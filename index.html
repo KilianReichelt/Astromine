@@ -197,7 +197,7 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 #storeNote{font-size:12px;color:#f0b75c;display:none}
 #warpfx{position:fixed;inset:0;background:#cfeaff;opacity:0;pointer-events:none;z-index:8}
 .empty{color:var(--mut2);font-size:13px;padding:14px 4px}
-@media (max-width:720px){
+@media (max-width:1380px){
   #panel{top:auto;bottom:64px;right:8px;left:8px;width:auto;max-height:calc(100vh - 80px)}
   #hint{max-width:54vw;font-size:11px}
   #top{flex-wrap:nowrap;gap:8px;padding:8px 10px}
@@ -215,6 +215,9 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
   #iconrow button{flex:1;justify-content:center;text-align:center}
   #resbar{top:50px;max-width:54vw}
   #sysov,#bodyov{top:58px;max-height:calc(100vh - 130px)}
+}
+@media (max-width:1180px){
+  #bodyov.on{display:none;}
 }
 @media (max-width:380px){
   #brand small{display:none}
