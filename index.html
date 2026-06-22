@@ -26,7 +26,7 @@ body{background:var(--ink);color:var(--txt);
   -webkit-user-select:none;user-select:none}
 .mono{font-family:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace}
 #cv{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
-#vig{position:fixed;inset:0;pointer-events:none;
+#vig{position:fixed;inset:0;pointer-events:none;z-index:2;
   background:radial-gradient(ellipse at center,transparent 55%,rgba(2,4,9,.55) 100%)}
 .hud{position:fixed;z-index:5}
 #top{top:0;left:0;right:0;display:flex;align-items:center;gap:14px;padding:12px 16px;
@@ -39,6 +39,20 @@ body{background:var(--ink);color:var(--txt);
   color:var(--mut);letter-spacing:.04em}
 .chip b{color:var(--txt);font-weight:600}
 #top .sp{flex:1}
+#top button{min-height:36px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
+#topactions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#top #btnMenu{display:none}
+#setwin{position:fixed;inset:0;z-index:26;display:none;align-items:center;justify-content:center;
+  background:rgba(3,5,11,.82);backdrop-filter:blur(8px)}
+#setwin.on{display:flex}
+.setbox{background:var(--panel);border:1px solid var(--line2);border-radius:10px;
+  padding:22px 24px;min-width:300px;max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.setbox h2{margin:0 0 16px;font-size:15px;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase}
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:10px 0;border-top:1px solid var(--line)}
+.setrow span{font-size:13px;color:var(--txt)}
+.setrow button{min-width:96px}
+.setdone{margin-top:16px;width:100%}
 button{font:inherit;color:var(--cyan);background:rgba(110,231,216,.06);
   border:1px solid var(--line2);padding:7px 16px;border-radius:3px;cursor:pointer;
   letter-spacing:.1em;text-transform:uppercase;font-size:12px;transition:background .15s,border-color .15s}
@@ -59,12 +73,22 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 #panel.on{display:flex;flex-direction:column;animation:panelIn .28s cubic-bezier(.2,.8,.25,1)}
 /* Inhalt scrollt, der Rahmen (inkl. Eck-Marker) bleibt fix → Marker sitzen an der echten Fensterecke */
 #pbody{padding:16px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;min-height:0;border-radius:4px}
-#sysov{position:fixed;top:72px;right:16px;width:240px;max-width:calc(100vw - 32px);
+#sysov,#bodyov{position:fixed;top:72px;right:16px;width:240px;max-width:calc(100vw - 32px);
   max-height:calc(100vh - 150px);overflow:auto;background:var(--panel);border:1px solid var(--line);
   border-radius:4px;padding:10px 12px;display:none;z-index:4;backdrop-filter:blur(8px)}
-#sysov.on{display:block}
-#sysov h3{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.16em;color:var(--mut2);
+#sysov.on,#bodyov.on{display:block}
+#sysov h3,#bodyov h3{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.16em;color:var(--mut2);
   text-transform:uppercase;margin:0 0 8px}
+#bodyov .sovrow{gap:6px}
+#bodyov .bov.lvl1{margin-left:18px;border-left:2px solid var(--line2)}
+#bodyov .bov.lvl1 .snm{font-size:11.5px;color:var(--mut)}
+#bodyov .bov.cur{border-color:#6ee7d8aa;background:rgba(110,231,216,.08)}
+#bodyov .unk{color:var(--mut2);letter-spacing:.18em;font-family:ui-monospace,monospace}
+#bodyov .sst{font-size:10px;color:var(--amber);border:1px solid #f0b75c44;border-radius:3px;padding:1px 4px}
+#bodyov .bovic{width:18px;height:18px;flex:none;border-radius:50%}
+#bodyov .bovtog{flex:none;background:none;border:none;color:var(--mut);cursor:pointer;padding:0;width:13px;font-size:10px;line-height:1}
+#bodyov .bovtog:hover{color:var(--cyan);background:none}
+#bodyov .bovsp{flex:none;width:13px}
 .sovrow{display:flex;align-items:center;flex-wrap:wrap;gap:7px;padding:6px 7px;border:1px solid var(--line);
   border-radius:4px;margin-bottom:5px;cursor:pointer;background:rgba(255,255,255,.02)}
 .sovrow:hover{border-color:var(--line2);background:rgba(110,231,216,.07)}
@@ -175,8 +199,25 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 .empty{color:var(--mut2);font-size:13px;padding:14px 4px}
 @media (max-width:720px){
   #panel{top:auto;bottom:64px;right:8px;left:8px;width:auto;max-height:calc(100vh - 80px)}
-  #hint{max-width:60vw}
-  #brand{letter-spacing:.16em}
+  #hint{max-width:54vw;font-size:11px}
+  #top{flex-wrap:nowrap;gap:8px;padding:8px 10px}
+  #brand{letter-spacing:.12em;font-size:12px;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  #brand small{font-size:10px;letter-spacing:.1em}
+  #stats{display:none}
+  #top #btnMenu{display:inline-flex}
+  #topactions{position:absolute;top:100%;right:8px;flex-direction:column;align-items:stretch;
+    gap:6px;background:rgba(8,12,20,.97);border:1px solid var(--line);border-radius:8px;
+    padding:8px;min-width:210px;display:none;box-shadow:0 12px 34px rgba(0,0,0,.55);
+    backdrop-filter:blur(10px);max-height:calc(100vh - 64px);overflow:auto}
+  #topactions.open{display:flex}
+  #topactions>button{width:100%;text-align:left;justify-content:flex-start}
+  #iconrow{justify-content:space-between}
+  #iconrow button{flex:1;justify-content:center;text-align:center}
+  #resbar{top:50px;max-width:54vw}
+  #sysov,#bodyov{top:58px;max-height:calc(100vh - 130px)}
+}
+@media (max-width:380px){
+  #brand small{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   .toast{animation:none}.scanbar{animation-duration:.2s}
@@ -431,7 +472,7 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 </div>
 <div class="hud" id="top">
   <button id="back">&#8617; Galaxie</button>
-  <div id="brand">ASTROMINE<small>Galaktisches Bergbau-Imperium · V2 (Entwicklung)</small></div>
+  <div id="brand">ASTROMINE<small>Galaktisches Bergbau-Imperium</small></div>
   <div id="stats">
     <span class="chip" id="gstat">Stufe 1 · Sprung 0 ly</span>
     <span class="chip" id="chipP">Planeten <b id="cP">0</b></span>
@@ -439,13 +480,23 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
     <span class="chip" id="chipA">Erfolge <b id="cA">0/10</b></span>
   </div>
   <div class="sp"></div>
+  <div id="topactions">
   <button id="btnGalTrade" style="display:none">Handel</button>
   <button id="btnMega">Megakonstruktionen</button>
   <button id="btnUps">Ausbau</button>
   <button id="btnStats">Statistik</button>
   <button id="btnCodex">Kodex</button>
-  <button id="btnFull" class="iconbtn" title="Vollbild ein/aus">⛶</button>
-  <button id="btnLang" class="iconbtn" title="Language / Sprache">EN</button>
+  </div>
+  <button id="btnSettings" class="iconbtn" title="Einstellungen" aria-label="Einstellungen">⚙</button>
+  <button id="btnMenu" class="iconbtn" title="Menü" aria-label="Menü">☰</button>
+</div>
+<div id="setwin">
+  <div class="setbox">
+    <h2 id="setTitle">Einstellungen</h2>
+    <div class="setrow"><span id="setLanglab">Sprache</span><button id="setLang">EN</button></div>
+    <div class="setrow"><span id="setFulllab">Vollbild</span><button id="setFull">Umschalten</button></div>
+    <button id="setClose" class="setdone">Schließen</button>
+  </div>
 </div>
 <div class="hud" id="resbar"></div>
 <div class="hud" id="hint">
@@ -453,6 +504,7 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 </div>
 <div class="hud" id="panel"><div id="pbody"></div></div>
 <div id="sysov"></div>
+<div id="bodyov"></div>
 <div class="hud" id="toasts"></div>
 <div id="notes"></div>
 <div id="floaters"></div>
@@ -576,7 +628,7 @@ Object.assign(TR,{
  "Entdeckt: ":"Discovered: "," – ein Bote der Menschheit am Rand des Systems.":" – a messenger of humanity at the edge of the system.",
  "Sonde":"Probe","Menschengemacht · 1977 gestartet":"Human-made · launched 1977",
  "Goldene Schallplatte":"Golden Record","Interstellarer Raum":"Interstellar space","Gruß der Menschheit":"Greeting from humanity",
- "ungescannt":"unscanned","unentdeckt":"undiscovered","Unbekannter Himmelskörper":"Unknown celestial body","System ":"System ",
+ "ungescannt":"unscanned","unentdeckt":"undiscovered","Unbekannter Himmelskörper":"Unknown celestial body","Himmelskörper":"Celestial bodies","Ein-/Ausklappen":"Collapse/expand","System ":"System ",
  "Dieser Himmelskörper wurde noch nicht gescannt. Führe einen Scan durch, um seine Beschaffenheit und Ressourcenvorkommen zu enthüllen.":"This celestial body has not been scanned yet. Run a scan to reveal its composition and resource deposits.",
  "Noch nicht erschlossen. Bau oder verbessere die <b>Erkundungssonde</b> dieses Systems auf Stufe ":"Not yet accessible. Build or upgrade this system's <b>exploration probe</b> to level ",
  ", um diesen Körper zu erreichen.":" to reach this body.","Erkundungssonde öffnen":"Open exploration probe",
@@ -605,7 +657,7 @@ Object.assign(TR,{
  "Galaktisches Zentrum · Sagittarius A*":"Galactic center · Sagittarius A*","Übersicht (Galaxie)":"Overview (galaxy)","Megastrukturen":"Megastructures",
  "Fertiggestellt":"Completed","Nur bei <b>Sagittarius A*</b> baubar.":"Only buildable at <b>Sagittarius A*</b>.","Phase":"Phase","fertig":"done","bereit":"ready","Material fehlt":"Material missing","Bau starten":"Start build",
  "gebaut":"built","im Bau":"under construction","baubar – nur bei Sagittarius A*":"buildable – only at Sagittarius A*","baubar (pro System)":"buildable (per system)",
- "+15 % Anlagen-Durchsatz (dieses System)":"+15% facility throughput (this system)","+30 % Produktionstempo (dieses System)":"+30% production speed (this system)","Zentrallager – zahlt aus allen Systemen":"Central storage – pays from all systems",
+ "+15 % Anlagen-Durchsatz (dieses System)":"+15% facility throughput (this system)","Zentrallager – zahlt aus allen Systemen":"Central storage – pays from all systems",
  "Sprung":"Jump","Sicht":"Sight","Zyklus":"cycle","bis":"up to","10 % Ertrag":"10% yield","Stufe":"Level","Erkundungssonde":"Exploration probe","Aktiv":"Active","Nicht gebaut":"Not built","nächste Stufe:":"next level:","Fertig":"Done","Verbessern":"Upgrade","Sonde bauen":"Build probe","Ausbauen":"Upgrade","Quelle:":"Source:",
  "Einzigartiges Modul – nur an einem besonderen Ort zu finden.":"Unique module – found only at a special location.",
  "Sprungreichweite":"Jump range","Vergrößert die Distanz, über die du zu anderen Sternen springen kannst – so erreichst du neue Systeme.":"Increases the distance over which you can jump to other stars – reaching new systems.",
@@ -642,8 +694,6 @@ Object.assign(TR,{
  "Dyson-Schwarm":"Dyson Swarm","Temporaler Verstärker":"Temporal Amplifier","Versorgungs-Nexus":"Supply Nexus",
  "Ein Schwarm von Kollektoren um den Stern. Bonus: +15 % Durchsatz aller Anlagen – in DIESEM System. Je System einmal baubar.":"A swarm of collectors around the star. Bonus: +15% throughput of all facilities – in THIS system. Buildable once per system.",
  "+15 % Anlagen-Durchsatz (dieses System)":"+15% facility throughput (this system)",
- "Verdichtet die Zeit im Trägersystem. Bonus: +30 % Produktionstempo (Förderer + Anlagen) – nur in diesem System. Nur einmal, bei Sagittarius A*.":"Compresses time in the host system. Bonus: +30% production speed (conveyors + facilities) – only in this system. Only once, at Sagittarius A*.",
- "+30 % Produktionstempo (dieses System)":"+30% production speed (this system)",
  "Galaxisweites Zentrallager im galaktischen Zentrum. Bonus: Bau-, Ausbau- und Freischaltkosten dürfen aus dem Lager ALLER Systeme bezahlt werden. Nur einmal, bei Sagittarius A*.":"A galaxy-wide central warehouse at the galactic centre. Bonus: build, upgrade and unlock costs may be paid from the storage of ALL systems. Only once, at Sagittarius A*.",
  "Zentrallager – zahlt aus allen Systemen":"Central warehouse – pays from all systems",
  "Kurier":"Courier","Frachter":"Freighter",
@@ -877,43 +927,43 @@ const RAR=[
 const RARW=[100,36,12,3.5,0.9];
 
 const STARCL=[
- {k:"M",n:"Roter Zwerg",col:"#ff9a6b",glow:"#ff7a4d",r:9,rar:0,p:.285,t:"2.500\u20133.800 K",
+ {k:"M",n:"Roter Zwerg",col:"#ff9a6b",glow:"#ff7a4d",r:8,rar:0,p:.285,t:"2.500\u20133.800 K",
   d:"Der h\u00e4ufigste Sterntyp der Galaxie. Klein, k\u00fchl und langlebig: Rote Zwerge brennen Billionen Jahre."},
- {k:"K",n:"Oranger Zwerg",col:"#ffb877",glow:"#ff9a55",r:11,rar:0,p:.18,t:"3.800\u20135.200 K",
+ {k:"K",n:"Oranger Zwerg",col:"#ffb877",glow:"#ff9a55",r:10,rar:0,p:.18,t:"3.800\u20135.200 K",
   d:"Ruhig und stabil \u2013 orange Zwerge gelten als ideale Heimatsterne f\u00fcr bewohnbare Welten."},
  {k:"G",n:"Gelber Zwerg",col:"#ffd97a",glow:"#ffc14d",r:12,rar:0,p:.13,t:"5.200\u20136.000 K",
   d:"Ein Stern wie die Sonne. Mittleres Alter, mittlere Gr\u00f6\u00dfe \u2013 und doch Quelle allen bekannten Lebens."},
  {k:"F",n:"Gelbwei\u00dfer Stern",col:"#fff0c2",glow:"#ffe08a",r:13,rar:1,p:.09,t:"6.000\u20137.500 K",
   d:"Hei\u00dfer und heller als die Sonne, mit intensiver UV-Strahlung in der inneren Zone."},
- {k:"A",n:"Wei\u00dfer Stern",col:"#eef4ff",glow:"#cfe0ff",r:14,rar:1,p:.07,t:"7.500\u201310.000 K",
+ {k:"A",n:"Wei\u00dfer Stern",col:"#eef4ff",glow:"#cfe0ff",r:16,rar:1,p:.07,t:"7.500\u201310.000 K",
   d:"Junge, schnell rotierende Sterne mit gestochen wei\u00dfem Licht \u2013 wie Sirius oder Wega."},
- {k:"B",n:"Blauwei\u00dfer Riese",col:"#a8c8ff",glow:"#7fa8ff",r:16,rar:2,p:.05,t:"10.000\u201330.000 K",
+ {k:"B",n:"Blauwei\u00dfer Riese",col:"#a8c8ff",glow:"#7fa8ff",r:20,rar:2,p:.05,t:"10.000\u201330.000 K",
   d:"Massereich und verschwenderisch: Diese Sterne verbrennen ihren Vorrat in wenigen Dutzend Millionen Jahren."},
- {k:"O",n:"Blauer \u00dcberriese",col:"#86b0ff",glow:"#5e8eff",r:18,rar:2,p:.03,t:"\u00fcber 30.000 K",
+ {k:"O",n:"Blauer \u00dcberriese",col:"#86b0ff",glow:"#5e8eff",r:26,rar:2,p:.03,t:"\u00fcber 30.000 K",
   d:"Die hellsten und seltensten Sterne. Ihr Sonnenwind formt ganze Nebel \u2013 ihr Ende ist eine Supernova."},
- {k:"RG",n:"Roter \u00dcberriese",col:"#ff7a55",glow:"#ff5530",r:26,rar:3,p:.006,t:"3.000\u20134.000 K",
+ {k:"RG",n:"Roter \u00dcberriese",col:"#ff7a55",glow:"#ff5530",r:44,rar:3,p:.006,t:"3.000\u20134.000 K",
   d:"Ein Stern am Ende seines Lebens, aufgebl\u00e4ht auf das Hundertfache seines fr\u00fcheren Radius. Sein Kollaps endet als Supernova \u2013 die Frage ist nicht ob, sondern wann."},
- {k:"BIN",n:"Doppelstern",col:"#ffe9a8",glow:"#ffd06b",r:12,rar:3,p:.025,t:"variabel",sp:"bin",
+ {k:"BIN",n:"Doppelstern",col:"#ffe9a8",glow:"#ffd06b",r:12,rar:3,p:0,t:"variabel",sp:"bin",
   d:"Zwei Sterne, ein Schwerpunkt. Planeten hier erleben doppelte Sonnenauf- und -unterg\u00e4nge."},
- {k:"NS",n:"Neutronenstern",col:"#d8f0ff",glow:"#9fd4ff",r:6,rar:3,p:.016,t:"\u2248 600.000 K",sp:"ns",
+ {k:"NS",n:"Neutronenstern",col:"#d8f0ff",glow:"#9fd4ff",r:4,rar:3,p:.016,t:"\u2248 600.000 K",sp:"ns",
   d:"Der kollabierte Kern einer Supernova: stadtgro\u00df, aber schwerer als die Sonne. Ein Teel\u00f6ffel seiner Materie wiegt Milliarden Tonnen."},
  {k:"BH",n:"Schwarzes Loch",col:"#0a0c12",glow:"#ffb35c",r:10,rar:4,p:.009,t:"\u2014",sp:"bh",
   d:"Ein Riss in der Raumzeit. Nichts, was den Ereignishorizont passiert, kehrt zur\u00fcck \u2013 nur die gl\u00fchende Akkretionsscheibe verr\u00e4t seine Position."},
- {k:"WD",n:"Wei\u00dfer Zwerg",col:"#eaf2ff",glow:"#bcd4ff",r:6,rar:2,p:.03,t:"8.000\u201340.000 K",
+ {k:"WD",n:"Wei\u00dfer Zwerg",col:"#eaf2ff",glow:"#bcd4ff",r:4,rar:2,p:.03,t:"8.000\u201340.000 K",
   d:"Der erdgro\u00dfe, ausgegl\u00fchte Kern eines sonnen\u00e4hnlichen Sterns. Unvorstellbar dicht \u2013 und \u00fcber Jahrmilliarden langsam erkaltend."},
- {k:"BD",n:"Brauner Zwerg",col:"#a85a44",glow:"#6a2e22",r:7,rar:2,p:.03,t:"300\u20131.300 K",
+ {k:"BD",n:"Brauner Zwerg",col:"#a85a44",glow:"#6a2e22",r:6,rar:2,p:.03,t:"300\u20131.300 K",
   d:"Ein verhinderter Stern: zu massearm, um Wasserstoff dauerhaft zu z\u00fcnden. Er glimmt nur in tiefem Infrarot vor sich hin."},
- {k:"C",n:"Kohlenstoffstern",col:"#ff5a3a",glow:"#c0301a",r:14,rar:3,p:.012,t:"2.400\u20133.200 K",
+ {k:"C",n:"Kohlenstoffstern",col:"#ff5a3a",glow:"#c0301a",r:18,rar:3,p:.012,t:"2.400\u20133.200 K",
   d:"Ein gealterter Riese, dessen Atmosph\u00e4re mehr Kohlenstoff als Sauerstoff enth\u00e4lt. Ru\u00dfwolken f\u00e4rben ihn in tiefes, rubinrotes Gl\u00fchen."},
- {k:"WR",n:"Wolf-Rayet-Stern",col:"#bcd0ff",glow:"#7fa0ff",r:15,rar:4,p:.006,t:"\u00fcber 40.000 K",
+ {k:"WR",n:"Wolf-Rayet-Stern",col:"#bcd0ff",glow:"#7fa0ff",r:17,rar:4,p:.006,t:"\u00fcber 40.000 K",
   d:"Ein sterbender Gigant, der seine \u00e4u\u00dferen H\u00fcllen in einem rasenden Sternwind abst\u00f6\u00dft \u2013 Vorbote einer baldigen Supernova."},
- {k:"PSR",n:"Pulsar",col:"#cfeaff",glow:"#9fd4ff",r:6,rar:3,p:.01,t:"\u2248 1.000.000 K",sp:"ns",
+ {k:"PSR",n:"Pulsar",col:"#cfeaff",glow:"#9fd4ff",r:4,rar:3,p:.01,t:"\u2248 1.000.000 K",sp:"ns",
   d:"Ein rasend rotierender Neutronenstern, dessen Strahlungskegel die Galaxie wie ein kosmischer Leuchtturm \u00fcberstreicht \u2013 hunderte Male pro Sekunde."},
- {k:"MAG",n:"Magnetar",col:"#d0b8ff",glow:"#9a7fff",r:6,rar:4,p:.004,t:"\u2248 1.000.000 K",sp:"ns",
+ {k:"MAG",n:"Magnetar",col:"#d0b8ff",glow:"#9a7fff",r:4,rar:4,p:.004,t:"\u2248 1.000.000 K",sp:"ns",
   d:"Ein Neutronenstern mit dem st\u00e4rksten Magnetfeld des Universums \u2013 stark genug, um aus der Entfernung eines Mondes die Atome im K\u00f6rper zu zerrei\u00dfen."},
- {k:"TRI",n:"Dreifachstern",col:"#ffe9a8",glow:"#ffd06b",r:13,rar:3,p:.012,t:"variabel",sp:"tri",
+ {k:"TRI",n:"Dreifachstern",col:"#ffe9a8",glow:"#ffd06b",r:13,rar:3,p:0,t:"variabel",sp:"tri",
   d:"Drei Sonnen, an einen gemeinsamen Schwerpunkt gebunden. Auf Planeten hier gehen je nach Konstellation bis zu drei Sterne gleichzeitig auf."},
- {k:"QUAD",n:"Vierfachstern",col:"#fff0c2",glow:"#ffe08a",r:14,rar:4,p:.005,t:"variabel",sp:"quad",
+ {k:"QUAD",n:"Vierfachstern",col:"#fff0c2",glow:"#ffe08a",r:14,rar:4,p:0,t:"variabel",sp:"quad",
   d:"Ein hierarchisches Vierfachsystem: zwei enge Sternpaare umkreisen einander. Ein seltenes, choreografisches Wunderwerk der Schwerkraft."}];
 
 const PTYPES=[
@@ -1048,8 +1098,21 @@ function ensureSystemFeature(sys,sr){
   if(!natural && ps.length){
     if(ps.length>=2 && sr()<0.45){
       const p=ps[1+Math.floor(sr()*(ps.length-1))];
-      p.twin={col:vary(p.cb,sr,0.18),s:0.58+sr()*0.22,a:sr()*6.283};
+      // Echter Begleitplaneter (klickbar/abbaubar). Beide teilen die Bahn = Baryzentrum;
+      // der massereichere bleibt zentraler (planetPos verschiebt massengewichtet).
+      const idx=sys.star.i, trng=mulberry32(sys.star.seed^(0xD00B1E+p.i));
+      const tw=genPlanet(trng,sys.star,idx,p.i,Math.max(ps.length,2));
+      tw.id=p.id+"t"; tw.name=p.name+" B";
+      tw.dist=p.dist; tw.a0=p.a0; tw.per=p.per; tw.e=p.e||0; tw.w=p.w; tw.z=p.z;
+      tw.tier=p.tier||1; tw.moons=0; tw.sysIdx=idx;
+      {const ms=tw.stats&&tw.stats.find(s=>s[0]==="Monde");if(ms)ms[1]="0";}
+      attachMine(tw,tw.type.id);
+      const m1=p.massN||1, m2=tw.massN||1, D=(p.size+tw.size)*1.7, pa=trng()*6.283, spd=0.5;
+      p.pair ={partner:tw,frac:m2/(m1+m2),sign:-1,D:D,a0:pa,spd:spd};
+      tw.pair={partner:p, frac:m1/(m1+m2),sign:1, D:D,a0:pa,spd:spd};
       if(!p.feats.some(f=>/Doppelplanet/.test(f)))p.feats.unshift("Doppelplanet");
+      tw.feats.unshift("Doppelplanet");
+      ps.push(tw);
     }else{
       const p=ps.filter(q=>q.type.giant).pop()||ps[ps.length-1];
       p.ring=true;p.ringX=true;
@@ -1058,7 +1121,7 @@ function ensureSystemFeature(sys,sr){
   }
 
   const rare=ps.filter(p=>p.type.rar>=2).sort((a,b)=>b.type.rar-a.type.rar)[0]||null;
-  const twin=ps.find(p=>p.twin);
+  const twin=ps.find(p=>p.pair);
   const ringX=ps.find(p=>p.ringX);
   if(rare)  return {n:rare.type.n, d:(rare.type.rar>=3?t("Höhepunkt des Systems: ")+rare.name+" – "+t(rare.type.n).toLowerCase()+"."
                                                        :rare.name+" – "+t(rare.type.n).toLowerCase()+t(" – sticht in diesem System hervor.")), col:RAR[rare.rar].c};
@@ -1102,7 +1165,7 @@ const LMS=[
  {key:"k452",n:"Kepler-452",x:0.70,y:0.45,cls:2,
   d:"Ein sonnen\u00e4hnlicher Stern mit der ber\u00fchmten Supererde Kepler-452 b \u2013 von der NASA als \u201eCousin der Erde\u201c vorgestellt: 385 Tage Jahresl\u00e4nge, mitten in der habitablen Zone.",
   pl:[["Kepler-452 b",0,["\u201eCousin der Erde\u201c \u00b7 Supererde","Jahr: 385 Tage \u00b7 habitable Zone"]]]},
- {key:"sgra",n:"Sagittarius A*",x:0,y:0,cls:10,big:2.6,
+ {key:"sgra",n:"Sagittarius A*",x:0,y:0,cls:10,big:5.5,
   d:"Das supermassereiche Schwarze Loch im Zentrum der Galaxie: 4,3 Millionen Sonnenmassen. 2022 gelang dem Event Horizon Telescope das erste direkte Bild seines Schattens. Die gesamte Milchstra\u00dfe rotiert um diesen Punkt.",pl:[]}];
 
 const NEBULAE=[
@@ -1169,7 +1232,10 @@ const nOf=o=>Object.keys(o).length;
 const escH=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* ============ Galaxie-Generierung ============ */
-const GR=2600, NSTARS=2000, EXT=GR*1.18;
+const GR=4500, NSTARS=6000, EXT=GR*1.18;
+/* SOL & Landmarken werden nur unter den ersten 2000 Sternen gesucht, damit ihre
+   Indizes (und damit bestehende Spielstände) stabil bleiben, wenn NSTARS wächst. */
+const LMPOOL=Math.min(2000,NSTARS);
 
 const LY=20;
 const STARS=[];
@@ -1187,10 +1253,10 @@ function pickClass(r){let a=0;for(let i=0;i<STARCL.length;i++){a+=STARCL[i].p;if
 
       const d=(0.05+Math.pow(rg(),0.6)*0.95)*GR;
       let a=rg()*Math.PI*2;
-      const ARMS=2, step=Math.PI*2/ARMS, pitch=d*0.0017;
+      const ARMS=2, step=Math.PI*2/ARMS, pitch=(d/GR)*4.42;
       const armA=Math.round((a-pitch)/step)*step+pitch;
       a+=(armA-a)*0.22;
-      const sc=120+(1-d/GR)*70;
+      const sc=(120+(1-d/GR)*70)*(GR/2600);
       x=Math.cos(a)*d+(rg()*2-1)*sc;
       y=Math.sin(a)*d*0.99+(rg()*2-1)*sc;
     }
@@ -1203,7 +1269,7 @@ function pickClass(r){let a=0;for(let i=0;i<STARCL.length;i++){a+=STARCL[i].p;if
   }
 
   let best=0,bd=1e18; const tx=GR*0.5, ty=GR*0.12;
-  for(let i=0;i<NSTARS;i++){const s=STARS[i],d=(s.x-tx)**2+(s.y-ty)**2;if(d<bd){bd=d;best=i}}
+  for(let i=0;i<LMPOOL;i++){const s=STARS[i],d=(s.x-tx)**2+(s.y-ty)**2;if(d<bd){bd=d;best=i}}
   SOL=best;
   const s=STARS[SOL]; s.cls=2; s.name="Sol"; s.sol=true;
 
@@ -1211,7 +1277,7 @@ function pickClass(r){let a=0;for(let i=0;i<STARCL.length;i++){a+=STARCL[i].p;if
   for(const lm of LMS){
     const tx2=lm.x*GR, ty2=lm.y*GR;
     let bi=-1,bd2=1e18;
-    for(let i=0;i<NSTARS;i++){if(used.has(i))continue;
+    for(let i=0;i<LMPOOL;i++){if(used.has(i))continue;
       const st=STARS[i],d=(st.x-tx2)**2+(st.y-ty2)**2;if(d<bd2){bd2=d;bi=i}}
     used.add(bi);
     const st=STARS[bi];
@@ -1220,7 +1286,7 @@ function pickClass(r){let a=0;for(let i=0;i<STARCL.length;i++){a+=STARCL[i].p;if
   }
 
   (function spaceStars(){
-    const MINSEP=34, MIN2=MINSEP*MINSEP, cell=MINSEP;
+    const MINSEP=34*(GR/2600), MIN2=MINSEP*MINSEP, cell=MINSEP;
     const fixed=new Set([SOL]); for(const lm of LMS)if(lm.idx!=null)fixed.add(lm.idx);
     const ck=(cx,cy)=>cx+"_"+cy;
     for(let iter=0;iter<14;iter++){
@@ -1327,13 +1393,13 @@ function buildBG(){
   }
 
   const DCOL=["255,255,255","200,214,240","255,214,170","170,196,255"];
-  for(let i=0;i<34000;i++){
+  for(let i=0;i<62000;i++){
     let wx,wy;
     if(rg()<0.34){const d=Math.pow(rg(),1.6)*GR*0.38,a=rg()*Math.PI*2;wx=Math.cos(a)*d;wy=Math.sin(a)*d*0.8}
     else{const d=(0.04+Math.pow(rg(),0.6)*0.96)*GR;
-      let a=rg()*Math.PI*2;const step=Math.PI,pitch=d*0.0017;
+      let a=rg()*Math.PI*2;const step=Math.PI,pitch=(d/GR)*4.42;
       const armA=Math.round((a-pitch)/step)*step+pitch; a+=(armA-a)*0.2;
-      const sc=130+(1-d/GR)*80;
+      const sc=(130+(1-d/GR)*80)*(GR/2600);
       wx=Math.cos(a)*d+(rg()*2-1)*sc;wy=Math.sin(a)*d*0.99+(rg()*2-1)*sc}
     const [bx,by]=w2b(wx,wy);
     x.fillStyle="rgba("+pick(rg,DCOL)+","+(0.10+rg()*0.28)+")";
@@ -1342,13 +1408,13 @@ function buildBG(){
 
   GSTARS.length=0;
   const r2=mulberry32(424243);
-  for(let i=0;i<22000;i++){
+  for(let i=0;i<34000;i++){
     let wx,wy;
     if(r2()<0.34){const d=Math.pow(r2(),1.6)*GR*0.38,a=r2()*Math.PI*2;wx=Math.cos(a)*d;wy=Math.sin(a)*d*0.8}
     else{const d=(0.04+Math.pow(r2(),0.6)*0.96)*GR;
-      let a=r2()*Math.PI*2;const step=Math.PI,pitch=d*0.0017;
+      let a=r2()*Math.PI*2;const step=Math.PI,pitch=(d/GR)*4.42;
       const armA=Math.round((a-pitch)/step)*step+pitch; a+=(armA-a)*0.2;
-      const sc=130+(1-d/GR)*80;
+      const sc=(130+(1-d/GR)*80)*(GR/2600);
       wx=Math.cos(a)*d+(r2()*2-1)*sc;wy=Math.sin(a)*d*0.99+(r2()*2-1)*sc}
     GSTARS.push({x:wx,y:wy,col:"rgba("+pick(r2,DCOL)+","+(0.2+r2()*0.6).toFixed(2)+")",s:r2()<0.92?1:2});
   }
@@ -1396,12 +1462,16 @@ function genPlanet(rng,star,sIdx,i,n,forced){
   const tIdx=forced!==undefined?forced:pickType(rng,z);
   const t=PTYPES[tIdx];
   const giant=!!t.giant;
-  const dist=78+(i+1)*(50+rng()*34)+i*i*7;
-  let size=giant?13+rng()*9:4.2+rng()*5.2;
-  if(t.id==="supererde")size+=4.5;
+  // Innerste Bahn liegt sicher außerhalb des Sterns (größerer Stern → weiter draußen),
+  // Abstände wachsen nach außen (Titius-Bode-artig) und passen so zu realistischeren Körpergrößen.
+  const sunR=(STARCL[star.cls]&&STARCL[star.cls].r||10)*4.8;
+  const dist=sunR*1.15+60+i*(58+rng()*30)+i*i*11;
+  rng(); // Wurf erhalten (RNG-Stream stabil); visuelle Größe folgt unten aus dem physischen Radius
   const per=10*Math.pow(dist/120,1.4);
   let radius=giant?3.5+rng()*7.5:0.3+rng()*2.1;
   if(t.id==="supererde")radius+=2.5;
+  // Visuelle Größe realistisch an den physischen Radius gekoppelt (Gasriesen deutlich größer als Gesteinswelten)
+  let size=3.2+3.6*Math.sqrt(radius);
   const mass=giant?radius*radius*(8+rng()*30):Math.pow(radius,3)*(0.7+rng()*0.7);
   const grav=giant?0.9+rng()*1.6:radius*(0.75+rng()*0.55);
   let temp=z===0?180+rng()*820:z===1?-60+rng()*120:-225+rng()*120;
@@ -1413,7 +1483,12 @@ function genPlanet(rng,star,sIdx,i,n,forced){
   const atm=t.id==="gestein"&&rng()<0.6?ATMOS[0]:
     giant?ATMOS[5]:t.id==="leben"?ATMOS[3]:t.id==="toxisch"?(rng()<0.5?ATMOS[2]:ATMOS[6]):
     pick(rng,ATMOS);
-  const moons=giant?2+Math.floor(rng()*7):Math.floor(rng()*3);
+  // Mondzahl an Masse/Größe gekoppelt (genau 1 RNG-Wurf → Generierungs-Stream stabil):
+  // große Riesen viele Monde, Gesteinswelten nur mit genug Masse. Bilanzneutral (Vorkommen/Mond konstant).
+  const mr=rng();
+  let moons;
+  if(giant){moons=Math.round(2+(radius-3.5)/7.5*5)+(mr<0.33?-1:mr<0.66?0:1);moons=Math.max(1,Math.min(9,moons));}
+  else{moons=mass>25?2:mass>6?(mr<0.6?1:2):mass>1.5?(mr<0.5?1:0):(mr<0.18?1:0);}
   const ring=giant?rng()<0.4:rng()<0.07;
   const feats=[];
   const fp=FEAT[t.id]||[];
@@ -1512,9 +1587,13 @@ function getSystem(idx){
   for(const p of planets)maxR=Math.max(maxR,p.dist*(1+(p.e||0)));
 
   let belt=null;
-  const mkBelt=(r0,r1)=>{const pts=[];
-    for(let i=0;i<120;i++)pts.push({r:r0+rng()*(r1-r0),a:rng()*6.283,
-      sp:0.4+rng()*0.9,sz:rng()<0.85?1:2,al:0.25+rng()*0.45});
+  // Punkte aus separater RNG (rein dekorativ → Generierungs-Stream/Saves bleiben unberührt).
+  const mkBelt=(r0,r1)=>{const pts=[], brng=mulberry32(star.seed^0xBE17);
+    const N=300+Math.floor(brng()*140);
+    for(let i=0;i<N;i++){const rr=brng();
+      pts.push({r:r0+brng()*(r1-r0),a:brng()*6.283,sp:0.4+brng()*0.9,
+        sz:rr<0.72?1:rr<0.93?2:3, al:0.3+brng()*0.5,
+        col:brng()<0.28?"196,176,142":"178,188,206"});}
     return {r0,r1,pts}};
   if(star.sol){
     belt=mkBelt((planets[3].dist+planets[4].dist)/2-26,(planets[3].dist+planets[4].dist)/2+26);
@@ -1612,7 +1691,7 @@ function getSystem(idx){
       const orb=p.size*1.7+6+k*5.5;
       const m={kind:"moon",id:"s"+idx+"m"+pi+"_"+k,name:d.name,parent:p,orb,massN:mN,
         a0:rng()*6.283,per:9+k*3+rng()*5,type:{id:d.typeId,n:d.tn},rar:1,
-        size:(p.type.giant?2.8:2.2)+rng()*1.3,tier:p.tier||1,
+        size:(p.type.giant?2.6:2.0)+p.size*0.06+rng()*1.3,tier:p.tier||1,
         desc:d.desc,feats:d.feats,stats:d.stats,cb:d.col,ca:shade(d.col,0.7)};
       attachMine(m,d.typeId);moons.push(m);
     }
@@ -1633,6 +1712,27 @@ function getSystem(idx){
   allB.forEach(b=>{b.sysIdx=idx});
   sys.probeMax=allB.reduce((m,b)=>Math.max(m,b.tier||1),1);
   sys.probeA=rng()*6.283;
+
+  // Mehrfachsterne: echte Begleitsterne um ein gemeinsames Baryzentrum. Eigene RNG
+  // (aus star.seed) → der Körper-Generierungs-Stream bleibt unangetastet (Saves stabil).
+  // Der größte Stern bleibt die Primärklasse und bestimmt die Klassifizierung auf der Karte.
+  sys.stars=[{cls:star.cls,col:cl.col,glow:cl.glow,r:cl.r}];
+  if(!star.sol&&!cl.sp){
+    const rm=mulberry32(star.seed^0x5747A12), roll=rm();
+    const n=roll<0.04?3:roll<0.16?2:1;
+    if(n>1){
+      const cand=[];for(let i=0;i<STARCL.length;i++){const c=STARCL[i];if(c.p>0&&!c.sp&&c.r<=cl.r)cand.push(i);}
+      for(let k=1;k<n;k++){const ci=cand.length?cand[Math.floor(rm()*cand.length)]:star.cls,c=STARCL[ci];
+        sys.stars.push({cls:ci,col:c.col,glow:c.glow,r:c.r});}
+      sys.multi=n;sys.stars.forEach(s=>{s.ang0=rm()*6.283});
+      const clr=cl.r*4.8*2.3+70;                       // zirkumbinäre Planeten klar außerhalb der Sternbahn
+      planets.forEach(p=>{p.dist+=clr});
+      comets.forEach(c=>{if(c.dist!=null)c.dist+=clr});
+      if(beltBody&&beltBody.dist!=null)beltBody.dist+=clr;
+      let mr=300;for(const p of planets)mr=Math.max(mr,p.dist*(1+(p.e||0)));
+      maxR=mr;sys.maxR=mr;
+    }
+  }
 
   if(!star.sol){
     const sr=mulberry32(star.seed^0x5EED5);
@@ -1658,12 +1758,21 @@ function getTex(p){
   const blob=(col,n,r0,r1,a)=>{for(let i=0;i<n;i++){x.globalAlpha=a;x.fillStyle=col;
     x.beginPath();x.arc(rng()*S,rng()*S,r0+rng()*(r1-r0),0,7);x.fill()}x.globalAlpha=1};
   if(t.giant){
-    for(let y=0;y<S;){const h=5+rng()*11;
-      x.fillStyle=rng()<0.5?shade(t.base,0.82+rng()*0.5):t.alt;
-      x.globalAlpha=0.35+rng()*0.4; x.fillRect(0,y,S,h); y+=h}
+    // Zonale Bänder
+    for(let y=0;y<S;){const h=4+rng()*9;
+      x.fillStyle=rng()<0.5?shade(t.base,0.8+rng()*0.5):shade(t.alt,0.9+rng()*0.4);
+      x.globalAlpha=0.4+rng()*0.4; x.fillRect(0,y,S,h); y+=h}
     x.globalAlpha=1;
-    if(rng()<0.7){x.fillStyle=shade(t.alt,1.25);x.globalAlpha=0.8;
-      x.beginPath();x.ellipse(S*(0.25+rng()*0.5),S*(0.3+rng()*0.4),12+rng()*8,6+rng()*4,0,0,7);x.fill();x.globalAlpha=1}
+    // Turbulente Wirbel an den Bandgrenzen
+    for(let i=0;i<26;i++){const cy=rng()*S, w=10+rng()*30, h=2+rng()*5;
+      x.globalAlpha=0.22+rng()*0.3; x.fillStyle=rng()<0.5?shade(t.base,1.22):shade(t.alt,1.15);
+      x.beginPath();x.ellipse(rng()*S,cy,w,h,0,0,7);x.fill()}
+    x.globalAlpha=1;
+    // Markanter Sturm (Großer Roter Fleck)
+    if(rng()<0.85){const sx=S*(0.2+rng()*0.6), sy=S*(0.35+rng()*0.32), rw=9+rng()*9, rh=6+rng()*4;
+      for(let k=3;k>=1;k--){x.globalAlpha=0.7/k; x.fillStyle=shade(t.alt,1.15+k*0.12);
+        x.beginPath();x.ellipse(sx,sy,rw*(0.45+k*0.18),rh*(0.45+k*0.18),0.3,0,7);x.fill()}
+      x.globalAlpha=1}
   }else if(t.id==="lava"){
     blob(shade(t.base,1.5),18,4,14,0.5);
     x.strokeStyle=t.alt;x.lineWidth=1.6;
@@ -1740,6 +1849,21 @@ function getTex(p){
       x.globalAlpha=0.5;x.strokeStyle=shade(t.base,0.6);x.lineWidth=1;
       x.beginPath();x.arc(px,py,r,0,7);x.stroke();x.globalAlpha=1}
   }
+  // Polare Eiskappen für temperierte/gemäßigte Welten (oben/unten der Textur = Pole)
+  const CAP={leben:0.16,ozean:0.18,sumpf:0.14,insel:0.16,dschungel:0.10,gezeiten:0.12};
+  if(CAP[t.id]!=null){const cap=Math.max(6,CAP[t.id]*(0.7+rng()*0.8)*S);
+    let g=x.createLinearGradient(0,0,0,cap);
+    g.addColorStop(0,"rgba(255,255,255,0.92)");g.addColorStop(1,"rgba(255,255,255,0)");
+    x.fillStyle=g;x.fillRect(0,0,S,cap);
+    g=x.createLinearGradient(0,S,0,S-cap);
+    g.addColorStop(0,"rgba(255,255,255,0.92)");g.addColorStop(1,"rgba(255,255,255,0)");
+    x.fillStyle=g;x.fillRect(0,S-cap,S,cap);}
+  // Wolkenschleier für Welten mit Atmosphäre
+  const CLOUD={leben:1,ozean:0.9,dschungel:1,sumpf:0.8,toxisch:0.7};
+  if(CLOUD[t.id]){const ca=CLOUD[t.id];
+    for(let i=0;i<11;i++){x.globalAlpha=(0.10+rng()*0.13)*ca;x.fillStyle="#ffffff";
+      x.beginPath();x.ellipse(rng()*S,rng()*S,8+rng()*20,3+rng()*6,rng()*0.6,0,7);x.fill()}
+    x.globalAlpha=1;}
   p.tex=c; return c;
 }
 function blobAt(x,col,px,py,r,a){x.globalAlpha=a;x.fillStyle=col;
@@ -1781,8 +1905,12 @@ function ellPos(a,e,w,ang){
   return {x:cx+X*Math.cos(w)-Y*Math.sin(w), y:cy+X*Math.sin(w)+Y*Math.cos(w)};
 }
 function planetPos(p){const ang=p.a0+simT/p.per*0.3, e=p.e||0;
-  if(e<0.001)return {x:Math.cos(ang)*p.dist,y:Math.sin(ang)*p.dist,a:ang};
-  const q=ellPos(p.dist,e,p.w||0,ang); q.a=ang; return q}
+  let q; if(e<0.001)q={x:Math.cos(ang)*p.dist,y:Math.sin(ang)*p.dist,a:ang};
+  else{q=ellPos(p.dist,e,p.w||0,ang); q.a=ang;}
+  // Doppelplanet: massengewichteter Versatz vom gemeinsamen Baryzentrum (= geteilte Bahn).
+  if(p.pair){const pr=p.pair, pa=pr.a0+simT*pr.spd;
+    q.x+=Math.cos(pa)*pr.D*pr.frac*pr.sign; q.y+=Math.sin(pa)*pr.D*pr.frac*pr.sign;}
+  return q;}
 
 /* ============ Eingabe ============ */
 let drag=null, pts={};
@@ -1826,18 +1954,24 @@ cvEl.addEventListener("wheel",e=>{e.preventDefault();if(warp)return;
   const zin=e.deltaY<0;
   const f=Math.pow(1.0016,-e.deltaY), nz=clamp(tgt.z*f,minZ(),maxZ());
 
-  if(MODE==="system"&&!zin){
-    if(follow){const zFit=Math.min(W,H)/(2*(SYS.maxR+220));
-      if(nz<=zFit*1.18){unfollowToSystem();return}}
-    else if(tgt.z<=minZ()*1.05){
-      if(performance.now()-lastEnterT>=800&&G().galaxyOpen){startWarp("out",null);return}}
-  }
+  // Beim Herauszoomen aus einem fokussierten Körper zurück zur Systemübersicht.
+  // Das System selbst wird bewusst nur über den Zurück-Button verlassen (kein versehentliches Zurückwerfen).
+  if(MODE==="system"&&!zin&&follow&&nz<=sysFit()*1.1){unfollowToSystem();return}
 
   if(!follow){const wp=s2w(e.clientX,e.clientY);
     tgt.x=wp.x-(e.clientX-W/2)/nz;tgt.y=wp.y-(e.clientY-H/2)/nz}
   tgt.z=nz},{passive:false});
-function minZ(){return MODE==="galaxy"?fitGal()*0.85:Math.min(W,H)/(2*(SYS.maxR+260))*0.7}
-function maxZ(){return MODE==="galaxy"?3.5:12}
+function sysExtent(){return SYS?(SYS.maxR*1.22+150):1000;}      // äußerster Rand inkl. Voyager/Kometen
+function sysFit(){return Math.min(W,H)/(2*sysExtent());}          // Zoom, bei dem alles ins Bild passt
+function minZ(){return MODE==="galaxy"?fitGal()*0.85:sysFit()*0.92}
+function maxZ(){
+  if(MODE==="galaxy")return 3.5;
+  if(follow&&typeof follow==="object"){                            // Fokus auf Körper → Max-Zoom an dessen Größe gekoppelt
+    const sz=Math.max(2,follow.size||8);
+    return clamp((Math.min(W,H)*0.62)/(2*sz),8,260);
+  }
+  return 50;                                                       // freies Heranzoomen im System
+}
 function nearestStar(sx,sy,maxPx){let best=null,bd=maxPx;const SR=sightRange();
   for(const s of STARS){if(!(s.sol||SAVE.vis[s.i]||s.dSol<=SR))continue;
     const p=w2s(s.x,s.y);const d=Math.hypot(p.x-sx,p.y-sy);
@@ -1897,7 +2031,9 @@ function activate(hit){
     tgt.x=st.x;tgt.y=st.y;
     showSystemPanel(st);
   }
-  else if(hit.kind==="planet"){sel=hit.o;follow=hit.o;tgt.z=Math.max(tgt.z,1.5);showPlanetPanel(hit.o)}
+  else if(hit.kind==="planet"){sel=hit.o;follow=hit.o;
+    const sz=Math.max(2,hit.o.size||8);tgt.z=clamp((Math.min(W,H)*0.32)/(2*sz),tgt.z,maxZ());
+    showPlanetPanel(hit.o)}
   else if(hit.kind==="sun"){sel="sun";follow=null;tgt.x=0;tgt.y=0;showStarPanel()}
   else if(hit.kind==="probe"){sel="probe";follow=null;showProbePanel()}
   else if(hit.kind==="station"){sel="station";follow=null;showStationPanel()}
@@ -1913,7 +2049,7 @@ function activate(hit){
 function unfollowToSystem(){
   if(MODE!=="system"||!SYS)return;
   follow=null;sel=null;hidePanel();
-  tgt.x=0;tgt.y=0;tgt.z=Math.min(W,H)/(2*(SYS.maxR+220));
+  tgt.x=0;tgt.y=0;tgt.z=sysFit();
 }
 function goUp(){
   if(warp||MODE!=="system")return;
@@ -1972,8 +2108,8 @@ function enterSystem(idx){
   SYSIDX=idx;SYS=getSystem(idx);MODE="system";simT=0;clearFloaters();lastEnterT=performance.now();
   {const ov=$("#sysov");if(ov)ov.classList.remove("on");sovSig="";}
   if(firstVisit)showLoader(SYS.star.name);
-  const zFit=Math.min(W,H)/(2*(SYS.maxR+220));
-  cam={x:0,y:0,z:zFit*2.2};tgt={x:0,y:0,z:zFit};
+  const zFit=sysFit();
+  cam={x:0,y:0,z:zFit*1.8};tgt={x:0,y:0,z:zFit};
   follow=null;sel=null;
   $("#back").style.display="";
   $("#hinttxt").textContent=SYS.planets.length?
@@ -2114,23 +2250,100 @@ function drawGalaxy(){
   }
 }
 
+/* Gebackene Sternoberfläche (Granulation + Flecken) je Sternklasse, einmalig gecacht. */
+const SURF={};
+function starSurface(ci){
+  if(SURF[ci])return SURF[ci];
+  const c=STARCL[ci], S=128, cv=document.createElement("canvas"); cv.width=cv.height=S;
+  const x=cv.getContext("2d"), rng=mulberry32(7001+ci);
+  x.fillStyle=c.col; x.fillRect(0,0,S,S);
+  // Granulation: viele weiche Konvektionszellen in helleren/dunkleren Tönungen der Sternfarbe
+  for(let i=0;i<300;i++){const px=rng()*S,py=rng()*S,r=3+rng()*9;
+    x.globalAlpha=0.10+rng()*0.20;
+    x.fillStyle=rng()<0.5?shade(c.col,1.22+rng()*0.3):shade(c.col,0.7+rng()*0.2);
+    x.beginPath();x.arc(px,py,r,0,7);x.fill()}
+  x.globalAlpha=1;
+  // Sternflecken – auf kühlen Sternen (M/K/G) mehr
+  const spots=ci<=2?4+Math.floor(rng()*4):1+Math.floor(rng()*2);
+  for(let i=0;i<spots;i++){const px=rng()*S,py=rng()*S,r=4+rng()*7;
+    x.globalAlpha=0.3+rng()*0.25; x.fillStyle=shade(c.col,0.5);
+    x.beginPath();x.arc(px,py,r,0,7);x.fill()}
+  x.globalAlpha=1;
+  SURF[ci]=cv; return cv;
+}
+function drawStarCorona(cx,cy,R,c){
+  // weicher Korona-Saum
+  const g=ctx.createRadialGradient(cx,cy,R*0.92,cx,cy,R*1.4);
+  g.addColorStop(0,hexA(c.glow,0));g.addColorStop(0.3,hexA(c.glow,0.30));g.addColorStop(1,hexA(c.glow,0));
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R*1.4,0,7);ctx.fill();
+}
+/* Eine Sternscheibe: Glühen + rotierende Granulation (geclippt) + Randverdunkelung. */
+function drawStarOrb(cx,cy,R,ci){
+  const c=STARCL[ci];
+  let g=ctx.createRadialGradient(cx,cy,R*0.55,cx,cy,R*1.7);
+  g.addColorStop(0,hexA(c.glow,0.5));g.addColorStop(1,hexA(c.glow,0));
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R*1.7,0,7);ctx.fill();
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.clip();
+  ctx.translate(cx,cy);ctx.rotate(simT*0.05);
+  ctx.drawImage(starSurface(ci),-R,-R,R*2,R*2);
+  ctx.restore();
+  g=ctx.createRadialGradient(cx-R*0.18,cy-R*0.18,R*0.1,cx,cy,R);
+  g.addColorStop(0,"rgba(255,255,255,0.45)");g.addColorStop(0.55,"rgba(255,255,255,0)");
+  g.addColorStop(0.9,hexA(shade(c.glow,0.45),0));g.addColorStop(1,hexA(shade(c.glow,0.4),0.7));
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.fill();
+}
+function drawMultiStar(sc,zz){
+  const stars=SYS.stars, n=stars.length;
+  const Rs=stars.map(s=>Math.max(3,s.r*1.6*zz*3));
+  const Rmax=Math.max.apply(null,Rs), sep=Rmax*1.5;
+  const a0=(SYS.binA||0)+simT*0.28;
+  for(let i=0;i<n;i++){const s=stars[i], ang=a0+i*(Math.PI*2/n);
+    drawStarOrb(sc.x+Math.cos(ang)*sep, sc.y+Math.sin(ang)*sep, Rs[i], s.cls);}
+}
 function drawSun(){
   const c=SYS.cl, sc=w2s(0,0), zz=Math.pow(cam.z,0.4);
-  const R=c.r*1.6*zz*3;
+  const big=(SYS.star&&SYS.star.big)||1;
+  if(SYS.stars&&SYS.stars.length>1){drawMultiStar(sc,zz);
+    if(sel==="sun")drawReticle(sc.x,sc.y,c.r*1.6*zz*3*1.6+12);return;}
+  const R=c.r*1.6*zz*3*(c.sp==="bh"?big:1);
   if(c.sp==="bh"){
-    const g=ctx.createRadialGradient(sc.x,sc.y,R*0.22,sc.x,sc.y,R*1.4);
-    g.addColorStop(0,"rgba(255,179,92,0.8)");g.addColorStop(0.4,"rgba(255,130,60,0.28)");
-    g.addColorStop(1,"rgba(255,130,60,0)");
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(sc.x,sc.y,R*1.4,0,7);ctx.fill();
-    const dw=Math.max(1.5,R*0.06);
-
-    ctx.strokeStyle="rgba(255,220,170,0.9)";ctx.lineWidth=dw;
-    ctx.beginPath();ctx.ellipse(sc.x,sc.y,R*0.7,R*0.2,-0.5,Math.PI,Math.PI*2);ctx.stroke();
-    ctx.fillStyle="#03040a";ctx.beginPath();ctx.arc(sc.x,sc.y,R*0.26,0,7);ctx.fill();
-    ctx.strokeStyle="rgba(255,255,255,0.85)";ctx.lineWidth=1.2;
-    ctx.beginPath();ctx.arc(sc.x,sc.y,R*0.28,0,7);ctx.stroke();
-    ctx.strokeStyle="rgba(255,220,170,0.9)";ctx.lineWidth=dw;
-    ctx.beginPath();ctx.ellipse(sc.x,sc.y,R*0.7,R*0.2,-0.5,0,Math.PI);ctx.stroke();
+    const tilt=-0.5, dw=Math.max(1.5,R*0.06), eh=R*0.26, ct=Math.cos(tilt), st=Math.sin(tilt);
+    // Relativistische Jets mit aufsteigenden Knoten
+    for(const dir of [-1,1]){
+      const jl=R*(2.4+0.25*Math.sin(simT*1.1)), jx=sc.x+Math.cos(tilt+Math.PI/2)*dir*jl, jy=sc.y+Math.sin(tilt+Math.PI/2)*dir*jl;
+      const jg=ctx.createLinearGradient(sc.x,sc.y,jx,jy);
+      jg.addColorStop(0,"rgba(190,220,255,0.6)");jg.addColorStop(0.6,"rgba(150,190,255,0.18)");jg.addColorStop(1,"rgba(150,190,255,0)");
+      ctx.strokeStyle=jg;ctx.lineWidth=Math.max(1.5,R*0.07);ctx.lineCap="round";
+      ctx.beginPath();ctx.moveTo(sc.x,sc.y);ctx.lineTo(jx,jy);ctx.stroke();
+      for(let k=0;k<3;k++){const f=((k+ (simT*0.2)%1)/3);
+        ctx.globalAlpha=0.5*(1-f);ctx.fillStyle="rgba(205,228,255,1)";
+        ctx.beginPath();ctx.arc(sc.x+(jx-sc.x)*f,sc.y+(jy-sc.y)*f,Math.max(1,R*0.05*(1-f)),0,7);ctx.fill();}
+      ctx.globalAlpha=1;
+    }
+    ctx.lineCap="butt";
+    // Weiches Glühen
+    const g=ctx.createRadialGradient(sc.x,sc.y,R*0.22,sc.x,sc.y,R*1.7);
+    g.addColorStop(0,"rgba(255,190,110,0.8)");g.addColorStop(0.4,"rgba(255,140,70,0.25)");g.addColorStop(1,"rgba(255,110,60,0)");
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(sc.x,sc.y,R*1.7,0,7);ctx.fill();
+    // Akkretionsscheibe: getiltete Ellipse, segmentweise mit Doppler-Beaming (anlaufende Seite
+    // hell/bläulich, ablaufende dunkel/rötlich) + rotierenden Filamenten.
+    const diskArc=(rx,ry,a0,a1,base)=>{const N=32;ctx.lineWidth=dw;
+      for(let i=0;i<N;i++){const t0=a0+(a1-a0)*i/N, t1=a0+(a1-a0)*(i+1)/N, mid=(t0+t1)/2;
+        const lx=Math.cos(mid)*rx, ly=Math.sin(mid)*ry, dopp=(lx*ct-ly*st)/rx;   // Bildschirm-x → Seite
+        const fl=0.6+0.4*Math.sin(mid*6-simT*3.0);
+        const a=Math.max(0,Math.min(1,base*(0.45+0.55*dopp)*fl));
+        ctx.strokeStyle=(dopp>0?"rgba(255,250,238,":"rgba(255,168,108,")+a.toFixed(2)+")";
+        ctx.beginPath();ctx.ellipse(sc.x,sc.y,rx,ry,tilt,t0,t1);ctx.stroke();}};
+    // hintere Hälfte (über den Schatten gewölbt)
+    diskArc(R*0.95,R*0.25,Math.PI,Math.PI*2,0.9); diskArc(R*0.72,R*0.18,Math.PI,Math.PI*2,0.7);
+    // Ereignishorizont + Photonenring + schwacher gelinster Halo (Einstein-Ring)
+    ctx.fillStyle="#000005";ctx.beginPath();ctx.arc(sc.x,sc.y,eh,0,7);ctx.fill();
+    ctx.strokeStyle="rgba(255,248,225,0.98)";ctx.lineWidth=Math.max(1.4,R*0.028);
+    ctx.beginPath();ctx.arc(sc.x,sc.y,eh*1.06,0,7);ctx.stroke();
+    ctx.strokeStyle="rgba(255,236,205,0.22)";ctx.lineWidth=Math.max(1,R*0.014);
+    ctx.beginPath();ctx.arc(sc.x,sc.y,eh*1.5,0,7);ctx.stroke();
+    // vordere Hälfte
+    diskArc(R*0.95,R*0.25,0,Math.PI,1.0); diskArc(R*0.72,R*0.18,0,Math.PI,0.85);
   }else if(c.sp==="ns"){
     const g=ctx.createRadialGradient(sc.x,sc.y,0,sc.x,sc.y,R);
     g.addColorStop(0,"#ffffff");g.addColorStop(0.2,c.col);g.addColorStop(1,hexA(c.glow,0));
@@ -2173,11 +2386,10 @@ function drawSun(){
       }
     }
   }else{
-    const pul=1+0.025*Math.sin(simT*1.7);
-    const g=ctx.createRadialGradient(sc.x,sc.y,0,sc.x,sc.y,R*pul);
-    g.addColorStop(0,"#ffffff");g.addColorStop(0.16,c.col);
-    g.addColorStop(0.45,hexA(c.glow,0.4));g.addColorStop(1,hexA(c.glow,0));
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(sc.x,sc.y,R*pul,0,7);ctx.fill();
+    const pAmp=(c.k==="RG"||c.k==="C")?0.06:0.025;              // veränderliche Riesen pulsieren stärker
+    const pul=1+pAmp*Math.sin(simT*(c.k==="RG"?0.9:1.7)), Rp=R*pul;
+    drawStarCorona(sc.x,sc.y,Rp,c);
+    drawStarOrb(sc.x,sc.y,Rp,SYS.star.cls);
   }
   if(sel==="sun"){drawReticle(sc.x,sc.y,R*0.5+12)}
 }
@@ -2202,7 +2414,16 @@ function drawSysStorm(sp){
   }
   ctx.restore();
 }
+function drawDisk(cx,cy,rad,p,la){
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,rad,0,7);ctx.clip();
+  ctx.drawImage(getTex(p),cx-rad,cy-rad,rad*2,rad*2);
+  const hx=cx+Math.cos(la)*rad*0.55, hy=cy+Math.sin(la)*rad*0.55;
+  const g=ctx.createRadialGradient(hx,hy,rad*0.15,hx,hy,rad*2.1);
+  g.addColorStop(0,"rgba(255,255,255,0.22)");g.addColorStop(0.4,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,2,10,0.86)");
+  ctx.fillStyle=g;ctx.fillRect(cx-rad,cy-rad,rad*2,rad*2);ctx.restore();
+}
 function drawPlanetBody(p,sx,sy,r,wx,wy){
+  const la=Math.atan2(-wy,-wx);
   if(p.type.id==="lava"||p.type.id==="leben"||p.type.id==="ozean"||p.type.giant){
     const hc=p.type.id==="lava"?"255,120,50":p.type.id==="leben"?"120,200,255":
       p.type.giant?"230,200,160":"120,180,255";
@@ -2219,17 +2440,7 @@ function drawPlanetBody(p,sx,sy,r,wx,wy){
       ctx.strokeStyle="rgba(224,206,160,0.26)";ctx.lineWidth=Math.max(0.6,r*0.08);
       ctx.beginPath();ctx.ellipse(sx,sy,r*3.3,r*1.12,-0.42,Math.PI,Math.PI*2);ctx.stroke();}
   }
-  ctx.save();
-  ctx.beginPath();ctx.arc(sx,sy,r,0,7);ctx.clip();
-  ctx.drawImage(getTex(p),sx-r,sy-r,r*2,r*2);
-  const la=Math.atan2(-wy,-wx);
-  const hx=sx+Math.cos(la)*r*0.55, hy=sy+Math.sin(la)*r*0.55;
-  const g=ctx.createRadialGradient(hx,hy,r*0.15,hx,hy,r*2.1);
-  g.addColorStop(0,"rgba(255,255,255,0.22)");
-  g.addColorStop(0.4,"rgba(0,0,0,0)");
-  g.addColorStop(1,"rgba(0,2,10,0.86)");
-  ctx.fillStyle=g;ctx.fillRect(sx-r,sy-r,r*2,r*2);
-  ctx.restore();
+  drawDisk(sx,sy,r,p,la);
   if(p.ring){
     ctx.strokeStyle="rgba(216,200,160,0.7)";ctx.lineWidth=Math.max(1,r*0.22);
     ctx.beginPath();ctx.ellipse(sx,sy,r*1.9,r*0.62,-0.42,0,Math.PI);ctx.stroke();
@@ -2240,14 +2451,6 @@ function drawPlanetBody(p,sx,sy,r,wx,wy){
       ctx.strokeStyle="rgba(224,206,160,0.26)";ctx.lineWidth=Math.max(0.6,r*0.08);
       ctx.beginPath();ctx.ellipse(sx,sy,r*3.3,r*1.12,-0.42,0,Math.PI);ctx.stroke();}
   }
-
-  if(p.twin){const tr=Math.max(2,r*p.twin.s), ang=p.twin.a+simT*0.6, off=r*1.7+tr;
-    const tx=sx+Math.cos(ang)*off, ty=sy+Math.sin(ang)*off*0.85;
-    ctx.save();ctx.beginPath();ctx.arc(tx,ty,tr,0,7);ctx.clip();
-    ctx.drawImage(getTex(p),tx-tr,ty-tr,tr*2,tr*2);
-    const g=ctx.createRadialGradient(tx-tr*0.4,ty-tr*0.4,tr*0.2,tx,ty,tr*1.7);
-    g.addColorStop(0,"rgba(255,255,255,0.2)");g.addColorStop(0.5,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,2,10,0.82)");
-    ctx.fillStyle=g;ctx.fillRect(tx-tr,ty-tr,tr*2,tr*2);ctx.restore();}
 }
 function drawReticle(x,y,r){
   ctx.strokeStyle="#6ee7d8";ctx.lineWidth=1.3;
@@ -2348,10 +2551,12 @@ function drawSystem(){
   }
 
   if(SYS.belt){const bl=SYS.belt;
+    const zf=cam.z>1?Math.min(2,0.5+cam.z*0.5):1;
     for(const a of bl.pts){const ang=a.a+simT*a.sp*0.12;
       const s=w2s(Math.cos(ang)*a.r,Math.sin(ang)*a.r);
       if(s.x<-20||s.x>W+20||s.y<-20||s.y>H+20)continue;
-      ctx.globalAlpha=a.al;ctx.fillStyle="rgba(176,186,205,1)";ctx.fillRect(s.x,s.y,a.sz,a.sz)}
+      ctx.globalAlpha=Math.min(1,a.al);ctx.fillStyle="rgba("+a.col+",1)";
+      ctx.beginPath();ctx.arc(s.x,s.y,Math.max(0.6,a.sz*zf*0.6),0,7);ctx.fill()}
     ctx.globalAlpha=1;
   }
   drawSun();
@@ -2696,17 +2901,22 @@ $("#btnCodex").addEventListener("click",openCodex);
 $("#cxClose").addEventListener("click",()=>codex.classList.remove("on"));
 function goFullscreen(){try{const el=document.documentElement;if(el.requestFullscreen)el.requestFullscreen();else if(el.webkitRequestFullscreen)el.webkitRequestFullscreen();}catch(e){}}
 function toggleFull(){try{if(document.fullscreenElement||document.webkitFullscreenElement){(document.exitFullscreen||document.webkitExitFullscreen).call(document);}else goFullscreen();}catch(e){}}
-$("#btnFull").addEventListener("click",toggleFull);
 /* ===== Sprache umschalten: statische UI-Texte (dynamische laufen über t()) ===== */
 const STATICUI=[
  ["#back","text","↩ Galaxie","↩ Galaxy"],
- ["#brand small","text","Galaktisches Bergbau-Imperium · V2 (Entwicklung)","Galactic Mining Empire · V2 (development)"],
+ ["#brand small","text","Galaktisches Bergbau-Imperium","Galactic Mining Empire"],
  ["#btnGalTrade","text","Handel","Trade"],
  ["#btnMega","text","Megakonstruktionen","Megastructures"],
  ["#btnUps","text","Ausbau","Upgrades"],
  ["#btnStats","text","Statistik","Statistics"],
  ["#btnCodex","text","Kodex","Codex"],
- ["#btnFull","title","Vollbild ein/aus","Fullscreen on/off"],
+ ["#btnMenu","title","Menü","Menu"],
+ ["#btnSettings","title","Einstellungen","Settings"],
+ ["#setTitle","text","Einstellungen","Settings"],
+ ["#setLanglab","text","Sprache","Language"],
+ ["#setFulllab","text","Vollbild","Fullscreen"],
+ ["#setFull","text","Umschalten","Toggle"],
+ ["#setClose","text","Schließen","Close"],
  ["#chipP","html",'Planeten <b id="cP">0</b>','Planets <b id="cP">0</b>'],
  ["#chipS","html",'Systeme <b id="cS">0</b>','Systems <b id="cS">0</b>'],
  ["#chipA","html",'Erfolge <b id="cA">0/10</b>','Achievements <b id="cA">0/10</b>'],
@@ -2733,7 +2943,7 @@ const CXTABS={typen:["Planetentypen","Planet types"],sterne:["Sternklassen","Sta
 const STSEC=[["Bilanz · Produktion / Verbrauch pro Sekunde","Balance · production / consumption per second"],["Förderung pro System","Output per system"],["Megastrukturen","Megastructures"]];
 function applyLang(){
   document.documentElement.lang=LANG;
-  const lb=$("#btnLang");if(lb)lb.textContent=LANG==="en"?"EN":"DE";
+  const lb=$("#setLang");if(lb)lb.textContent=LANG==="en"?"EN":"DE";
   const j=LANG==="de"?2:3;
   STATICUI.forEach(u=>{const el=$(u[0]);if(!el)return;const v=u[j];if(u[1]==="title")el.title=v;else if(u[1]==="html")el.innerHTML=v;else el.textContent=v;});
   document.querySelectorAll("#cxtabs button").forEach(b=>{const m=CXTABS[b.dataset.t];if(m)b.textContent=m[LANG==="de"?0:1];});
@@ -2746,7 +2956,19 @@ function applyLang(){
 function setLang(l){LANG=l==="de"?"de":"en";SAVE.lang=LANG;persist();
   try{SYSCACHE.clear();if(SYSIDX!=null)SYS=getSystem(SYSIDX);}catch(e){}
   applyLang();}
-$("#btnLang").addEventListener("click",()=>setLang(LANG==="en"?"de":"en"));
+/* ===== Einstellungs-Fenster (⚙): Sprache, Vollbild ===== */
+$("#btnSettings").addEventListener("click",()=>{const w=$("#setwin");if(w)w.classList.add("on");});
+$("#setClose").addEventListener("click",()=>{const w=$("#setwin");if(w)w.classList.remove("on");});
+$("#setwin").addEventListener("click",e=>{if(e.target.id==="setwin")$("#setwin").classList.remove("on");});
+$("#setLang").addEventListener("click",()=>setLang(LANG==="en"?"de":"en"));
+$("#setFull").addEventListener("click",toggleFull);
+/* Mobiles Topbar-Menü: bündelt die rechten Aktionen in ein ☰-Dropdown. */
+(function mobileMenu(){
+  const mb=$("#btnMenu"), ta=$("#topactions"); if(!mb||!ta)return;
+  mb.addEventListener("click",e=>{e.stopPropagation();ta.classList.toggle("open");});
+  ta.addEventListener("click",e=>{if(e.target.closest("button"))ta.classList.remove("open");});
+  document.addEventListener("click",e=>{if(!ta.contains(e.target)&&e.target!==mb)ta.classList.remove("open");});
+})();
 $("#introStart").addEventListener("click",()=>{SAVE.flags.intro=1;persist();const iv=$("#intro");if(iv)iv.classList.remove("on");goFullscreen();});
 $("#btnGalTrade").addEventListener("click",openGalaxyTrade);
 $("#btnUps").addEventListener("click",openUps);
@@ -2773,6 +2995,7 @@ $("#btnReset").addEventListener("click",()=>{
 });
 addEventListener("keydown",e=>{
   if(e.key==="Escape"){
+    const stw=$("#setwin");if(stw&&stw.classList.contains("on")){stw.classList.remove("on");return}
     const cw=$("#cargowin");if(cw&&cw.classList.contains("on")){closeCargo();return}
     const mw=$("#megawin");if(mw&&mw.classList.contains("on")){closeMega();return}
     const sw=$("#statswin");if(sw&&sw.classList.contains("on")){sw.classList.remove("on");return}
@@ -2848,7 +3071,7 @@ function frame(now){
     cam.z+=(tgt.z-cam.z)*Math.min(1,dt*7);
     updBack();updZoom();updateStatsLive();updCycleFills();
     {const mw=$("#megawin");if(mw&&mw.classList.contains("on"))megaLiveFills($("#mgbody"));}
-    uiAcc+=dt;if(uiAcc>=0.5){uiAcc=0;prodDirty();refreshOpenPanel();updSysOverview()}
+    uiAcc+=dt;if(uiAcc>=0.5){uiAcc=0;prodDirty();refreshOpenPanel();updSysOverview();updBodyOverview()}
     if(MODE==="galaxy")drawGalaxy();else drawSystem();
     stepFloaters(now);
   }catch(e){
@@ -3780,6 +4003,72 @@ function updSysOverview(){
     showSystemPanel(st);
   }));
 }
+
+/* System-Übersicht (rechts): alle Körper hierarchisch gruppiert (Monde unter ihrem Planeten,
+   ein-/ausklappbar), Mini-Darstellung vor dem Namen, Unerforschte als „???".
+   Klick fokussiert den Körper und öffnet sein Infofenster. Nur sichtbar, wenn nichts ausgewählt ist. */
+let bovSig="", bovCollapsed={};
+function drawBovIcon(cv,g){
+  const S=18, dpr=Math.min(DPR||1,2), P=Math.round(S*dpr);
+  cv.width=P;cv.height=P;cv.style.width=S+"px";cv.style.height=S+"px";
+  const x=cv.getContext("2d");
+  if(!g.known){
+    x.fillStyle="#10161f";x.beginPath();x.arc(P/2,P/2,P*0.42,0,7);x.fill();
+    x.strokeStyle="rgba(150,165,190,0.5)";x.lineWidth=1;x.stroke();
+    x.fillStyle="rgba(150,165,190,0.85)";x.font="bold "+Math.round(P*0.5)+"px ui-monospace,monospace";
+    x.textAlign="center";x.textBaseline="middle";x.fillText("?",P/2,P*0.56);return;
+  }
+  if(g.sun){drawStarPreview(cv,SYS.cl);return;}
+  try{drawBodyPreview(cv,g.body);}catch(e){}
+}
+function updBodyOverview(){
+  const ov=$("#bodyov");if(!ov)return;
+  if(MODE!=="system"||!SYS||sel||warp){if(ov.classList.contains("on"))ov.classList.remove("on");bovSig="";return;}
+  const groups=[{sun:true,known:true,name:SYS.star.name,sub:t(SYS.cl.n),moons:[]}];
+  for(const p of SYS.planets){
+    const moons=(SYS.moons||[]).filter(m=>m.parent===p);
+    groups.push({id:p.id,body:p,known:!!SAVE.p[p.id],name:p.name,sub:t(p.type.n),moons});
+  }
+  if(SYS.beltBody){const b=SYS.beltBody;groups.push({id:b.id,body:b,known:!!SAVE.p[b.id],name:b.name||t("Asteroidengürtel"),sub:"",moons:[]});}
+  for(const cm of (SYS.comets||[]))groups.push({id:cm.id,body:cm,known:!!SAVE.p[cm.id],name:cm.name,sub:t("Komet"),moons:[]});
+  const isCol=id=>bovCollapsed[id]!==false;   // Standard: eingeklappt; nur explizit aufgeklappt zeigt Monde
+  let sig=SYSIDX+"|";
+  for(const g of groups){sig+=(g.id||"sun")+(g.known?1:0)+(g.moons.length?(isCol(g.id)?"c":"o"):"")+";";
+    for(const m of g.moons)sig+=m.id+(SAVE.p[m.id]?1:0)+",";}
+  ov.classList.add("on");
+  if(sig===bovSig)return; bovSig=sig;
+  const icons=[];
+  const rowHTML=(g,lvl)=>{
+    const i=icons.length;icons.push(g);
+    const hasMoons=g.moons&&g.moons.length>0, col=isCol(g.id);
+    const attr=g.sun?' data-sun="1"':(' data-bid="'+escH(g.id)+'"'+(g.voy?' data-voy="1"':''));
+    return '<div class="sovrow bov'+(lvl?' lvl1':'')+'"'+attr+'>'+
+      (hasMoons?'<button class="bovtog" data-tog="'+escH(g.id)+'" title="'+t("Ein-/Ausklappen")+'">'+(col?'▸':'▾')+'</button>':(lvl?'':'<span class="bovsp"></span>'))+
+      '<canvas class="bovic" data-ic="'+i+'"></canvas>'+
+      '<span class="snm">'+(g.known?(g.sun?'☀ ':'')+escH(g.name):'<span class="unk">???</span>')+'</span>'+
+      (hasMoons?'<span class="sbadge">'+g.moons.length+'☾</span>':'')+
+      (g.known?(g.sub?'<span class="sbadge">'+escH(g.sub)+'</span>':''):'<span class="sst">'+t("ungescannt")+'</span>')+'</div>';
+  };
+  let h='<h3>'+t("Himmelskörper")+'</h3>';
+  for(const g of groups){
+    h+=rowHTML(g,0);
+    if(g.moons.length&&!isCol(g.id))
+      for(const m of g.moons)h+=rowHTML({id:m.id,body:m,known:!!SAVE.p[m.id],name:m.name,sub:t(m.type.n),moons:[]},1);
+  }
+  ov.innerHTML=h;
+  ov.querySelectorAll('.bovic').forEach(cv=>drawBovIcon(cv,icons[+cv.dataset.ic]));
+  ov.querySelectorAll('.bovtog').forEach(b=>b.addEventListener('click',e=>{
+    e.stopPropagation();const id=b.dataset.tog;bovCollapsed[id]=(bovCollapsed[id]===false);bovSig="";updBodyOverview();}));
+  ov.querySelectorAll('.bov').forEach(el=>el.addEventListener('click',()=>{
+    if(el.dataset.sun){activate({kind:"sun",o:SYS});return;}
+    const id=el.dataset.bid;
+    if(el.dataset.voy){const v=(SYS.voyager||[]).find(x=>x.id===id);if(v)activate({kind:"voyager",o:v});return;}
+    const b=findBodyById(SYS,id);if(!b)return;
+    sel=b;follow=b;const sz=Math.max(2,b.size||8);
+    tgt.z=clamp((Math.min(W,H)*0.32)/(2*sz),tgt.z,maxZ());
+    showPlanetPanel(b);
+  }));
+}
 function foeTick(){
   let any=false;
   for(const sys of SYSCACHE.values()){
@@ -4274,9 +4563,6 @@ function showSystemPanel(star){
     '<div class="cell"><div class="k">Sonde</div><div class="v">'+(pl>0?pl+' / '+pmx:'\u2013')+'</div></div>'+
     '<div class="cell"><div class="k">Schiffe</div><div class="v">'+(hasStation(idx)?shipsFree(idx):'\u2013')+'</div></div>'+
     '</div>';
-  if(sys.feature){
-    h+='<div class="psub" style="margin:8px 0 2px;color:'+sys.feature.col+'">\u2726 Besonderheit \u00b7 '+sys.feature.n+'</div>';
-    h+='<p class="desc" style="margin:0 0 4px">'+sys.feature.d+'</p>';}
   if(sys.phenomenon){const sc=sys.phenomenon.col;
     h+='<div class="psub" style="margin:8px 0 2px;color:rgb('+sc[0]+','+sc[1]+','+sc[2]+')">\u2736 '+t("Ph\u00e4nomen")+' \u00b7 '+t(sys.phenomenon.n)+'</div>';
     h+='<p class="desc" style="margin:0 0 4px">'+sys.phenomenon.d+'</p>';}
