@@ -1,0 +1,9 @@
+Wir haben ein Problem: Um die Werft bauen zu können und aus dem System expandieren zu können benötigt man Kristalle, welche man bisher nicht in Sol bekommen kann. Angenommen wir würden sol jetzt auf einem der späteren Planeten als Ressource platzieren, dann bräuchte man zum Ausbau der Erkundungssonde über stufe 4 hinaus Methaneis, welches aber erst ab Stufe 6 in Sol auf Uranus vorhanden ist (bitte prüfen), dafür brauchen wir eine Lösung. Ab dem 2. System, in welches man expandiert, spielt das dann keine Rolle mehr, da in Proxima Zentauri relativ schnell Methaneis vorkommt. Lass uns dafür eine Lösung finden. und sortiere den ordner mal etwas.
+
+Übersetze das Spiel ins englische, füge ein kleines Einstellungsfenster ein und stelle die Standartsprache auf Englisch.
+
+Geplant ist ein Hosting auf Github Pages damit es auch andere Leute überall Spielen können. Setze dafür Git im Projekt auf, ergänze ein Lizenz-file um mich rechtlich vor Diebstahl abzusichern, baue eine saubere Versionierung auf und prüfe in diesem Zusammenhang, ob die Verwendung von JavaScript Obfuscator sinnvoll ist (https://obfuscator.io). Zusätzlich ist die Veröffentlich über itch.io geplant, was muss ich dafür beachten und ist es dahingehend sinnvoll das Spiel über https://www.electronjs.org/?utm_source=chatgpt.com oder https://tauri.app/?utm_source=chatgpt.com in eine Desktop-App umzuwandeln?
+
+---
+
+Performance Improvements

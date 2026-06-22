@@ -1,0 +1,77 @@
+-- Sterne
+Gelber Hauptreihenstern
+Roter Zwerg
+Orangefarbener Zwergstern
+Blauer Riesenstern
+Blauer Überriese
+Roter Riese
+Roter Überriese
+Weißer Zwerg
+Brauner Zwerg
+Neutronenstern
+Pulsar
+Magnetar
+Schwarzes Loch
+Kohlenstoffstern
+Wolf-Rayet-Stern
+Doppelsternsystem
+Dreifachsternsystem
+Vierfachsternsystem
+Enge Doppelsterne
+Weit auseinanderliegende Doppelsterne
+Schwarzes Loch mit Akkretionsscheibe
+Neutronenstern mit Akkretionsring
+-- Planeten
+Erdähnlicher Planet
+Ozeanplanet
+Inselplanet
+Wüstenplanet
+Eisplanet
+Vulkanplanet
+Lavawelt
+Toxische Welt
+Schwefelwelt
+Kristallplanet
+Dschungelplanet
+Sumpfplanet
+Supererde
+Gasriese
+Eisriese
+Kohlenstoffplanet
+Metallplanet
+Wüstenmond
+Ozeanmond
+Vulkanmond
+Eisiger Mond
+Planet mit extremen Ringen
+Planet mit mehreren Ringsystemen
+Planet mit biolumineszenten Ozeanen
+-- Asteroiden & Kleinkörper
+Kleiner Asteroidengürtel
+Dichtes Asteroidenfeld
+Riesiger Asteroidengürtel
+Metallreicher Asteroidengürtel
+Eisasteroidenfeld
+Einzelner gigantischer Asteroid
+Wandernde Eisbrocken
+Asteroiden mit Höhlenkolonien
+Kristallasteroiden
+Asteroiden mit seltenen Ressourcen
+-- Raumphänomene
+Farbiges Nebelfeld
+Dunkler Nebel
+Staubwolke
+Plasmawolke
+Ionisierter Nebel
+Gasstrom
+Magnetsturm
+Sonnensturm
+Antimateriewolke
+Kosmischer Strahlungssturm
+Elektrische Entladungswolken
+Leuchtende Partikelströme
+-- Seltene Besonderheiten
+Planet im Inneren eines Ringsystems
+Schwarzes Loch mit bewohnbarer Zone
+Doppelplanet
+Dreifachplanetensystem
