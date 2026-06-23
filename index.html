@@ -2066,12 +2066,26 @@ function goUp(){
 function startWarp(dir,star){
   if(warp)return;
   sel=null;hover=null;selStar=null;hidePanel();
-  warp={dir,t:0,star};
+  warp={dir,t:0,star,t0:performance.now()};   // Startzeit merken
   if(dir==="in"){follow=null;tgt.x=star.x;tgt.y=star.y;tgt.z=Math.max(tgt.z,1.2)}
   else{const s=STARS[SYSIDX];warp.back=s?{x:s.x,y:s.y}:{x:cam.x,y:cam.y};}
 }
 function stepWarp(dt){
   if(!warp)return;
+  if(!(dt>0)) dt = 1/60;                        // Mindestschritt, falls dt 0/ungültig
+  // Notausstieg: hängt der Warp > 4s realer Zeit, sauber beenden
+  if(performance.now()-(warp.t0||0) > 4000){
+    if(warp.dir=== "in"&&warp.star) enterSystem(warp.star.i);
+    else if(warp.dir=== "out"){
+      MODE="galaxy";SYS=null;sel=null;follow=null;
+      const st=(warp&&warp.back)||STARS[SYSIDX]||{x:cam.x,y:cam.y};SYSIDX=-1;
+      cam={x:st.x,y:st.y,z:0.9};tgt={x:st.x,y:st.y,z:0.45};
+      $("#back").style.display="none";
+      $("#hinttxt").textContent=t("Sternsystem w\u00e4hlen \u00b7 Anklicken \u00f6ffnet die Infokarte \u00b7 Ziehen/Scrollen: navigieren");
+      updHUD();
+    }
+    $("#warpfx").style.opacity=0; warp=null; return;
+  }
   warp.t+=dt/0.85;
   const fx=$("#warpfx");
   if(warp.t<1){
