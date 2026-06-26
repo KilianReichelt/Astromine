@@ -89,6 +89,10 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 #bodyov .bovtog{flex:none;background:none;border:none;color:var(--mut);cursor:pointer;padding:0;width:13px;font-size:10px;line-height:1}
 #bodyov .bovtog:hover{color:var(--cyan);background:none}
 #bodyov .bovsp{flex:none;width:13px}
+#bodyov .bovsec{margin-top:12px;padding-top:9px;border-top:1px solid var(--line2)}
+#bodyov .bovstic{flex:none;width:18px;height:18px}
+#bodyov .bovst .snm{color:var(--txt)}
+#bodyov .bovst.unbuilt .snm{color:var(--mut2)}
 .sovrow{display:flex;align-items:center;flex-wrap:wrap;gap:7px;padding:6px 7px;border:1px solid var(--line);
   border-radius:4px;margin-bottom:5px;cursor:pointer;background:rgba(255,255,255,.02)}
 .sovrow:hover{border-color:var(--line2);background:rgba(110,231,216,.07)}
@@ -327,7 +331,7 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 @keyframes loadbar{to{width:100%}}
 #loader .lsub{font-size:12px;color:var(--mut2);letter-spacing:.16em}
 /* ---- Produktions-Tooltip & Statistik-Fenster ---- */
-#prodtip{position:fixed;z-index:12;display:none;background:var(--panel);border:1px solid var(--line2);
+#prodtip{position:fixed;z-index:40;display:none;background:var(--panel);border:1px solid var(--line2);
   border-radius:4px;padding:8px 12px;font-size:12px;color:var(--txt);pointer-events:none;
   backdrop-filter:blur(6px);box-shadow:0 6px 20px rgba(0,0,0,.5);white-space:nowrap}
 #prodtip.on{display:block}
@@ -350,6 +354,20 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 #sthead .sp{flex:1}
 .stsec{margin:20px 0 9px;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.22em;
   color:var(--mut2);text-transform:uppercase}
+#sthead #statSysSel{max-width:300px;font-size:13px;padding:5px 9px;margin-left:6px}
+#stchartwrap{margin:8px 0 12px}
+#statchartctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.rangebtns{display:flex;gap:6px}
+.rangebtns button{font-size:12px;padding:4px 10px;letter-spacing:0;text-transform:none;background:rgba(110,231,216,.06);border:1px solid var(--line2);color:var(--mut2);border-radius:4px;cursor:pointer}
+.rangebtns button.on{color:var(--cyan);border-color:var(--cyan);background:rgba(110,231,216,.14)}
+.resdrop{position:relative}
+.resdroppanel{position:absolute;z-index:5;top:calc(100% + 4px);left:0;display:none;background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:8px;max-height:260px;overflow:auto;min-width:190px;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.resdroppanel.on{display:block}
+.resdroppanel label{display:flex;align-items:center;gap:7px;font-size:12px;padding:3px 4px;color:var(--txt);cursor:pointer;white-space:nowrap}
+.resdroppanel input{accent-color:#6ee7d8;width:14px;height:14px}
+.resdroppanel .rdactions{display:flex;gap:6px;margin-bottom:6px;border-bottom:1px solid var(--line);padding-bottom:7px}
+.resdroppanel .rdactions button{font-size:11px;padding:3px 8px;letter-spacing:0;text-transform:none}
+#statchart{width:100%;height:220px;display:block;background:rgba(255,255,255,.015);border-radius:6px}
 /* Bilanz-Ansicht (Produktion/Verbrauch je Ressource, Anno-Stil) */
 .baltabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 .baltab{font-size:12px;padding:5px 11px;background:var(--panel);border:1px solid var(--line);border-radius:4px;color:var(--mut);cursor:pointer}
@@ -406,6 +424,50 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
   border:1px solid var(--line2);background:rgba(110,231,216,.08);color:var(--cyan);border-radius:3px;cursor:pointer;text-transform:none}
 .cgstep button:hover{background:rgba(110,231,216,.2)}
 .cgq{font-size:12px;padding:5px 7px;letter-spacing:0;text-transform:none}
+.balbar .bf{position:absolute;bottom:2px;height:5px;background:#7fc8e0;border-radius:2px;min-width:1px}
+#reswin{position:fixed;inset:0;z-index:24;display:none;background:rgba(3,5,11,.86);backdrop-filter:blur(8px);overflow:auto}
+#reswin.on{display:block}
+#rsbox{max-width:880px;margin:4vh auto;padding:0 18px 60px}
+#rshead{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(3,5,11,.92);z-index:2}
+#rshead h1{font-family:ui-monospace,Consolas,monospace;font-size:18px;letter-spacing:.3em;color:var(--cyan);font-weight:500}
+#rsbody{padding-top:10px}
+.rstabs{display:flex;gap:8px;margin:6px 0 10px}
+.rstab{font-size:13px;padding:7px 14px;letter-spacing:.04em;text-transform:none;background:rgba(110,231,216,.06);border:1px solid var(--line2);color:var(--mut2);border-radius:5px;cursor:pointer}
+.rstab.on{color:var(--cyan);border-color:var(--cyan);background:rgba(110,231,216,.14)}
+.fpbig{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:4px 0 12px}
+.fpchip{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:5px 11px;border:1px solid var(--line);border-radius:20px;font-family:ui-monospace,monospace}
+.convrow{display:flex;align-items:center;gap:9px;padding:7px 6px;border-bottom:1px solid rgba(255,255,255,.05);flex-wrap:wrap}
+.convrow.on{background:rgba(127,200,224,.05)}
+.convrow .cn{flex:none;width:138px;font-size:13px;color:var(--txt)}
+.convrow .cs{flex:none;width:76px;text-align:right;font-family:ui-monospace,monospace;font-size:12px;color:var(--mut)}
+.convrow .cp{flex:none;width:84px;text-align:right;font-family:ui-monospace,monospace;font-size:12px;color:#5fd38a}
+.convlbl{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--mut2);letter-spacing:.02em}
+.rstartbtn{font-size:13px;padding:5px 12px;letter-spacing:0;text-transform:none;width:100%}
+.rqbox{padding:9px 11px;margin:4px 0 14px;border:1px solid #7fc8e055;border-radius:6px;background:rgba(127,200,224,.07)}
+/* Aufwertungs-Tab */
+.rupblock{padding:10px 12px;margin:8px 0;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.02)}
+.ruprow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:4px 0 6px}
+.rupres{font-family:ui-monospace,monospace;font-size:13px}
+/* Forschungsbaum */
+.rtree{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start;justify-content:center;margin-top:8px}
+.rbr{flex:1 1 152px;min-width:150px;max-width:200px;display:flex;flex-direction:column;align-items:stretch}
+.rbrh{text-align:center;font-size:12px;font-weight:600;letter-spacing:.05em;padding:6px 4px;border:1px solid;border-radius:6px}
+.rconn{align-self:center;width:2px;height:14px}
+.rn2{border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.025);padding:8px 10px}
+.rn2.done{background:rgba(95,211,138,.06);border-color:#5fd38a44}
+.rn2.run{border-color:#7fc8e0aa;box-shadow:0 0 0 1px #7fc8e055}
+.rn2.lk{opacity:.5}
+.rn2h{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:3px;line-height:1.25}
+.rn2c{font-family:ui-monospace,monospace;font-size:12px;color:var(--mut2);margin-bottom:5px}
+.rn2d{font-size:12px;color:var(--mut);line-height:1.35;margin-bottom:8px}
+.rn2s{font-size:13px}
+.rn2done{color:#5fd38a;font-weight:600}
+.rn2lk{color:var(--mut);font-size:12px;line-height:1.3;display:inline-block}
+.rmega{margin-top:22px;display:flex;flex-direction:column;align-items:center}
+.rmcol{display:flex;flex-direction:column;align-items:center;width:100%;max-width:400px;margin-top:6px}
+.rmcol>.rn2{width:100%;max-width:248px}
+.rmrow{display:flex;gap:10px;justify-content:center;width:100%}
+.rmrow>.rn2{flex:1 1 0;min-width:0;max-width:190px}
 .rterow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .rterow>label{font-size:12px;color:var(--mut2);min-width:44px;letter-spacing:.04em}
 .rtsel{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:7px 9px;border-radius:4px}
@@ -486,6 +548,7 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
   <div id="topactions">
   <button id="btnGalTrade" style="display:none">Handel</button>
   <button id="btnMega">Megakonstruktionen</button>
+  <button id="btnForsch">Forschung</button>
   <button id="btnUps">Ausbau</button>
   <button id="btnStats">Statistik</button>
   <button id="btnCodex">Kodex</button>
@@ -514,15 +577,22 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
 <div id="prodtip"></div>
 <div id="statswin" role="dialog" aria-label="Produktionsstatistik">
   <div id="stbox">
-    <div id="sthead"><h1>STATISTIK</h1><div class="sp"></div><button id="stClose">Schlie&szlig;en</button></div>
-    <div id="stsum" style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0"></div>
-    <div class="stsec">Bilanz &middot; Produktion / Verbrauch pro Sekunde</div>
+    <div id="sthead"><h1>STATISTIK</h1><select id="statSysSel" class="rtsel"></select><div class="sp"></div><button id="stClose">Schlie&szlig;en</button></div>
+    <div id="stsum" style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0"></div>
+    <div class="stsec">Verlauf</div>
+    <div id="stchartwrap">
+      <div id="statchartctrl">
+        <div id="statMetricBtns" class="rangebtns"></div>
+        <div id="statRangeBtns" class="rangebtns"></div>
+        <div class="resdrop"><button id="statResBtn" class="rtnow">Ressourcen &#9662;</button><div id="statResPanel" class="resdroppanel"></div></div>
+      </div>
+      <canvas id="statchart"></canvas>
+    </div>
+    <div class="stsec">Bilanz &middot; pro Sekunde</div>
     <div id="stbaltabs" class="baltabs"></div>
     <div id="stbal"></div>
-    <div class="stsec">F&ouml;rderung pro System</div>
+    <div class="stsec" id="stsysSec">F&ouml;rderung pro System</div>
     <div id="stsys"></div>
-    <div class="stsec">Megastrukturen</div>
-    <div id="stmega"></div>
   </div>
 </div>
 <div id="cargowin" role="dialog" aria-label="Schiff beladen">
@@ -535,6 +605,12 @@ button.warn{color:#f08a8a;border-color:rgba(240,138,138,.4);background:rgba(240,
   <div id="mgbox">
     <div id="mghead"><h1>MEGAKONSTRUKTIONEN</h1><div class="sp" style="flex:1"></div><button id="mgClose">Schlie&szlig;en</button></div>
     <div id="mgbody"></div>
+  </div>
+</div>
+<div id="reswin" role="dialog" aria-label="Forschungszentrum">
+  <div id="rsbox">
+    <div id="rshead"><h1>FORSCHUNGSZENTRUM</h1><div class="sp" style="flex:1"></div><button id="rsClose">Schlie&szlig;en</button></div>
+    <div id="rsbody"></div>
   </div>
 </div>
 <div id="loader">
@@ -596,6 +672,60 @@ let LANG="en";
 const TR={};
 function t(s){if(s==null)return s;if(LANG==="de")return s;const v=TR[s];return v==null?s:v;}
 Object.assign(TR,{
+ /* Forschungszentrum */
+ "Forschungszentrum":"Research Center","Forschungszentrum (nicht gebaut)":"Research Center (not built)",
+ "Nicht gebaut · nur in Sol, im Orbit der Erde":"Not built · only in Sol, in Earth orbit",
+ "Das Forschungszentrum wandelt eingespeiste Werkstoffe, Komponenten und Module (P1–P3) in Forschungspunkte um und schaltet einen Upgrade-Baum frei. Es speist ausschließlich aus dem Sol-Lager – liefere Produkte per Route nach Sol.":"The Research Center converts fed materials, components and modules (P1–P3) into research points and unlocks an upgrade tree. It draws exclusively from Sol storage – deliver products to Sol by route.",
+ "Forschungszentrum errichten":"Build Research Center","Umwandlungs-Slots":"conversion slots",
+ "Forschung läuft":"Research in progress","Noch ":"Remaining ","Forschungszentrum öffnen":"Open Research Center",
+ "Ausbauen → Stufe ":"Upgrade → level ","Maximalstufe erreicht.":"Maximum level reached.",
+ "Umwandlung":"Conversion","Forschung":"Research","Slots":"slots",
+ "Speist ausschließlich aus dem Sol-Lager. Stelle pro Produkt die Umwandlungsrate (Einheiten/s) und eine Reserve ein, unter der die Umwandlung pausiert. Es laufen maximal so viele Umwandlungen gleichzeitig wie die Zentrumsstufe Slots bietet.":"Draws exclusively from Sol storage. Set a conversion rate (units/s) and a reserve per product below which conversion pauses. At most as many conversions run at once as the center level provides slots.",
+ "P1 · Werkstoffe":"P1 · Materials","P2 · Komponenten":"P2 · Components","P3 · Module":"P3 · Modules",
+ "Im Sol-Lager":"In Sol storage","Produktion/s (galaxieweit)":"Production/s (galaxy-wide)",
+ "Rate":"Rate","Reserve":"Reserve","benötigt: ":"requires: ","Stufe-III-Knoten":"tier-III node(s)",
+ "gesperrt":"locked","erforscht":"researched","läuft …":"running …","Erforschen":"Research",
+ "zu wenig FP":"not enough FP","Abbrechen (FP zurück)":"Cancel (refund FP)",
+ "Ökologie":"Ecology","Förderung":"Mining","Logistik":"Logistics","Sensorik":"Sensors","Veredelung":"Refining","Megakonstruktionen":"Megastructures",
+ "davon FP-Umwandlung":"of which FP conversion","FP-Umwandlung":"FP conversion",
+ "Erst im <b>Forschungszentrum</b> erforschen.":"Research it first at the <b>Research Center</b>.",
+ "Anlagen":"Facilities","Schmelze":"Smelter","Fabrik":"Factory","Werft":"Shipyard",
+ "Alle Systeme (galaxieweit)":"All systems (galaxy-wide)","Keine Daten":"No data","Bereich":"Scope",
+ "1 Min":"1 min","5 Min":"5 min","15 Min":"15 min","1 Std":"1 h","Ressourcen":"Resources","Keine":"None",
+ "Lagerbestand":"Stock","Netto/s":"Net/s",
+ "Keine Ressourcen ausgewählt":"No resources selected","Sammle Daten …":"Collecting data …","jetzt":"now",
+ "Aufwertung":"Upgrade","Aufwerten":"Upgrade","einsetzen":"use","Verfügbar: ":"Available: ",
+ "Zentrum Stufe ":"Center level ","Umwandlungen aktiv":"conversions active",
+ "Höhere Stufen schalten tiefere Forschung frei.":"Higher levels unlock deeper research.",
+ "Zu wenig Punkte zum Aufwerten":"Not enough points to upgrade",
+ "Das Forschungszentrum wandelt Produkte aus dem Sol-Lager fortlaufend in Forschungspunkte um: P1 → FP1, P2 → FP2, P3 → FP3 (je 1 Einheit = 1 Punkt). Lege pro Produkt fest, wie viele Einheiten pro Sekunde umgewandelt werden, und eine Reserve, unter der die Umwandlung pausiert – so verarbeitest du nur den Überschuss.":"The Research Center continuously converts products from Sol storage into research points: P1 → FP1, P2 → FP2, P3 → FP3 (1 unit = 1 point each). Set per product how many units per second are converted, and a reserve below which conversion pauses – so you only process the surplus.",
+ "Werte niedrigere Forschungspunkte in höhere auf – im Verhältnis 3:1. Trage ein, wie viele Punkte du einsetzen willst; das Ergebnis siehst du sofort und bestätigst es per Knopf. Herabstufen ist nicht möglich.":"Upgrade lower research points into higher ones at a 3:1 ratio. Enter how many points to spend; the result shows instantly and is confirmed with a button. Downgrading is not possible.",
+ /* Forschungsbaum – Knoten */
+ "Erneuerbare Ressourcen I":"Renewable Resources I","Erneuerbare Ressourcen II":"Renewable Resources II","Tiefenbohrung":"Deep Drilling",
+ "Präzisionsabbau":"Precision Mining","Parallel-Förderer":"Parallel Conveyors","Adaptive Förderer":"Adaptive Conveyors",
+ "Lasthebetechnik":"Heavy-Lift Tech","Sprungleitwerk":"Jump Drive Array","Kolonnen-Logistik":"Convoy Logistics",
+ "Sondenkalibrierung":"Probe Calibration","Tiefenscan":"Deep Scan","Schwarm-Sensorik":"Swarm Sensors",
+ "Katalyse I":"Catalysis I","Hochofen-Takt":"Furnace Cadence","Transmutation II":"Transmutation II",
+ "Dyson-Schwarm-Forschung":"Dyson Swarm Research","Galaktisches Archiv":"Galactic Archive",
+ "Vorkommen regenerieren langsam bis 50 % ihres Maximums.":"Deposits slowly regenerate up to 50% of their maximum.",
+ "Regenerations-Deckel auf 100 %, doppelte Regenerationsrate.":"Regeneration cap raised to 100%, double regeneration rate.",
+ "Neu erschlossene Vorkommen sind um 25 % ergiebiger.":"Newly tapped deposits are 25% richer.",
+ "Manuelle Förderleistung +4 pro Zyklus.":"Manual mining yield +4 per cycle.",
+ "Höchststufe der Förderer 10 → 14.":"Conveyor max level 10 → 14.",
+ "Förderertempo +10 %.":"Conveyor speed +10%.",
+ "Frachtkapazität aller Schiffe +25 %.":"Cargo capacity of all ships +25%.",
+ "Schiffstempo +20 %.":"Ship speed +20%.",
+ "Schiffstempo +30 %.":"Ship speed +30%.",
+ "Erkundungssonden −25 % Kosten.":"Exploration probes −25% cost.",
+ "+25 % Ausbeute auf seltene Ressourcen (Stufe 3–4) beim Abbau & Fördern.":"+25% yield on rare resources (tier 3–4) when mining & conveying.",
+ "Sicht- und Sprungreichweite +600 ly.":"Sight and jump range +600 ly.",
+ "Rezeptertrag (Raffinerie & Werk) +15 %.":"Recipe output (refinery & works) +15%.",
+ "Verarbeitungstempo +25 %.":"Processing speed +25%.",
+ "Bessere Quoten: −20 % Rohstoff-Einsatz je Rezept.":"Better ratios: −20% input per recipe.",
+ "Schaltet den Bau des Dyson-Schwarms frei. Benötigt mindestens einen Stufe-III-Knoten.":"Unlocks construction of the Dyson Swarm. Requires at least one tier-III node.",
+ "Schaltet den Bau des Temporalen Verstärkers frei (Sagittarius A*).":"Unlocks construction of the Temporal Amplifier (Sagittarius A*).",
+ "Schaltet den Bau des Versorgungs-Nexus frei (Sagittarius A*).":"Unlocks construction of the Supply Nexus (Sagittarius A*).",
+ "Globaler Ertrags-Multiplikator +10 %. Benötigt 3 Stufe-III-Knoten.":"Global yield multiplier +10%. Requires 3 tier-III nodes.",
  "Sonde Lv.":"Probe Lv.","Sonde (nicht gebaut)":"Probe (not built)",
  "Handelsstation":"Trade station","Station (nicht gebaut)":"Station (not built)",
  "Raffinerie Lv.":"Refinery Lv.","Raffinerie (nicht gebaut)":"Refinery (not built)",
@@ -654,7 +784,7 @@ Object.assign(TR,{
  "Sonde":"Probe","vollständig":"complete","Unbekannter Ort":"Unknown place","Unbekanntes System":"Unknown system","Objekt":"Object",
  "Noch keine Systeme besucht. Springe von Sol aus zu einem Nachbarstern.":"No systems visited yet. Jump from Sol to a neighboring star.",
  "Noch keine Einträge. Scanne Planeten, um dein Logbuch zu füllen.":"No entries yet. Scan planets to fill your log.",
- "Megakonstruktionen werden ab der ersten <b>Werft</b> verfügbar. Baue in einem System eine Werft, um sie freizuschalten.":"Megastructures become available once you have your first <b>shipyard</b>. Build a shipyard in a system to unlock them.",
+ "Megakonstruktionen werden im <b>Forschungszentrum</b> (Sol) freigeschaltet. Erforsche dort den jeweiligen Megakonstruktions-Knoten.":"Megastructures are unlocked at the <b>Research Center</b> (Sol). Research the respective megastructure node there.",
  "<b>Dyson-Schwarm</b>: in jedem System einmal baubar (+15 % Anlagen-Durchsatz dort). <b>Temporaler Verstärker</b> und <b>Versorgungs-Nexus</b>: nur bei <b>Sagittarius A*</b>. Das Material wird aus dem Lager des jeweiligen Systems bezahlt.":"<b>Dyson Swarm</b>: buildable once per system (+15% facility throughput there). <b>Temporal Amplifier</b> and <b>Supply Nexus</b>: only at <b>Sagittarius A*</b>. Material is paid from the respective system's storage.",
  "Aktuelles System":"Current system","Betritt ein System, um dort einen <b>Dyson-Schwarm</b> zu errichten.":"Enter a system to build a <b>Dyson Swarm</b> there.",
  "Galaktisches Zentrum · Sagittarius A*":"Galactic center · Sagittarius A*","Übersicht (Galaxie)":"Overview (galaxy)","Megastrukturen":"Megastructures",
@@ -666,7 +796,6 @@ Object.assign(TR,{
  "Sprungreichweite":"Jump range","Vergrößert die Distanz, über die du zu anderen Sternen springen kannst – so erreichst du neue Systeme.":"Increases the distance over which you can jump to other stars – reaching new systems.",
  "Sensorreichweite":"Sensor range","Erweitert, wie weit entfernt du neue Sterne überhaupt erkennst.":"Extends how far away you can detect new stars at all.",
  "Förderleistung":"Mining yield","Mehr Ressourcen pro Abbauzyklus.":"More resources per mining cycle.",
- "Offline-Speicher":"Offline storage","Erhöht, wie lange während deiner Abwesenheit weiterproduziert wird (zu 10 % der Online-Rate gutgeschrieben).":"Increases how long production continues while you are away (credited at 10% of the online rate).",
  "Gravitationslinse":"Gravitational lens","Sensorreichweite dauerhaft +20.000 ly.":"Sensor range permanently +20,000 ly.",
  "Pulsar-Kartograf":"Pulsar cartographer","Sprungreichweite dauerhaft +5.200 ly.":"Jump range permanently +5,200 ly.",
  "Bio-Reaktor":"Bio-reactor","Förderleistung dauerhaft +3 / Zyklus.":"Mining yield permanently +3 / cycle.",
@@ -691,7 +820,7 @@ Object.assign(TR,{
  "Ladung ":"Load "," übersteigt die Kapazität von ":" exceeds the capacity of ",
  "Sagittarius A* noch nicht besucht. Reise ins galaktische Zentrum, um <b>Temporalen Verstärker</b> und <b>Versorgungs-Nexus</b> zu errichten.":"Sagittarius A* not yet visited. Travel to the galactic centre to build the <b>Temporal Amplifier</b> and <b>Supply Nexus</b>.",
  "Schaltet Himmelskörper in <b>diesem</b> System frei. Entfernungsfaktor ×":"Unlocks celestial bodies in <b>this</b> system. Distance factor ×",
- "Megastrukturen werden ab der ersten Werft verfügbar.":"Megastructures become available after the first shipyard.",
+ "Megastrukturen werden im Forschungszentrum freigeschaltet.":"Megastructures are unlocked at the Research Center.",
  "Niedrige Bildrate erkannt – die Grafik läuft vermutlich ohne Hardwarebeschleunigung. Aktiviere sie im Browser (Einstellungen → System → „Hardwarebeschleunigung verwenden, falls verfügbar“) und starte den Browser neu. In Remote-Desktop-Sitzungen steht meist keine GPU bereit – dort am besten lokal spielen.":"Low frame rate detected – graphics are probably running without hardware acceleration. Enable it in your browser (Settings → System → „Use hardware acceleration when available“) and restart the browser. Remote desktop sessions usually have no GPU – it's best to play locally there.",
  "Lesezeichen entfernen":"Remove bookmark","Als Lesezeichen merken":"Add bookmark","Handelsstation · ":"Trade station · "," Schiff(e)":" ship(s)","✓ erkundet":"✓ explored","Sonde ":"Probe ","unbesucht":"unvisited","★ Favoriten · ":"★ Favourites · ","Systeme · ":"Systems · ","Noch keine Systeme besucht.":"No systems visited yet.","Vorräte reichen noch ≈ ":"Supplies last ≈ ",
  "Dyson-Schwarm":"Dyson Swarm","Temporaler Verstärker":"Temporal Amplifier","Versorgungs-Nexus":"Supply Nexus",
@@ -1195,11 +1324,13 @@ NEBULAE.forEach(nb=>{nb.x*=2600;nb.y*=2600});
 const KEY="galaktischer-kartograf-spiel-v2";
 let PERSIST=true;
 function freshSave(){return {p:{},log:[],types:{},cls:{},flags:{},vis:{},ach:{},poi:{},ts:0,lang:null,
-  game:{store:{},mined:{},disc:{},up:{jump:0,sight:0,mining:0,offline:0},uni:{},foe:{},probe:{},sysDone:{},dep:{},
-    station:{},transit:[],fleet:[],shipSeq:0,refinery:{},plants:{},mega:{},recipes:{},fav:{},firstSol:0,galaxyOpen:0,jumpHint:0,stationHint:0,galTradeHint:0}}}
+  game:{store:{},mined:{},disc:{},up:{jump:0,sight:0,mining:0},uni:{},foe:{},probe:{},sysDone:{},dep:{},
+    station:{},transit:[],fleet:[],shipSeq:0,refinery:{},plants:{},mega:{},recipes:{},fav:{},
+    research:{built:0,lvl:1,conv:{},fp:{},nodes:{},queue:null},
+    firstSol:0,galaxyOpen:0,jumpHint:0,stationHint:0,galTradeHint:0}}}
 function loadSave(){try{const s=localStorage.getItem(KEY);if(s){const o=JSON.parse(s);const f=Object.assign(freshSave(),o);
   f.game=Object.assign(freshSave().game,o.game||{});
-  f.game.up=Object.assign({jump:0,sight:0,mining:0,offline:0},f.game.up||{});
+  f.game.up=Object.assign({jump:0,sight:0,mining:0},f.game.up||{});
   if(!Number.isFinite(f.ts))f.ts=Date.now();
   if(!f.game.foe)f.game.foe={};
   if(!f.game.probe)f.game.probe={};
@@ -1210,6 +1341,10 @@ function loadSave(){try{const s=localStorage.getItem(KEY);if(s){const o=JSON.par
   if(!f.game.refinery)f.game.refinery={};
   if(!f.game.plants)f.game.plants={};
   if(!f.game.mega)f.game.mega={};
+  if(!f.game.research||typeof f.game.research!=="object")f.game.research={built:0,lvl:1,conv:{},fp:{},nodes:{},queue:null};
+  else{const r=f.game.research;if(!r.conv)r.conv={};if(!r.fp)r.fp={};if(!r.nodes)r.nodes={};
+    if(!Number.isFinite(r.lvl)||r.lvl<1)r.lvl=1;if(r.lvl>5)r.lvl=5;r.built=r.built?1:0;
+    if(r.queue&&(typeof r.queue!=="object"||!r.queue.node))r.queue=null;}
   if(!Array.isArray(f.game.fleet))f.game.fleet=[];
   if(!f.game.recipes)f.game.recipes={};
   if(!f.game.fav)f.game.fav={};
@@ -1468,7 +1603,8 @@ function genPlanet(rng,star,sIdx,i,n,forced){
   // Innerste Bahn liegt sicher außerhalb des Sterns (größerer Stern → weiter draußen),
   // Abstände wachsen nach außen (Titius-Bode-artig) und passen so zu realistischeren Körpergrößen.
   const sunR=(STARCL[star.cls]&&STARCL[star.cls].r||10)*4.8;
-  const dist=sunR*1.15+60+i*(58+rng()*30)+i*i*11;
+  // Bahnabstände wachsen nach außen (i*82 + i*i*12) mit kräftiger, aber monoton bleibender Zufallsstreuung (rng*80 < Mindestabstand).
+  const dist=sunR*1.15+60+i*82+i*i*12+rng()*80;
   rng(); // Wurf erhalten (RNG-Stream stabil); visuelle Größe folgt unten aus dem physischen Radius
   const per=10*Math.pow(dist/120,1.4);
   let radius=giant?3.5+rng()*7.5:0.3+rng()*2.1;
@@ -1895,6 +2031,7 @@ addEventListener("resize",resize);resize();
 let MODE="galaxy", SYS=null, SYSIDX=-1;
 let cam={x:0,y:0,z:0.4}, tgt={x:0,y:0,z:0.4};
 let follow=null, sel=null, hover=null, simT=0, pendingSel=null, selStar=null;
+let camSeq=null;  // "in" = erst zentrieren dann hineinzoomen · "out" = erst herauszoomen dann zentrieren · null = simultan (manuell)
 let warp=null;
 let lastEnterT=0;
 const fitGal=()=>Math.min(W,H)/(GR*2.35);
@@ -1926,14 +2063,14 @@ cvEl.addEventListener("pointermove",e=>{
     const d0=Math.hypot(pts[e.pointerId][0]-o[0],pts[e.pointerId][1]-o[1]);
     pts[e.pointerId]=[e.clientX,e.clientY];
     const d1=Math.hypot(pts[e.pointerId][0]-o[0],pts[e.pointerId][1]-o[1]);
-    if(d0>0)tgt.z=clamp(tgt.z*d1/d0,minZ(),maxZ());
+    if(d0>0){tgt.z=clamp(tgt.z*d1/d0,minZ(),maxZ());camSeq=null;}
     if(drag)drag.moved=99; return;
   }
   if(drag&&pts[e.pointerId]){
     const dx=e.clientX-pts[e.pointerId][0],dy=e.clientY-pts[e.pointerId][1];
     pts[e.pointerId]=[e.clientX,e.clientY];
     drag.moved+=Math.abs(dx)+Math.abs(dy);
-    if(drag.moved>5){follow=null;tgt.x-=dx/cam.z;tgt.y-=dy/cam.z;cam.x=tgt.x;cam.y=tgt.y}
+    if(drag.moved>5){follow=null;camSeq=null;tgt.x-=dx/cam.z;tgt.y-=dy/cam.z;cam.x=tgt.x;cam.y=tgt.y}
   }else if(!warp){
     hover=pickAt(e.clientX,e.clientY);
     cvEl.style.cursor=hover?"pointer":"grab";
@@ -1963,7 +2100,7 @@ cvEl.addEventListener("wheel",e=>{e.preventDefault();if(warp)return;
 
   if(!follow){const wp=s2w(e.clientX,e.clientY);
     tgt.x=wp.x-(e.clientX-W/2)/nz;tgt.y=wp.y-(e.clientY-H/2)/nz}
-  tgt.z=nz},{passive:false});
+  tgt.z=nz;camSeq=null},{passive:false});
 function sysExtent(){return SYS?(SYS.maxR*1.22+150):1000;}      // äußerster Rand inkl. Voyager/Kometen
 function sysFit(){return Math.min(W,H)/(2*sysExtent());}          // Zoom, bei dem alles ins Bild passt
 function minZ(){return MODE==="galaxy"?fitGal()*0.85:sysFit()*0.92}
@@ -1999,12 +2136,14 @@ function pickAt(sx,sy){
   }
 
   const sc=w2s(0,0);
-  if(Math.hypot(sc.x-sx,sc.y-sy)<Math.max(20,SYS.cl.r*1.6*Math.pow(cam.z,0.4)+10))
+  if(Math.hypot(sc.x-sx,sc.y-sy)<Math.max(20,SYS.cl.r*1.6*cam.z*3*0.5+10))
     return {kind:"sun",o:SYS};
   {const pp=probePos(SYS),ps=w2s(pp.x,pp.y);
    if(Math.hypot(ps.x-sx,ps.y-sy)<15)return {kind:"probe",o:SYS}}
   {const pp=stationPos(SYS),ps=w2s(pp.x,pp.y);
    if(Math.hypot(ps.x-sx,ps.y-sy)<16)return {kind:"station",o:SYS}}
+  if(SYS.star.sol&&(hasResearch()||cam.z>0.55)){const pp=researchPos(SYS),ps=w2s(pp.x,pp.y);
+   if(Math.hypot(ps.x-sx,ps.y-sy)<14)return {kind:"research",o:SYS}}
   if(hasStation(SYS.star.i)){const pp=refineryPos(SYS),ps=w2s(pp.x,pp.y);
    if(Math.hypot(ps.x-sx,ps.y-sy)<16)return {kind:"refinery",o:SYS}}
   if(hasStation(SYS.star.i))for(const typ in PLANTDEF){const pp=plantPos(SYS,typ),ps=w2s(pp.x,pp.y);
@@ -2030,16 +2169,17 @@ function pickAt(sx,sy){
 function activate(hit){
   if(hit.kind==="star"){
     const st=hit.o;
-    selStar=st;sel=null;follow=null;
+    selStar=st;sel=null;follow=null;camSeq=null;
     tgt.x=st.x;tgt.y=st.y;
     showSystemPanel(st);
   }
-  else if(hit.kind==="planet"){sel=hit.o;follow=hit.o;
+  else if(hit.kind==="planet"){sel=hit.o;follow=hit.o;camSeq="in";
     const sz=Math.max(2,hit.o.size||8);tgt.z=clamp((Math.min(W,H)*0.32)/(2*sz),tgt.z,maxZ());
     showPlanetPanel(hit.o)}
-  else if(hit.kind==="sun"){sel="sun";follow=null;tgt.x=0;tgt.y=0;showStarPanel()}
+  else if(hit.kind==="sun"){sel="sun";follow=null;camSeq="in";tgt.x=0;tgt.y=0;showStarPanel()}
   else if(hit.kind==="probe"){sel="probe";follow=null;showProbePanel()}
   else if(hit.kind==="station"){sel="station";follow=null;showStationPanel()}
+  else if(hit.kind==="research"){sel="research";follow=null;showResearchPanel()}
   else if(hit.kind==="refinery"){sel="refinery";follow=null;showRefineryPanel()}
   else if(hit.kind==="plant"){sel="plant:"+hit.typ;follow=null;showPlantPanel(hit.typ)}
   else if(hit.kind==="voyager"){sel=hit.o;follow=null;showVoyagerPanel(hit.o)}
@@ -2051,7 +2191,7 @@ function activate(hit){
 }
 function unfollowToSystem(){
   if(MODE!=="system"||!SYS)return;
-  follow=null;sel=null;hidePanel();
+  follow=null;sel=null;hidePanel();camSeq="out";
   tgt.x=0;tgt.y=0;tgt.z=sysFit();
 }
 function goUp(){
@@ -2065,7 +2205,7 @@ function goUp(){
 /* ============ Warp ============ */
 function startWarp(dir,star){
   if(warp)return;
-  sel=null;hover=null;selStar=null;hidePanel();
+  sel=null;hover=null;selStar=null;hidePanel();camSeq=null;
   warp={dir,t:0,star,t0:performance.now()};   // Startzeit merken
   if(dir==="in"){follow=null;tgt.x=star.x;tgt.y=star.y;tgt.z=Math.max(tgt.z,1.2)}
   else{const s=STARS[SYSIDX];warp.back=s?{x:s.x,y:s.y}:{x:cam.x,y:cam.y};}
@@ -2146,7 +2286,7 @@ function enterSystem(idx){
   if(pendingSel){
     const ps=pendingSel;pendingSel=null;
     const o=findBodyById(SYS,ps.id);
-    if(o){sel=o;follow=o;tgt.z=Math.max(zFit,1.5);showPlanetPanel(o)}
+    if(o){sel=o;follow=o;camSeq="in";tgt.z=Math.max(zFit,1.5);showPlanetPanel(o)}
   }
 }
 $("#back").addEventListener("click",goUp);
@@ -2318,7 +2458,7 @@ function drawMultiStar(sc,zz){
     drawStarOrb(sc.x+Math.cos(ang)*sep, sc.y+Math.sin(ang)*sep, Rs[i], s.cls);}
 }
 function drawSun(){
-  const c=SYS.cl, sc=w2s(0,0), zz=Math.pow(cam.z,0.4);
+  const c=SYS.cl, sc=w2s(0,0), zz=cam.z;   // lineare Skalierung: Stern behält konstante Größe relativ zu den Bahnen
   const big=(SYS.star&&SYS.star.big)||1;
   if(SYS.stars&&SYS.stars.length>1){drawMultiStar(sc,zz);
     if(sel==="sun")drawReticle(sc.x,sc.y,c.r*1.6*zz*3*1.6+12);return;}
@@ -2403,16 +2543,14 @@ function drawSun(){
       }
     }
   }else{
-    const pAmp=(c.k==="RG"||c.k==="C")?0.06:0.025;              // veränderliche Riesen pulsieren stärker
-    const pul=1+pAmp*Math.sin(simT*(c.k==="RG"?0.9:1.7)), Rp=R*pul;
-    drawStarCorona(sc.x,sc.y,Rp,c);
-    drawStarOrb(sc.x,sc.y,Rp,SYS.star.cls);
+    drawStarCorona(sc.x,sc.y,R,c);
+    drawStarOrb(sc.x,sc.y,R,SYS.star.cls);
   }
   if(sel==="sun"){drawReticle(sc.x,sc.y,R*0.5+12)}
 }
 
 function drawSysStorm(sp){
-  const sc=w2s(0,0),zz=Math.pow(cam.z,0.4),R=SYS.cl.r*1.6*zz*3,c=sp.col;
+  const sc=w2s(0,0),zz=cam.z,R=SYS.cl.r*1.6*zz*3,c=sp.col;
   ctx.save();
   if(sp.key==="sonnensturm"){
     for(let i=0;i<5;i++){const a=simT*0.4+i*1.256, len=R*(1.7+0.6*Math.sin(simT*1.3+i));
@@ -2526,6 +2664,26 @@ function drawStation(sys){
     ctx.fillStyle=col;ctx.font="12px ui-monospace,monospace";ctx.textAlign="center";
     ctx.fillText(built?t("Handelsstation"):t("Station (nicht gebaut)"),s.x,s.y-r-7);}
 }
+function drawResearch(sys){
+  if(!sys.star.sol)return;                         // einziges Zentrum, nur in Sol
+  const built=hasResearch();
+  if(!built&&cam.z<0.55&&sel!=="research")return;  // Geist erst beim Heranzoomen zeigen
+  const e=earthBody(sys);if(!e)return;
+  const pp=researchPos(sys), s=w2s(pp.x,pp.y), ec=w2s(pp.cx,pp.cy);
+  ctx.strokeStyle="rgba(127,200,224,0.16)";ctx.lineWidth=1;ctx.setLineDash([2,6]);ctx.lineDashOffset=-simT*5;
+  ctx.beginPath();ctx.ellipse(ec.x,ec.y,pp.orb*cam.z,pp.orb*0.96*cam.z,0,0,7);ctx.stroke();ctx.setLineDash([]);
+  const col=built?"#7fc8e0":"#5b6c82", r=Math.max(3.4,4.4*Math.pow(cam.z,0.4));
+  ctx.save();ctx.translate(s.x,s.y);ctx.globalAlpha=built?1:0.5;
+  ctx.strokeStyle=col;ctx.fillStyle=built?"rgba(127,200,224,0.22)":"rgba(91,108,130,0.15)";ctx.lineWidth=1.3;
+  ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.arc(0,0,r*0.45,0,7);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(-r*1.7,0);ctx.lineTo(-r,0);ctx.moveTo(r,0);ctx.lineTo(r*1.7,0);ctx.stroke();
+  ctx.restore();ctx.globalAlpha=1;
+  if(sel==="research")drawReticle(s.x,s.y,r+9);
+  if(cam.z>0.5||sel==="research"||(hover&&hover.kind==="research")){
+    ctx.fillStyle=col;ctx.font="12px ui-monospace,monospace";ctx.textAlign="center";
+    ctx.fillText(built?t("Forschungszentrum"):t("Forschungszentrum (nicht gebaut)"),s.x,s.y-r-7);}
+}
 function drawSystem(){
   ctx.fillStyle="#04060d";ctx.fillRect(0,0,W,H);
   const tint=hexA(SYS.cl.glow,0.05);
@@ -2580,6 +2738,7 @@ function drawSystem(){
   if(SYS.phenomenon&&(SYS.phenomenon.key==="sturm"||SYS.phenomenon.key==="sonnensturm"))drawSysStorm(SYS.phenomenon);
   drawProbe(SYS);
   drawStation(SYS);
+  drawResearch(SYS);
   drawRefinery(SYS);
   drawPlants(SYS);
   drawMega();
@@ -2906,7 +3065,7 @@ function openCodex(){
     pendingSel={id:l.id};
     if(MODE==="system"&&SYSIDX===l.si){pendingSel=null;
       const o=findBodyById(SYS,l.id);
-      if(o){sel=o;follow=o;tgt.z=Math.max(tgt.z,1.5);showPlanetPanel(o)}}
+      if(o){sel=o;follow=o;camSeq="in";tgt.z=Math.max(tgt.z,1.5);showPlanetPanel(o)}}
     else if(!G().galaxyOpen){pendingSel=null;toast("Galaxiekarte noch nicht verfügbar – errichte im Sonnensystem eine Handelsstation und kaufe ein interstellares Schiff.")}
     else{if(MODE==="system"){MODE="galaxy";SYS=null;$("#back").style.display="none";
         const st=STARS[SYSIDX];cam={x:st.x,y:st.y,z:0.6};tgt={...cam};SYSIDX=-1}
@@ -2924,6 +3083,7 @@ const STATICUI=[
  ["#brand small","text","Galaktisches Bergbau-Imperium","Galactic Mining Empire"],
  ["#btnGalTrade","text","Handel","Trade"],
  ["#btnMega","text","Megakonstruktionen","Megastructures"],
+ ["#btnForsch","text","Forschung","Research"],
  ["#btnUps","text","Ausbau","Upgrades"],
  ["#btnStats","text","Statistik","Statistics"],
  ["#btnCodex","text","Kodex","Codex"],
@@ -2948,6 +3108,7 @@ const STATICUI=[
  ["#cxhead h1","text","KODEX","CODEX"],
  ["#stClose","text","Schließen","Close"],["#cgClose","text","Schließen","Close"],
  ["#mgClose","text","Schließen","Close"],["#upClose","text","Schließen","Close"],
+ ["#rsClose","text","Schließen","Close"],["#rshead h1","text","FORSCHUNGSZENTRUM","RESEARCH CENTER"],
  ["#cxClose","text","Schließen","Close"],
  [".upsub","text","Einzigartige Module","Unique modules"],
  ["#btnReset","text","Fortschritt zurücksetzen","Reset progress"],
@@ -2957,7 +3118,7 @@ const STATICUI=[
  [".lsub","text","Prozedurale Vermessung läuft …","Procedural survey in progress …"]
 ];
 const CXTABS={typen:["Planetentypen","Planet types"],sterne:["Sternklassen","Star classes"],systeme:["Systeme","Systems"],orte:["Orte","Places"],erfolge:["Erfolge","Achievements"],log:["Logbuch","Log"]};
-const STSEC=[["Bilanz · Produktion / Verbrauch pro Sekunde","Balance · production / consumption per second"],["Förderung pro System","Output per system"],["Megastrukturen","Megastructures"]];
+const STSEC=[["Verlauf","History"],["Bilanz · pro Sekunde","Balance · per second"],["Förderung pro System","Output per system"]];
 function applyLang(){
   document.documentElement.lang=LANG;
   const lb=$("#setLang");if(lb)lb.textContent=LANG==="en"?"EN":"DE";
@@ -2995,6 +3156,8 @@ $("#stClose").addEventListener("click",()=>$("#statswin").classList.remove("on")
 $("#cgClose").addEventListener("click",closeCargo);
 $("#btnMega").addEventListener("click",openMega);
 $("#mgClose").addEventListener("click",closeMega);
+{const fb=$("#btnForsch");if(fb)fb.addEventListener("click",openResearch);}
+{const rc=$("#rsClose");if(rc)rc.addEventListener("click",closeResearch);}
 document.querySelectorAll("#cxtabs button").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll("#cxtabs button").forEach(x=>x.classList.remove("act"));
   document.querySelectorAll(".cxsec").forEach(x=>x.classList.remove("on"));
@@ -3015,6 +3178,7 @@ addEventListener("keydown",e=>{
     const stw=$("#setwin");if(stw&&stw.classList.contains("on")){stw.classList.remove("on");return}
     const cw=$("#cargowin");if(cw&&cw.classList.contains("on")){closeCargo();return}
     const mw=$("#megawin");if(mw&&mw.classList.contains("on")){closeMega();return}
+    const rw=$("#reswin");if(rw&&rw.classList.contains("on")){closeResearch();return}
     const sw=$("#statswin");if(sw&&sw.classList.contains("on")){sw.classList.remove("on");return}
     if(ups&&ups.classList.contains("on")){ups.classList.remove("on");return}
     if(codex.classList.contains("on")){codex.classList.remove("on");return}
@@ -3079,16 +3243,29 @@ function frame(now){
     transitTick(dt);
     refineryTick(dt);
     plantTick(dt);
+    researchTick(dt);
     megaTick(dt);
+    sampleStats(dt);
     if(follow&&MODE==="system"&&typeof follow==="object"){
       const q=bodyPos(follow);tgt.x=q.x;tgt.y=q.y;
     }
-    cam.x+=(tgt.x-cam.x)*Math.min(1,dt*6);
-    cam.y+=(tgt.y-cam.y)*Math.min(1,dt*6);
-    cam.z+=(tgt.z-cam.z)*Math.min(1,dt*7);
+    // Kamera: manuell = simultan; bei Klick-Fokus zweiphasig mit weichem Übergang
+    // (erst zentrieren, dann zoomen – und umgekehrt beim Herauszoomen; kein harter Schnitt).
+    const base=Math.min(1,dt*6.5); let kxy=base, kz=base;
+    if(camSeq){
+      const offPx=Math.hypot(tgt.x-cam.x,tgt.y-cam.y)*cam.z;            // Bildschirmabweichung vom Ziel
+      const zrel=Math.abs(tgt.z-cam.z)/Math.max(0.001,Math.max(tgt.z,cam.z));
+      const ss=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};   // Smoothstep für sanften Phasenübergang
+      if(camSeq==="in")kz=base*ss((150-offPx)/130);    // Zoom blendet weich ein, je zentrierter
+      else if(camSeq==="out")kxy=base*ss((0.20-zrel)/0.18); // Pan blendet weich ein, je weiter herausgezoomt
+      if(offPx<2&&zrel<0.01)camSeq=null;                // Sequenz abgeschlossen
+    }
+    cam.x+=(tgt.x-cam.x)*kxy;
+    cam.y+=(tgt.y-cam.y)*kxy;
+    cam.z+=(tgt.z-cam.z)*kz;
     updBack();updZoom();updateStatsLive();updCycleFills();
     {const mw=$("#megawin");if(mw&&mw.classList.contains("on"))megaLiveFills($("#mgbody"));}
-    uiAcc+=dt;if(uiAcc>=0.5){uiAcc=0;prodDirty();refreshOpenPanel();updSysOverview();updBodyOverview()}
+    uiAcc+=dt;if(uiAcc>=0.5){uiAcc=0;prodDirty();refreshOpenPanel();updSysOverview();updBodyOverview();updateResearchLive()}
     if(MODE==="galaxy")drawGalaxy();else drawSystem();
     stepFloaters(now);
   }catch(e){
@@ -3102,7 +3279,7 @@ function frame(now){
 /* ============ Spiel: Ressourcen, Abbau, Ausbau ============ */
 const G=()=>SAVE.game;
 
-const JUMPSTEP=2500, SIGHT0=5000, SIGHTSTEP=2500;
+const JUMPSTEP=4700, SIGHT0=5000, SIGHTSTEP=4700; // Stufe 30 deckt die ganze Galaxie ab (max. ~137.650 ly)
 const RES=[
  {id:"regolith",n:"Regolith",col:"#b8b0a4",t:0},
  {id:"eisen",n:"Eisen",col:"#c2724a",t:0},
@@ -3215,7 +3392,7 @@ function attachMine(b,typeId){
      comp=comp.slice(0,Math.min(n,comp.length));
    }}
   const kindMult=b.kind==="belt"?2.5:b.kind==="comet"?0.8:1;
-  const total=Math.round(EARTH_MASS_RES*Math.pow(Math.max(0,mv),MASS_EXP)*kindMult);
+  const total=Math.round(EARTH_MASS_RES*Math.pow(Math.max(0,mv),MASS_EXP)*kindMult*(rNodeOn("oeko3")?1.25:1));
   let sum=0;for(const c of comp)sum+=c[1];
   b.comp=comp; b.dep={}; b.depMax={};
   for(const c of comp){const a=Math.max(1000,Math.round(total*c[1]/sum));b.depMax[c[0]]=a;b.dep[c[0]]=a}
@@ -3225,9 +3402,9 @@ function attachMine(b,typeId){
 }
 function saveDep(b){if(!b||!b.dep)return;const d={};for(const k in b.dep)d[k]=Math.floor(b.dep[k]);G().dep[b.id]=d}
 
-function jumpRange(){return (G().up.jump||0)*JUMPSTEP + (G().uni.pulsar?5200:0)+(G().uni.relikt?8800:0)}
-function sightRange(){return SIGHT0+(G().up.sight||0)*SIGHTSTEP+(G().uni.grav?20000:0)}
-function miningPower(){return 4+(G().up.mining||0)*2+(G().uni.bio?3:0)}
+function jumpRange(){return (G().up.jump||0)*JUMPSTEP + (G().uni.pulsar?5200:0)+(G().uni.relikt?8800:0)+(rNodeOn("sens3")?600:0)}
+function sightRange(){return SIGHT0+(G().up.sight||0)*SIGHTSTEP+(G().uni.grav?20000:0)+(rNodeOn("sens3")?600:0)}
+function miningPower(){return 4+(G().up.mining||0)*2+(G().uni.bio?3:0)+(rNodeOn("foer1")?4:0)}
 
 function probeLevel(idx){return G().probe[idx]||0}
 function probeMaxFor(idx){const s=SYSCACHE.get(idx)||getSystem(idx);return s.probeMax||1}
@@ -3242,7 +3419,7 @@ function bodyReachable(b){
   return (b.tier||1)<=lvl;
 }
 function probeCost(idx,L){
-  const amt=Math.round(80*Math.pow(1.55,L)*probeDistFactor(idx));
+  const amt=Math.round(80*Math.pow(1.55,L)*probeDistFactor(idx)*(rNodeOn("sens1")?0.75:1));
   const basket=L<2?["regolith","eisen"]:L<4?["eisen","silikat","eis"]:
     L<5?["nickel","helium3","silikat"]:L<6?["nickel","helium3","methan"]:
     L<8?["kohlenstoff","kristall","seltenerd"]:["seltenerd","stahl","keramik"];
@@ -3268,7 +3445,7 @@ function buildProbe(idx){
 }
 /* ============ Handelsstation & interstellarer Transport ============ */
 const SHIP_SPEED_DEFAULT=340;
-function shipSpeedOf(type){const t=SHIPTYPES[type];return (t&&t.speed)||SHIP_SPEED_DEFAULT;}
+function shipSpeedOf(type){const t=SHIPTYPES[type];return (((t&&t.speed)||SHIP_SPEED_DEFAULT))*shipSpeedMult();}
 function hasStation(idx){return !!G().station[idx]}
 function stationOf(idx){return G().station[idx]}
 function stationCost(idx){const df=probeDistFactor(idx);
@@ -3343,7 +3520,7 @@ function dispatchRouteStops(stopDefs,manifest,opts){
   for(const sd of stopDefs)if(!STARS[sd.sys]||!SAVE.vis[sd.sys]){toast("Ein Stopp ist kein besuchtes System");return false}
   const man={};let any=false,manTot=0;for(const k in (manifest||{})){const v=Math.floor(manifest[k]||0);if(v>0){man[k]=v;any=true;manTot+=v}}
   if(!any){toast("Keine Ladung gewählt");return false}
-  if(manTot>ship.cap){toast(t("Ladung ")+fmtN(manTot)+t(" übersteigt die Kapazität von ")+ship.call+" ("+ship.cap+")");return false}
+  if(manTot>shipCap(ship)){toast(t("Ladung ")+fmtN(manTot)+t(" übersteigt die Kapazität von ")+ship.call+" ("+shipCap(ship)+")");return false}
   const loop=!!opts.loop;
   const unloadSpec=sd=>{if(!(sd.act==='unload'||sd.act==='both'))return null;
     if(sd.all!==false)return 'all';
@@ -3354,7 +3531,7 @@ function dispatchRouteStops(stopDefs,manifest,opts){
   if(!loop){const last=stops[stops.length-1];
     if(opts.ret||!hasStation(last.sys))stops.push({sys:home,load:null,unload:null});}
   const spd=shipSpeedOf(ship.type);
-  const m={stops,loop,cargo:{},i:0,next:1,cancel:false,home,from:stops[0].sys,to:stops[1].sys,t:0,dur:legDur(stops[0].sys,stops[1].sys,spd),ship:ship.id,cap:ship.cap,spd};
+  const m={stops,loop,cargo:{},i:0,next:1,cancel:false,home,from:stops[0].sys,to:stops[1].sys,t:0,dur:legDur(stops[0].sys,stops[1].sys,spd),ship:ship.id,cap:shipCap(ship),spd};
   ship.loc=-1;
   routeLoad(m,stops[0]);
   G().transit.push(m);persist();updHUD();
@@ -3424,11 +3601,11 @@ function renderCargo(){
 
   const shipsHere=start>=0?shipsAt(start):[];
   if(routeShipId==null||!shipsHere.some(s=>s.id===routeShipId))routeShipId=shipsHere.length?((bestShipAt(start)||shipsHere[0]).id):null;
-  const carryShip=routeShipId!=null?shipById(routeShipId):null, cap=carryShip?carryShip.cap:0;
+  const carryShip=routeShipId!=null?shipById(routeShipId):null, cap=carryShip?shipCap(carryShip):0;
   if(shipsHere.length){
     h+='<div class="psub" style="margin-top:10px;margin-bottom:6px">'+t('Schiff in')+' '+STARS[start].name+'</div>';
     h+='<select class="rtsel" id="cgShip" style="width:100%;margin-bottom:10px">'+shipsHere.map(s=>
-      '<option value="'+s.id+'"'+(s.id===routeShipId?' selected':'')+'>'+escH(s.call)+' · '+t((SHIPTYPES[s.type]||{}).n||'')+' · '+fmtN(s.cap)+' '+t('Fracht')+'</option>').join('')+'</select>';
+      '<option value="'+s.id+'"'+(s.id===routeShipId?' selected':'')+'>'+escH(s.call)+' · '+t((SHIPTYPES[s.type]||{}).n||'')+' · '+fmtN(shipCap(s))+' '+t('Fracht')+'</option>').join('')+'</select>';
   }
   let manSum=0;for(const k in routeManifest)manSum+=Math.max(0,Math.floor(routeManifest[k]||0));
   const overCap=manSum>cap;
@@ -3561,7 +3738,8 @@ let REFLACK={};
 function refineryTick(dt){
   const rfs=G().refinery;if(!rfs)return;let changed=false;
   for(const k in rfs){const rf=rfs[k];if(!rf)continue;
-    const recs=refRecipes(rf), idx=+k, store=G().store[idx]||(G().store[idx]={}), batch=refBatch(rf.lvl), gotAll={}, spd=dt*dysonMult(idx)*sysSpeed(idx);
+    const recs=refRecipes(rf), idx=+k, store=G().store[idx]||(G().store[idx]={}), batch=refBatch(rf.lvl), gotAll={}, spd=dt*dysonMult(idx)*sysSpeed(idx)*procSpeedMult();
+    const om=recipeOutMult(), im=recipeInMult();
     for(const rid in recs){const rs=recs[rid], rc=RECMAP[rid];
       if(!rc||!recipeUnlocked(rid)){delete recs[rid];continue}
       if((rc.lvl||1)>refTier(rf)){REFLACK[k+rid]=null;rs.acc=0;continue}
@@ -3569,10 +3747,10 @@ function refineryTick(dt){
       rs.acc=(rs.acc||0)+spd;
       let lack=null;
       while(rs.acc>=REF_INTERVAL){rs.acc-=REF_INTERVAL;
-        lack=[];for(const r in rc.in)if((store[r]||0)<rc.in[r]*batch)lack.push(r);
+        lack=[];for(const r in rc.in)if((store[r]||0)<Math.max(1,Math.round(rc.in[r]*batch*im)))lack.push(r);
         if(lack.length){rs.acc=0;break}
-        for(const r in rc.in)store[r]=(store[r]||0)-rc.in[r]*batch;
-        for(const r in rc.out){const a=rc.out[r]*batch;store[r]=(store[r]||0)+a;gotAll[r]=(gotAll[r]||0)+a;G().disc[r]=1}
+        for(const r in rc.in)store[r]=(store[r]||0)-Math.max(1,Math.round(rc.in[r]*batch*im));
+        for(const r in rc.out){const a=Math.round(rc.out[r]*batch*om);store[r]=(store[r]||0)+a;gotAll[r]=(gotAll[r]||0)+a;G().disc[r]=1}
         changed=true;lack=null;
       }
       REFLACK[k+rid]=lack&&lack.length?lack:null;
@@ -3581,7 +3759,7 @@ function refineryTick(dt){
   }
   if(changed){persist();updHUD()}
 }
-function refineryPos(sys){const pOrb=sys.cl.r*2.2+130, a=(sys.probeA||0)+4.0+simT*0.075;
+function refineryPos(sys){const pOrb=sys.cl.r*2.2+130, a=(sys.probeA||0)+4.0+simT*0.024;
   return {x:Math.cos(a)*pOrb,y:Math.sin(a)*pOrb*0.96,orb:pOrb,a}}
 function drawRefinery(sys){
   if(!hasStation(sys.star.i))return;
@@ -3683,7 +3861,7 @@ function plantTick(dt){
   const all=G().plants;if(!all)return;let changed=false;
   for(const k in all){const byTyp=all[k];if(!byTyp)continue;
     const idx=+k, store=G().store[idx]||(G().store[idx]={});
-    const spd=dt*dysonMult(idx)*sysSpeed(idx);
+    const spd=dt*dysonMult(idx)*sysSpeed(idx)*procSpeedMult(), om=recipeOutMult(), im=recipeInMult();
     for(const typ in byTyp){const pl=byTyp[typ];if(!pl)continue;
       const recs=pl.recipes||(pl.recipes={}), batch=plantBatch(pl.lvl), gotAll={}, interval=(PLANTDEF[typ]&&PLANTDEF[typ].int)||PLANT_INTERVAL;
       for(const rid in recs){const rs=recs[rid], rc=PRECMAP[rid];
@@ -3692,10 +3870,10 @@ function plantTick(dt){
         if(!rs.on){PLANTLACK[k+rid]=null;rs.acc=0;continue}
         rs.acc=(rs.acc||0)+spd;let lack=null;
         while(rs.acc>=interval){rs.acc-=interval;
-          lack=[];for(const r in rc.in)if((store[r]||0)<rc.in[r]*batch)lack.push(r);
+          lack=[];for(const r in rc.in)if((store[r]||0)<Math.max(1,Math.round(rc.in[r]*batch*im)))lack.push(r);
           if(lack.length){rs.acc=0;break}
-          for(const r in rc.in)store[r]=(store[r]||0)-rc.in[r]*batch;
-          for(const r in rc.out){const a=rc.out[r]*batch;store[r]=(store[r]||0)+a;gotAll[r]=(gotAll[r]||0)+a;G().disc[r]=1}
+          for(const r in rc.in)store[r]=(store[r]||0)-Math.max(1,Math.round(rc.in[r]*batch*im));
+          for(const r in rc.out){const a=Math.round(rc.out[r]*batch*om);store[r]=(store[r]||0)+a;gotAll[r]=(gotAll[r]||0)+a;G().disc[r]=1}
           changed=true;lack=null;
         }
         PLANTLACK[k+rid]=lack&&lack.length?lack:null;
@@ -3712,7 +3890,7 @@ function plantTick(dt){
   }
   if(changed){persist();updHUD()}
 }
-function plantPos(sys,typ){const def=PLANTDEF[typ],pOrb=sys.cl.r*2.2+def.orbOff, a=(sys.probeA||0)+def.ang+simT*0.07;
+function plantPos(sys,typ){const def=PLANTDEF[typ],pOrb=sys.cl.r*2.2+def.orbOff, a=(sys.probeA||0)+def.ang+simT*0.022;
   return {x:Math.cos(a)*pOrb,y:Math.sin(a)*pOrb*0.96,orb:pOrb,a};}
 function drawPlants(sys){
   if(!hasStation(sys.star.i))return;
@@ -3894,9 +4072,14 @@ function extract(b,power){
     if(bk){b.dep[bk]-=1;got[bk]=1;pulled=1}
   }
   if(pulled===0)return null;
-  addRes(got,b.sysIdx);saveDep(b);
+  // Forschungs-Boni: zusaetzlicher Ertrag ohne Mehrverbrauch des Vorkommens
+  const t3=rNodeOn("sens2"), am=archiveMult();
+  let credited=got;
+  if(t3||am>1){credited={};for(const id in got){let v=got[id];
+    if(am>1)v*=am; if(t3&&RMAP[id]&&RMAP[id].t>=3)v*=1.25; credited[id]=Math.max(got[id],Math.round(v));}}
+  addRes(credited,b.sysIdx);saveDep(b);
   G().minedTotal=(G().minedTotal||0)+pulled;
-  return got;
+  return credited;
 }
 function mineBody(b){const got=extract(b,miningPower());if(got){spawnFloater(b,got);persist();checkAch();updHUD()}return got}
 
@@ -3942,7 +4125,7 @@ function removeFoe(b){
 }
 function buyFoe(b){
   const L=G().foe[b.id]||0, idx=b.sysIdx!=null?b.sysIdx:SYSIDX;
-  if(L>=FOE_MAX){toast("Förderer bereits auf Maximalstufe");return}
+  if(L>=foeMax()){toast("Förderer bereits auf Maximalstufe");return}
   const cost=foeCost(b,L);
   if(!canAfford(cost,idx)){toast("Nicht genug Ressourcen in diesem System");return}
   spend(cost,idx);G().foe[b.id]=L+1;persist();prodDirty();
@@ -4038,6 +4221,30 @@ function drawBovIcon(cv,g){
   if(g.sun){drawStarPreview(cv,SYS.cl);return;}
   try{drawBodyPreview(cv,g.body);}catch(e){}
 }
+/* Anlagen-Icon (identisch zu den im System umlaufenden Bauten), grau wenn nicht gebaut. */
+function drawStructIcon(cv,kind,typ,built){
+  const S=18, dpr=Math.min(DPR||1,2), P=Math.round(S*dpr);
+  cv.width=P;cv.height=P;cv.style.width=S+"px";cv.style.height=S+"px";
+  const x=cv.getContext("2d"), r=P*0.30;
+  const col=built?(kind==="station"?"#f0b75c":kind==="refinery"?"#b79bf0":kind==="research"?"#7fc8e0":kind==="plant"?((PLANTDEF[typ]&&PLANTDEF[typ].col)||"#e8965a"):"#9aa7b5"):"#5b6c82";
+  x.save();x.translate(P/2,P/2);x.globalAlpha=built?1:0.6;
+  x.strokeStyle=col;x.fillStyle=built?col+"33":"rgba(91,108,130,0.18)";x.lineWidth=Math.max(1,P*0.06);
+  if(kind==="station"){
+    x.beginPath();x.rect(-r,-r*0.7,r*2,r*1.4);x.fill();x.stroke();
+    x.beginPath();x.moveTo(-r*1.8,0);x.lineTo(-r,0);x.moveTo(r,0);x.lineTo(r*1.8,0);x.stroke();
+  }else if(kind==="refinery"){
+    x.beginPath();for(let k=0;k<3;k++){const a=k*2.0944-Math.PI/2,px=Math.cos(a)*r,py=Math.sin(a)*r;k?x.lineTo(px,py):x.moveTo(px,py)}x.closePath();x.fill();x.stroke();
+    x.beginPath();x.arc(0,0,r*0.42,0,7);x.stroke();
+  }else if(kind==="research"){
+    x.beginPath();x.arc(0,0,r,0,7);x.fill();x.stroke();
+    x.beginPath();x.arc(0,0,r*0.45,0,7);x.stroke();
+    x.beginPath();x.moveTo(-r*1.7,0);x.lineTo(-r,0);x.moveTo(r,0);x.lineTo(r*1.7,0);x.stroke();
+  }else{ // Produktionsanlage (Schmelze/Fabrik/Werft) – Fabrik-Box mit zwei Schloten
+    x.beginPath();x.rect(-r*0.85,-r*0.7,r*1.7,r*1.4);x.fill();x.stroke();
+    x.beginPath();x.moveTo(-r*0.35,-r*0.7);x.lineTo(-r*0.35,-r*1.45);x.moveTo(r*0.35,-r*0.7);x.lineTo(r*0.35,-r*1.45);x.stroke();
+  }
+  x.restore();x.globalAlpha=1;
+}
 function updBodyOverview(){
   const ov=$("#bodyov");if(!ov)return;
   if(MODE!=="system"||!SYS||sel||warp){if(ov.classList.contains("on"))ov.classList.remove("on");bovSig="";return;}
@@ -4049,9 +4256,18 @@ function updBodyOverview(){
   if(SYS.beltBody){const b=SYS.beltBody;groups.push({id:b.id,body:b,known:!!SAVE.p[b.id],name:b.name||t("Asteroidengürtel"),sub:"",moons:[]});}
   for(const cm of (SYS.comets||[]))groups.push({id:cm.id,body:cm,known:!!SAVE.p[cm.id],name:cm.name,sub:t("Komet"),moons:[]});
   const isCol=id=>bovCollapsed[id]!==false;   // Standard: eingeklappt; nur explizit aufgeklappt zeigt Monde
+  const idx=SYSIDX;
+  const structs=[
+    {k:"station",n:t("Handelsstation"),built:hasStation(idx)},
+    {k:"plant",typ:"schmelze",n:t("Schmelze"),built:hasPlant(idx,"schmelze")},
+    {k:"plant",typ:"fabrik",n:t("Fabrik"),built:hasPlant(idx,"fabrik")},
+    {k:"plant",typ:"werft",n:t("Werft"),built:hasPlant(idx,"werft")},
+    {k:"refinery",n:t("Raffinerie"),built:hasRefinery(idx)}];
+  if(SYS.star.sol)structs.push({k:"research",n:t("Forschungszentrum"),built:hasResearch()});
   let sig=SYSIDX+"|";
   for(const g of groups){sig+=(g.id||"sun")+(g.known?1:0)+(g.moons.length?(isCol(g.id)?"c":"o"):"")+";";
     for(const m of g.moons)sig+=m.id+(SAVE.p[m.id]?1:0)+",";}
+  sig+="|S"+structs.map(s=>s.k+(s.typ||"")+(s.built?1:0)).join(",");
   ov.classList.add("on");
   if(sig===bovSig)return; bovSig=sig;
   const icons=[];
@@ -4072,18 +4288,29 @@ function updBodyOverview(){
     if(g.moons.length&&!isCol(g.id))
       for(const m of g.moons)h+=rowHTML({id:m.id,body:m,known:!!SAVE.p[m.id],name:m.name,sub:t(m.type.n),moons:[]},1);
   }
+  h+='<h3 class="bovsec">'+t("Anlagen")+'</h3>';
+  for(const s of structs)h+='<div class="sovrow bov bovst'+(s.built?'':' unbuilt')+'" data-struct="'+s.k+'"'+(s.typ?' data-styp="'+s.typ+'"':'')+'>'+
+    '<span class="bovsp"></span><canvas class="bovstic" data-st="'+s.k+(s.typ?":"+s.typ:"")+'" data-stb="'+(s.built?1:0)+'"></canvas><span class="snm">'+escH(s.n)+'</span></div>';
   ov.innerHTML=h;
   ov.querySelectorAll('.bovic').forEach(cv=>drawBovIcon(cv,icons[+cv.dataset.ic]));
+  ov.querySelectorAll('.bovstic').forEach(cv=>{const p=cv.dataset.st.split(":");drawStructIcon(cv,p[0],p[1],cv.dataset.stb==="1");});
   ov.querySelectorAll('.bovtog').forEach(b=>b.addEventListener('click',e=>{
     e.stopPropagation();const id=b.dataset.tog;bovCollapsed[id]=(bovCollapsed[id]===false);bovSig="";updBodyOverview();}));
-  ov.querySelectorAll('.bov').forEach(el=>el.addEventListener('click',()=>{
+  ov.querySelectorAll('.bov:not(.bovst)').forEach(el=>el.addEventListener('click',()=>{
     if(el.dataset.sun){activate({kind:"sun",o:SYS});return;}
     const id=el.dataset.bid;
     if(el.dataset.voy){const v=(SYS.voyager||[]).find(x=>x.id===id);if(v)activate({kind:"voyager",o:v});return;}
     const b=findBodyById(SYS,id);if(!b)return;
-    sel=b;follow=b;const sz=Math.max(2,b.size||8);
+    sel=b;follow=b;camSeq="in";const sz=Math.max(2,b.size||8);
     tgt.z=clamp((Math.min(W,H)*0.32)/(2*sz),tgt.z,maxZ());
     showPlanetPanel(b);
+  }));
+  ov.querySelectorAll('.bovst').forEach(el=>el.addEventListener('click',()=>{
+    const k=el.dataset.struct;follow=null;
+    if(k==="station"){sel="station";showStationPanel();}
+    else if(k==="refinery"){sel="refinery";showRefineryPanel();}
+    else if(k==="research"){sel="research";showResearchPanel();}
+    else if(k==="plant"){sel="plant:"+el.dataset.styp;showPlantPanel(el.dataset.styp);}
   }));
 }
 function foeTick(){
@@ -4091,7 +4318,8 @@ function foeTick(){
   for(const sys of SYSCACHE.values()){
     const bodies=sys.planets.concat(sys.moons||[],sys.comets,sys.beltBody?[sys.beltBody]:[]);
     const cur=(sys===SYS), spd=sysSpeed(sys.star.i);
-    for(const b of bodies){const L=G().foe[b.id]||0;if(L>0){const got=extract(b,foeRate(L)*spd);
+    const fb=(rNodeOn("foer3")?1.1:1);
+    for(const b of bodies){const L=G().foe[b.id]||0;if(L>0){const got=extract(b,foeRate(L)*spd*fb);
       if(got){any=true;if(cur)spawnFloater(b,got)}}}
   }
   if(any){persist();checkAch();updHUD()}
@@ -4116,7 +4344,12 @@ const MEGAORDER=["dyson","temporal","nexus"];
 function sgraIdx(){const l=LMS.find(x=>x.key==="sgra");return l?l.idx:-1;}
 function megaAt(idx,key){const m=G().mega[idx];return m?m[key]:null;}
 function megaDoneAt(idx,key){const m=megaAt(idx,key);return !!(m&&m.phase>=MEGADEF[key].phases.length);}
-function megaUnlocked(){const p=G().plants||{};for(const k in p)if(p[k]&&p[k].werft)return true;return false;}
+function megaUnlocked(){
+  if(megaResearched("dyson")||megaResearched("temporal")||megaResearched("nexus"))return true;
+  const all=G().mega||{};for(const s in all)for(const key in all[s])if(all[s][key])return true; // Bestandsschutz: bereits Gebautes/Begonnenes
+  return false;
+}
+function megaBuildable(key,idx){return megaResearched(key)||!!megaAt(idx,key);} // Bestandsschutz fuer Begonnenes
 function dysonMult(idx){return 1+0.15*(megaDoneAt(idx,"dyson")?1:0);}
 function temporalActive(){const all=G().mega||{};for(const s in all)if(megaDoneAt(+s,"temporal"))return true;return false;}
 function sysSpeed(idx){return 1+0.10*(temporalActive()?1:0);}
@@ -4124,7 +4357,7 @@ function nexusActive(){const all=G().mega||{};for(const s in all)if(megaDoneAt(+
 function megaBuiltCount(key){let n=0;const all=G().mega||{};for(const s in all)if(megaDoneAt(+s,key))n++;return n;}
 function startMegaPhase(key,idx){
   const def=MEGADEF[key];if(!def)return;
-  if(!megaUnlocked()){toast("Megastrukturen werden erst ab einer Werft verfügbar");return}
+  if(!megaBuildable(key,idx)){toast("Erforsche zuerst „"+def.n+"“ im Forschungszentrum");return}
   if(def.loc==="sgra"&&idx!==sgraIdx()){toast(def.n+" lässt sich nur bei Sagittarius A* errichten");return}
   const sysM=G().mega[idx]||(G().mega[idx]={});
   const m=sysM[key]||(sysM[key]={phase:0,montage:0});
@@ -4155,6 +4388,7 @@ function megaSectionHTML(idx,keys){
   for(const key of order){const def=MEGADEF[key], m=megaAt(idx,key), phase=m?m.phase:0, done=!!(m&&phase>=def.phases.length);
     h+='<div class="megablock"><div class="megah" style="color:'+def.col+'">'+t(def.n)+' <span class="meta">· '+t(def.bonus)+'</span></div>';
     if(done){h+='<div class="lockbox" style="color:'+def.col+';border-color:'+def.col+'55;background:rgba(255,255,255,.04)">◈ '+t('Fertiggestellt')+'</div></div>';continue;}
+    if(!megaBuildable(key,idx)){h+='<div class="lockbox">🔒 '+t('Erst im <b>Forschungszentrum</b> erforschen.')+'</div></div>';continue;}
     if(def.loc==="sgra"&&idx!==sgraIdx()){h+='<div class="meta">'+t('Nur bei <b>Sagittarius A*</b> baubar.')+'</div></div>';continue;}
     h+='<div class="reclist">';
     for(let p=0;p<def.phases.length;p++){const cost=def.phases[p], built=phase>p, active=(phase===p&&m&&m.montage>0), cur=(phase===p&&!active);
@@ -4186,7 +4420,7 @@ function megaOverviewHTML(){
 }
 function renderMega(){
   const body=$("#mgbody");if(!body)return;
-  if(!megaUnlocked()){body.innerHTML='<div class="lockbox" style="margin-top:14px">'+t('Megakonstruktionen werden ab der ersten <b>Werft</b> verfügbar. Baue in einem System eine Werft, um sie freizuschalten.')+'</div>';return;}
+  if(!megaUnlocked()){body.innerHTML='<div class="lockbox" style="margin-top:14px">'+t('Megakonstruktionen werden im <b>Forschungszentrum</b> (Sol) freigeschaltet. Erforsche dort den jeweiligen Megakonstruktions-Knoten.')+'</div>';return;}
   const sgra=sgraIdx(), inSys=(MODE==="system"&&SYS), curIdx=inSys?SYS.star.i:-1;
   let h='<p class="desc" style="margin:10px 0 4px">'+t('<b>Dyson-Schwarm</b>: in jedem System einmal baubar (+15 % Anlagen-Durchsatz dort). <b>Temporaler Verstärker</b> und <b>Versorgungs-Nexus</b>: nur bei <b>Sagittarius A*</b>. Das Material wird aus dem Lager des jeweiligen Systems bezahlt.')+'</p>';
   if(inSys){h+='<div class="stsec">'+t('Aktuelles System')+'</div>';
@@ -4209,7 +4443,7 @@ function drawMega(){
   let off=0;
   for(const key in sysM){const m=sysM[key],def=MEGADEF[key];if(!m||!def)continue;
     const sc=w2s(0,0),done=m.phase>=def.phases.length;
-    const baseR=Math.max(10,SYS.cl.r*1.6*Math.pow(cam.z,0.4)*3);
+    const baseR=Math.max(10,SYS.cl.r*1.6*cam.z*3);
     const rings=Math.max(1,done?def.phases.length:m.phase);
     ctx.save();ctx.strokeStyle=def.col;ctx.lineWidth=1.6;ctx.setLineDash([4,5]);ctx.lineDashOffset=-simT*8;
     for(let i=0;i<rings;i++){const rr=baseR*(1.5+off+i*0.45);ctx.globalAlpha=done?0.85:0.5;
@@ -4228,13 +4462,151 @@ function probePos(sys){const pOrb=sys.cl.r*2.2+58, a=(sys.probeA||0)+simT*0.12;
 function stationPos(sys){const pOrb=sys.cl.r*2.2+98, a=(sys.probeA||0)+2.1+simT*0.09;
   return {x:Math.cos(a)*pOrb,y:Math.sin(a)*pOrb*0.96,orb:pOrb,a}}
 
-function regenSys(dt){}
+/* ============ Forschungszentrum (nur Sol, im Orbit der Erde) ============ */
+const RES_MAXLVL=5;            // Stufen 1..5 -> Slots 2..6
+const FP_UPSTEP=3;            // 3 FPn -> 1 FP(n+1); Herabstufen nicht moeglich
+const RESEARCH_BUILD={legplatte:250,schaltkreis:150,antrieb:50,habitat:30};
+const RESEARCH_UPG=[null,
+ {legplatte:375,schaltkreis:225,antrieb:75,habitat:45},                          // 1->2 (3 Slots)
+ {legplatte:560,schaltkreis:340,antrieb:115,habitat:70,reaktor:40},              // 2->3 (4 Slots)
+ {legplatte:840,schaltkreis:510,antrieb:170,habitat:105,reaktor:60,sensor:50},   // 3->4 (5 Slots)
+ {legplatte:1260,schaltkreis:760,antrieb:255,habitat:155,reaktor:90,sensor:75}]; // 4->5 (6 Slots)
+/* Forschungsbaum: tier = benoetigte FP-Stufe; cost = FP dieser Stufe; time = Forschungszeit (s, nur bei offenem Spiel). */
+const RNODES=[
+ {id:"oeko1",br:"oeko",tier:1,cost:40000,time:180, req:[],            n:"Erneuerbare Ressourcen I", d:"Vorkommen regenerieren langsam bis 50 % ihres Maximums."},
+ {id:"oeko2",br:"oeko",tier:2,cost:35000,time:480, req:["oeko1"],     n:"Erneuerbare Ressourcen II",d:"Regenerations-Deckel auf 100 %, doppelte Regenerationsrate."},
+ {id:"oeko3",br:"oeko",tier:3,cost:20000,time:1200,req:["oeko2"],     n:"Tiefenbohrung",            d:"Neu erschlossene Vorkommen sind um 25 % ergiebiger."},
+ {id:"foer1",br:"foer",tier:1,cost:40000,time:180, req:[],            n:"Präzisionsabbau",     d:"Manuelle Förderleistung +4 pro Zyklus."},
+ {id:"foer2",br:"foer",tier:2,cost:35000,time:480, req:["foer1"],     n:"Parallel-Förderer",   d:"Höchststufe der Förderer 10 → 14."},
+ {id:"foer3",br:"foer",tier:3,cost:20000,time:1200,req:["foer2","oeko1"], n:"Adaptive Förderer",d:"Förderertempo +10 %."},
+ {id:"log1", br:"log", tier:1,cost:40000,time:180, req:[],            n:"Lasthebetechnik",          d:"Frachtkapazität aller Schiffe +25 %."},
+ {id:"log2", br:"log", tier:2,cost:35000,time:480, req:["log1"],      n:"Sprungleitwerk",           d:"Schiffstempo +20 %."},
+ {id:"log3", br:"log", tier:3,cost:20000,time:1200,req:["log2"],      n:"Kolonnen-Logistik",        d:"Schiffstempo +30 %."},
+ {id:"sens1",br:"sens",tier:1,cost:40000,time:180, req:[],            n:"Sondenkalibrierung",       d:"Erkundungssonden −25 % Kosten."},
+ {id:"sens2",br:"sens",tier:2,cost:35000,time:480, req:["sens1"],     n:"Tiefenscan",               d:"+25 % Ausbeute auf seltene Ressourcen (Stufe 3–4) beim Abbau & Fördern."},
+ {id:"sens3",br:"sens",tier:3,cost:20000,time:1200,req:["sens2"],     n:"Schwarm-Sensorik",         d:"Sicht- und Sprungreichweite +600 ly."},
+ {id:"ver1", br:"ver", tier:1,cost:40000,time:180, req:[],            n:"Katalyse I",               d:"Rezeptertrag (Raffinerie & Werk) +15 %."},
+ {id:"ver2", br:"ver", tier:2,cost:35000,time:480, req:["ver1"],      n:"Hochofen-Takt",            d:"Verarbeitungstempo +25 %."},
+ {id:"ver3", br:"ver", tier:3,cost:20000,time:1200,req:["ver2","sens2"], n:"Transmutation II",      d:"Bessere Quoten: −20 % Rohstoff-Einsatz je Rezept."},
+ {id:"mega_dyson",  br:"mega",tier:3,cost:150000,time:2700,req:[],reqTier3:1, n:"Dyson-Schwarm-Forschung",d:"Schaltet den Bau des Dyson-Schwarms frei. Benötigt mindestens einen Stufe-III-Knoten."},
+ {id:"mega_temporal",br:"mega",tier:3,cost:250000,time:4500,req:["mega_dyson"], n:"Temporaler Verstärker",d:"Schaltet den Bau des Temporalen Verstärkers frei (Sagittarius A*)."},
+ {id:"mega_nexus",  br:"mega",tier:3,cost:250000,time:4500,req:["mega_dyson"], n:"Versorgungs-Nexus", d:"Schaltet den Bau des Versorgungs-Nexus frei (Sagittarius A*)."},
+ {id:"mega_archive",br:"mega",tier:3,cost:400000,time:5400,req:["mega_temporal","mega_nexus"],reqTier3n:3, n:"Galaktisches Archiv",d:"Globaler Ertrags-Multiplikator +10 %. Benötigt 3 Stufe-III-Knoten."}];
+const RNMAP={};RNODES.forEach(n=>RNMAP[n.id]=n);
+const RBRANCH=[["oeko","Ökologie"],["foer","Förderung"],["log","Logistik"],["sens","Sensorik"],["ver","Veredelung"],["mega","Megakonstruktionen"]];
+const TIER3NODES=["oeko3","foer3","log3","sens3","ver3"];
+
+function RG(){return G().research}
+function hasResearch(){return !!RG().built}
+function researchSlots(){return RG().lvl+1}
+function fp(tier){return Math.floor(RG().fp[tier]||0)}
+function addFP(tier,n){const r=RG();r.fp[tier]=(r.fp[tier]||0)+n}
+function rNodeOn(id){return hasResearch()&&!!RG().nodes[id]}
+function rNode(id){return RNMAP[id]}
+function tier3Count(){const r=RG();return TIER3NODES.filter(x=>r.nodes[x]).length}
+function megaResearched(key){ // Gating der Megakonstruktionen (Bestandsschutz separat)
+  if(key==="dyson")return rNodeOn("mega_dyson");
+  if(key==="temporal")return rNodeOn("mega_temporal");
+  if(key==="nexus")return rNodeOn("mega_nexus");
+  return false;
+}
+function foeMax(){return FOE_MAX+(rNodeOn("foer2")?4:0)}
+function archiveMult(){return rNodeOn("mega_archive")?1.1:1}
+function recipeOutMult(){return (rNodeOn("ver1")?1.15:1)*archiveMult()}  // Katalyse I + Archiv
+function recipeInMult(){return rNodeOn("ver3")?0.8:1}                    // Transmutation II
+function procSpeedMult(){return rNodeOn("ver2")?1.25:1}                  // Hochofen-Takt
+function shipSpeedMult(){return 0.7*(1+(rNodeOn("log2")?0.2:0)+(rNodeOn("log3")?0.3:0))} // -30 % Basis, Logistik gibt zurueck
+function cargoMult(){return rNodeOn("log1")?1.25:1}                      // Lasthebetechnik
+function shipCap(s){return Math.round((s&&s.cap||0)*cargoMult())}
+
+function earthBody(sys){return (sys&&sys.planets&&sys.planets.find(p=>p.home))||null}
+function researchPos(sys){const e=earthBody(sys);if(!e)return {x:0,y:0,orb:0,cx:0,cy:0};
+  const ep=planetPos(e), r=(e.size||8)*1.7+18, a=simT*0.16+1.0;
+  return {x:ep.x+Math.cos(a)*r,y:ep.y+Math.sin(a)*r*0.96,orb:r,cx:ep.x,cy:ep.y};}
+
+function buildResearch(){
+  if(hasResearch())return;
+  if(SYSIDX!==SOL){toast("Das Forschungszentrum kann nur in Sol – im Orbit der Erde – errichtet werden");return}
+  if(!canAfford(RESEARCH_BUILD,SOL)){toast("Nicht genug Ressourcen im Sol-Lager");return}
+  spend(RESEARCH_BUILD,SOL);const r=RG();r.built=1;r.lvl=1;persist();
+  toast("Forschungszentrum errichtet · im Orbit der Erde. Speise P1–P3 ein, um Forschungspunkte zu gewinnen.",true);
+  checkAch();updHUD();
+}
+function upgradeResearch(){const r=RG();if(!r.built)return;
+  if(r.lvl>=RES_MAXLVL){toast("Forschungszentrum bereits auf Maximalstufe");return}
+  const cost=RESEARCH_UPG[r.lvl];if(!canAfford(cost,SOL)){toast("Nicht genug Ressourcen im Sol-Lager");return}
+  spend(cost,SOL);r.lvl++;persist();
+  toast("Forschungszentrum ausgebaut → Stufe "+r.lvl+" · "+researchSlots()+" gleichzeitige Umwandlungen");updHUD();
+}
+function nodeAvail(id){const r=RG();if(r.nodes[id])return false;const nd=rNode(id);if(!nd)return false;
+  if(r.lvl<reqCenterLvl(nd))return false;
+  for(const q of (nd.req||[]))if(!r.nodes[q])return false;
+  if(nd.reqTier3&&tier3Count()<1)return false;
+  if(nd.reqTier3n&&tier3Count()<nd.reqTier3n)return false;
+  return true;}
+function startResearch(id){const r=RG();if(!r.built)return;
+  if(r.queue){toast("Es läuft bereits eine Forschung");return}
+  if(!nodeAvail(id)){toast("Voraussetzungen nicht erfüllt");return}
+  const nd=rNode(id);
+  if(fp(nd.tier)<nd.cost){toast("Nicht genug Forschungspunkte (FP"+nd.tier+")");return}
+  r.fp[nd.tier]-=nd.cost;r.queue={node:id,acc:0,dur:nd.time};persist();updHUD();
+}
+function cancelResearch(refund){const r=RG();if(!r.queue)return;const nd=rNode(r.queue.node);
+  if(refund&&nd)r.fp[nd.tier]=(r.fp[nd.tier]||0)+nd.cost; // FP zurück bei Abbruch
+  r.queue=null;persist();updHUD();}
+function onResearchComplete(id){const nd=rNode(id);persist();prodDirty();
+  toast("Forschung abgeschlossen: "+t(nd?nd.n:id),true);checkAch();updHUD();
+  try{refreshOpenPanel()}catch(_){}
+  try{if(researchWinOpen())renderResearchWin()}catch(_){}}
+function upstepFP(tier,times){const r=RG();times=times||1;tier=+tier;if(tier<1||tier>2)return;
+  let did=0;for(let i=0;i<times;i++){if((r.fp[tier]||0)>=FP_UPSTEP){r.fp[tier]-=FP_UPSTEP;r.fp[tier+1]=(r.fp[tier+1]||0)+1;did++;}else break;}
+  if(did){persist();updHUD();}return did;}
+
+/* Welche P-Items werden mit welcher Rate (Items/s) umgewandelt? */
+function researchConsumption(){const r=RG(),o={};if(!r.built)return o;
+  for(const id in r.conv){const cfg=r.conv[id];if(!cfg||!(cfg.rate>0))continue;o[id]=cfg.rate;}
+  return o;}
+function activeConvCount(){let n=0,r=RG();for(const id in r.conv){const c=r.conv[id];if(c&&c.rate>0)n++;}return n;}
+/* Benoetigte Zentrumsstufe je Knoten (gatet das Freischalten neuer Forschung). */
+function reqCenterLvl(nd){if(nd.br==="mega")return nd.id==="mega_dyson"?4:5;return nd.tier;}
+
+let researchSaveAcc=0;
+function researchTick(dt){const r=RG();if(!r.built)return;
+  const st=storeOf(SOL);
+  for(const id in r.conv){const cfg=r.conv[id];if(!cfg||!(cfg.rate>0))continue;
+    const item=RMAP[id],tier=item&&item.ps;if(!tier)continue;
+    const reserve=Math.max(0,cfg.reserve||0);
+    const cap=Math.max(0,Math.floor((st[id]||0)-reserve));
+    cfg.acc=(cfg.acc||0)+cfg.rate*dt;
+    const take=Math.min(Math.floor(cfg.acc),cap);
+    if(take>0){st[id]=(st[id]||0)-take;cfg.acc-=take;addFP(tier,take);}
+    if(cfg.acc>cap+1)cfg.acc=cap+1; // nicht unbegrenzt aufstauen, wenn durch Reserve/Lager blockiert
+  }
+  if(r.queue){r.queue.acc=(r.queue.acc||0)+dt;
+    if(r.queue.acc>=r.queue.dur){const id=r.queue.node;r.nodes[id]=1;r.queue=null;onResearchComplete(id);}}
+  researchSaveAcc+=dt;if(researchSaveAcc>=12){researchSaveAcc=0;persist();}
+}
+
+let regenAcc=0;
+function regenSys(dt){
+  if(!hasResearch())return;
+  const cap=rNodeOn("oeko2")?1.0:rNodeOn("oeko1")?0.5:0; if(cap<=0){regenAcc=0;return}
+  regenAcc+=dt; if(regenAcc<1)return; dt=regenAcc; regenAcc=0; // nur ~1x/s, akkumuliert
+  const rate=(rNodeOn("oeko2")?2:1)*0.0006; // Anteil von depMax pro Sekunde
+  SYSCACHE.forEach(sys=>{
+    const bodies=sys.planets.concat(sys.moons||[],sys.comets||[],sys.beltBody?[sys.beltBody]:[]);
+    for(const b of bodies){if(!b.dep||!b.depMax)continue;let ch=false;
+      for(const k in b.depMax){const mx=b.depMax[k]*cap,cur=b.dep[k]||0;
+        if(cur<mx){b.dep[k]=Math.min(mx,cur+b.depMax[k]*rate*dt);ch=true;}}
+      if(ch)saveDep(b);}
+  });
+}
 function findBodyById(sys,id){if(!sys)return null;
   return sys.planets.find(p=>p.id===id)||sys.comets.find(c=>c.id===id)||
    (sys.moons||[]).find(m=>m.id===id)||(sys.beltBody&&sys.beltBody.id===id?sys.beltBody:null)||null}
 
 function upCost(track,L){
-  const baseMap={jump:360,sight:150,mining:90,offline:300};
+  const baseMap={jump:360,sight:150,mining:90};
   const growth=track==="mining"?1.6:1.35;
   const amt=Math.round(baseMap[track]*Math.pow(growth,L));
   const basket=L<3?["regolith","eisen"]:L<5?["eisen","silikat","eis"]:
@@ -4246,13 +4618,11 @@ function upCost(track,L){
 const UP=[
  {id:"jump",n:"Sprungreichweite",d:"Vergr\u00f6\u00dfert die Distanz, \u00fcber die du zu anderen Sternen springen kannst \u2013 so erreichst du neue Systeme."},
  {id:"sight",n:"Sensorreichweite",d:"Erweitert, wie weit entfernt du neue Sterne \u00fcberhaupt erkennst."},
- {id:"mining",n:"F\u00f6rderleistung",d:"Mehr Ressourcen pro Abbauzyklus."},
- {id:"offline",n:"Offline-Speicher",d:"Erh\u00f6ht, wie lange w\u00e4hrend deiner Abwesenheit weiterproduziert wird (zu 10 % der Online-Rate gutgeschrieben)."}];
+ {id:"mining",n:"F\u00f6rderleistung",d:"Mehr Ressourcen pro Abbauzyklus."}];
 function effText(track){
   if(track==="jump")return t("Sprung")+" "+Math.round(jumpRange())+" ly";
   if(track==="sight")return t("Sicht")+" "+Math.round(sightRange())+" ly";
   if(track==="mining")return miningPower()+" / "+t("Zyklus");
-  if(track==="offline")return t("bis")+" "+(OFFLINE_BASE/3600*(1+(G().up.offline||0)))+" h \u00b7 "+t("10 % Ertrag");
 }
 function buyUp(track){
   const L=G().up[track]||0, def=UP.find(u=>u.id===track);
@@ -4395,52 +4765,67 @@ function openUps(){
 /* ============ Produktionsstatistik ============ */
 let PROD=null;
 function prodDirty(){PROD=null}
-function computeProduction(){
-  if(PROD)return PROD;
+function computeProduction(onlyIdx){
+  if(onlyIdx==null&&PROD)return PROD;   // global gecacht; Per-System immer frisch
   const prod={},cons={},perSys={};let activeFoe=0;
 
+  const am=archiveMult(), foeB=(rNodeOn("foer3")?1.1:1)*am, t3=rNodeOn("sens2");
+  const om=recipeOutMult(), im=recipeInMult(), psm=procSpeedMult();
   for(const id in G().foe){const L=G().foe[id]||0;if(L<=0)continue;
     const m=/^s(\d+)/.exec(id);if(!m)continue;const idx=+m[1];
+    if(onlyIdx!=null&&idx!==onlyIdx)continue;
     let sys;try{sys=getSystem(idx)}catch(e){continue}
     const b=findBodyById(sys,id);if(!b||!b.comp)continue;
     activeFoe++;
     const avail=b.comp.filter(c=>!b.dep||(b.dep[c[0]]||0)>0);
     let sum=0;for(const c of avail)sum+=c[1];if(sum<=0)continue;
-    const perCycle=foeRate(L)*sysSpeed(idx);
+    const perCycle=foeRate(L)*sysSpeed(idx)*foeB;
     const ps=perSys[idx]||(perSys[idx]={name:sys.star.name,foe:0,rate:0});ps.foe++;
-    for(const c of avail){const rps=(perCycle*c[1]/sum)/FOE_INTERVAL;
+    for(const c of avail){let rps=(perCycle*c[1]/sum)/FOE_INTERVAL;
+      if(t3&&RMAP[c[0]]&&RMAP[c[0]].t>=3)rps*=1.25;
       prod[c[0]]=(prod[c[0]]||0)+rps;ps.rate+=rps}
   }
 
-  for(const k in (G().refinery||{})){const rf=G().refinery[k];if(!rf)continue;const idx=+k, f=refBatch(rf.lvl)*dysonMult(idx)*sysSpeed(idx)/REF_INTERVAL;
+  for(const k in (G().refinery||{})){const rf=G().refinery[k];if(!rf)continue;const idx=+k;if(onlyIdx!=null&&idx!==onlyIdx)continue;const f=refBatch(rf.lvl)*dysonMult(idx)*sysSpeed(idx)*psm/REF_INTERVAL;
     const store=G().store[idx]||{}, batch=refBatch(rf.lvl);
     const recs=refRecipes(rf);for(const rid in recs){const rs=recs[rid];if(!rs||!rs.on)continue;const rc=RECMAP[rid];if(!rc||!recipeUnlocked(rid))continue;
       if((rc.lvl||1)>refTier(rf))continue;
-      let starved=false;for(const r in rc.in)if((store[r]||0)<rc.in[r]*batch){starved=true;break}if(starved)continue;
-      for(const r in rc.in)cons[r]=(cons[r]||0)+rc.in[r]*f;
-      for(const r in rc.out)prod[r]=(prod[r]||0)+rc.out[r]*f;}}
+      let starved=false;for(const r in rc.in)if((store[r]||0)<Math.max(1,Math.round(rc.in[r]*batch*im))){starved=true;break}if(starved)continue;
+      for(const r in rc.in)cons[r]=(cons[r]||0)+rc.in[r]*im*f;
+      for(const r in rc.out)prod[r]=(prod[r]||0)+rc.out[r]*om*f;}}
 
-  for(const k in (G().plants||{})){const byT=G().plants[k];if(!byT)continue;const idx=+k;
+  for(const k in (G().plants||{})){const byT=G().plants[k];if(!byT)continue;const idx=+k;if(onlyIdx!=null&&idx!==onlyIdx)continue;
     const store=G().store[idx]||{};
-    for(const typ in byT){const pl=byT[typ];if(!pl)continue;const f=plantBatch(pl.lvl)*dysonMult(idx)*sysSpeed(idx)/((PLANTDEF[typ]&&PLANTDEF[typ].int)||PLANT_INTERVAL);
+    for(const typ in byT){const pl=byT[typ];if(!pl)continue;const f=plantBatch(pl.lvl)*dysonMult(idx)*sysSpeed(idx)*psm/((PLANTDEF[typ]&&PLANTDEF[typ].int)||PLANT_INTERVAL);
       const batch=plantBatch(pl.lvl);
       const recs=pl.recipes||{};for(const rid in recs){const rs=recs[rid];if(!rs||!rs.on)continue;const rc=PRECMAP[rid];if(!rc||!recipeUnlocked(rid))continue;
         if((rc.lvl||1)>plantTier(pl))continue;
-        let starved=false;for(const r in rc.in)if((store[r]||0)<rc.in[r]*batch){starved=true;break}if(starved)continue;
-        for(const r in rc.in)cons[r]=(cons[r]||0)+rc.in[r]*f;
-        for(const r in rc.out)prod[r]=(prod[r]||0)+rc.out[r]*f;}}}
+        let starved=false;for(const r in rc.in)if((store[r]||0)<Math.max(1,Math.round(rc.in[r]*batch*im))){starved=true;break}if(starved)continue;
+        for(const r in rc.in)cons[r]=(cons[r]||0)+rc.in[r]*im*f;
+        for(const r in rc.out)prod[r]=(prod[r]||0)+rc.out[r]*om*f;}}}
   const perRes=prod;
   let total=0;for(const k in prod)total+=prod[k];
-  PROD={prod,cons,perRes,perSys,activeFoe,total};return PROD;
+  const res={prod,cons,perRes,perSys,activeFoe,total};
+  if(onlyIdx==null)PROD=res;
+  return res;
 }
+function producingSystems(){const set={};
+  for(const id in (G().foe||{})){if((G().foe[id]||0)>0){const m=/^s(\d+)/.exec(id);if(m)set[+m[1]]=1;}}
+  for(const k in (G().refinery||{}))if(G().refinery[k])set[+k]=1;
+  for(const k in (G().plants||{})){const b=G().plants[k];if(b)for(const t in b){if(b[t]){set[+k]=1;break;}}}
+  if(MODE==="system"&&SYSIDX>=0)set[SYSIDX]=1;   // aktuelles System immer wählbar
+  return Object.keys(set).map(Number).filter(i=>STARS[i]).sort((a,b)=>STARS[a].dSol-STARS[b].dSol);}
 function fmtRate(x){return x>=100?fmtN(Math.round(x)):x>=10?fmtDE(x,1):fmtDE(x,2)}
 
-function showProdTip(e,id){
-  const P=computeProduction(),pr=P.prod[id]||0,co=P.cons[id]||0,net=pr-co,r=RMAP[id];if(!r)return;
+function showProdTip(e,id,scope){
+  const oi=(scope==null||scope==="all")?null:scope;
+  const P=computeProduction(oi),pr=P.prod[id]||0,co=P.cons[id]||0;
+  const fc=((oi==null||oi===SOL)?(researchConsumption()[id]||0):0),net=pr-co-fc,r=RMAP[id];if(!r)return;
   const tip=$("#prodtip");if(!tip)return;
   tip.innerHTML='<div class="pt-h">'+resIcon(id,15)+' '+t(r.n)+'</div>'+
     '<div class="pt-r" style="color:#5fd38a">+'+fmtRate(pr)+' /s '+t('produziert')+'</div>'+
     (co>0?'<div class="pt-r" style="color:#f0b75c">\u2212'+fmtRate(co)+' /s '+t('verbraucht')+'</div>':'')+
+    (fc>0?'<div class="pt-r" style="color:#7fc8e0">\u2212'+fmtRate(fc)+' /s '+t('FP-Umwandlung')+'</div>':'')+
     '<div class="pt-r">'+t('Netto')+' '+(net>=0?'+':'\u2212')+fmtRate(Math.abs(net))+' /s</div>'+
     '<div class="pt-s">'+t('Gesamt')+' '+fmtN(totalRes(id))+' \u00b7 '+t('system\u00fcbergreifend')+'</div>';
   tip.classList.add("on");posProdTip(e);
@@ -4450,9 +4835,106 @@ function posProdTip(e){const tip=$("#prodtip");if(!tip||!tip.classList.contains(
   if(lx+w>innerWidth-8)lx=innerWidth-8-w;if(ly+h>innerHeight-8)ly=e.clientY-h-14;
   tip.style.left=lx+"px";tip.style.top=ly+"px";}
 function hideProdTip(){const tip=$("#prodtip");if(tip)tip.classList.remove("on")}
-let STATCLASS="all", statT=0;
+let STATCLASS="all", statT=0, STATSYS="all", statSysSig="";
 const STATTABS=[["all","Alle"],["raw","Rohstoffe"],["P1","Werkstoffe"],["P2","Komponenten"],["P3","Module"]];
 function resClass(r){return r.prod?("P"+(r.ps||1)):"raw";}
+function renderStatsSysSel(){
+  const sel=$("#statSysSel");if(!sel)return;
+  const sys=producingSystems(), sig=STATSYS+"|"+sys.join(",");
+  if(sig===statSysSig)return; statSysSig=sig;
+  let o='<option value="all"'+(STATSYS==="all"?' selected':'')+'>'+t("Alle Systeme (galaxieweit)")+'</option>';
+  o+=sys.map(i=>'<option value="'+i+'"'+(STATSYS===i?' selected':'')+'>'+escH(STARS[i].name)+'</option>').join('');
+  sel.innerHTML=o;
+}
+/* ---- Verlaufsdiagramm: Historie (Lagerbestand) + Linienchart ---- */
+const STAT_SAMPLE=3, STAT_MAXSPAN=3600;                // alle 3 s, max. 1 Std Historie
+const STATRANGES=[["1 Min",60],["5 Min",300],["15 Min",900],["1 Std",3600]];
+let statHist={}, statHistAcc=0, statRange=300, statResSel=null, statChartGeo=null, statHoverT=null, statMetric="stock";
+const STATMETRICS=[["stock","Lagerbestand"],["rate","Netto/s"]];
+function statKey(scope){return scope==="all"?"all":("s"+scope);}
+function statStock(scope,id){return scope==="all"?totalRes(id):((G().store[scope]||{})[id]||0);}
+function sampleStats(dt){
+  statHistAcc+=dt; if(statHistAcc<STAT_SAMPLE)return; statHistAcc=0;
+  const now=performance.now(), scopes=["all"].concat(producingSystems().slice(0,8));
+  for(const sc of scopes){const key=statKey(sc), oi=sc==="all"?null:sc;
+    const P=computeProduction(oi), fpc=(sc==="all"||sc===SOL)?researchConsumption():{}, stock={}, net={};
+    for(const r of DRES){const v=statStock(sc,r.id);if(v>0||(sc==="all"&&G().disc[r.id]))stock[r.id]=v;
+      const nv=(P.prod[r.id]||0)-(P.cons[r.id]||0)-(fpc[r.id]||0);if(nv!==0)net[r.id]=nv;}
+    const buf=statHist[key]||(statHist[key]=[]);
+    buf.push({t:now,stock,net});
+    while(buf.length>2&&now-buf[0].t>STAT_MAXSPAN*1000+4000)buf.shift();
+  }
+}
+function statResOptions(){const buf=statHist[statKey(STATSYS)]||[], set={};
+  for(const s of buf){for(const id in s.stock)set[id]=1;for(const id in s.net)set[id]=1;}
+  for(const r of DRES)if(statStock(STATSYS,r.id)>0)set[r.id]=1;
+  const P=computeProduction(STATSYS==="all"?null:STATSYS);
+  for(const id in P.prod)set[id]=1;for(const id in P.cons)set[id]=1;
+  return DRES.filter(r=>set[r.id]);}
+function ensureResSel(){if(!statResSel)statResSel=new Set(statResOptions().slice(0,6).map(r=>r.id));}
+function renderStatRangeBtns(){const el=$("#statRangeBtns");if(!el)return;
+  el.innerHTML=STATRANGES.map(r=>'<button class="'+(statRange===r[1]?'on':'')+'" data-range="'+r[1]+'">'+t(r[0])+'</button>').join('');
+  el.querySelectorAll('[data-range]').forEach(b=>b.addEventListener('click',()=>{statRange=+b.dataset.range;renderStatRangeBtns();drawStatHistChart();}));}
+function renderStatMetricBtns(){const el=$("#statMetricBtns");if(!el)return;
+  el.innerHTML=STATMETRICS.map(m=>'<button class="'+(statMetric===m[0]?'on':'')+'" data-metric="'+m[0]+'">'+t(m[1])+'</button>').join('');
+  el.querySelectorAll('[data-metric]').forEach(b=>b.addEventListener('click',()=>{statMetric=b.dataset.metric;renderStatMetricBtns();drawStatHistChart();}));}
+function renderStatResDrop(){const panel=$("#statResPanel"), btn=$("#statResBtn");if(!panel||!btn)return;
+  ensureResSel();const opts=statResOptions();
+  let h='<div class="rdactions"><button data-rdall="1">'+t("Alle")+'</button><button data-rdall="0">'+t("Keine")+'</button></div>';
+  h+=opts.map(r=>'<label><input type="checkbox" data-rid="'+r.id+'"'+(statResSel.has(r.id)?' checked':'')+'>'+resIcon(r.id,13)+' '+t(r.n)+'</label>').join('')||('<div class="meta">'+t("Keine Daten")+'</div>');
+  panel.innerHTML=h;
+  btn.textContent=t("Ressourcen")+" ("+[...statResSel].filter(id=>RMAP[id]).length+") ▾";
+  panel.querySelectorAll('input[data-rid]').forEach(c=>c.addEventListener('change',()=>{c.checked?statResSel.add(c.dataset.rid):statResSel.delete(c.dataset.rid);renderStatResDrop();drawStatHistChart();}));
+  panel.querySelectorAll('[data-rdall]').forEach(b=>b.addEventListener('click',()=>{b.dataset.rdall==="1"?opts.forEach(r=>statResSel.add(r.id)):statResSel.clear();renderStatResDrop();drawStatHistChart();}));}
+function drawStatHistChart(){
+  const cv=$("#statchart");if(!cv)return;
+  const dpr=Math.min(DPR||1,2), cssW=cv.clientWidth||620, cssH=220;
+  cv.width=Math.round(cssW*dpr);cv.height=Math.round(cssH*dpr);
+  const x=cv.getContext("2d");x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,cssW,cssH);
+  const padL=58,padR=12,padT=12,padB=24, W=Math.max(10,cssW-padL-padR), H=cssH-padT-padB;
+  const msg=m=>{x.fillStyle="#8a93a3";x.font="12px ui-monospace,monospace";x.textAlign="center";x.textBaseline="middle";x.fillText(m,cssW/2,cssH/2);};
+  ensureResSel();statChartGeo=null;
+  const buf=statHist[statKey(STATSYS)]||[], now=performance.now(), t0=now-statRange*1000;
+  const samples=buf.filter(s=>s.t>=t0-STAT_SAMPLE*1000), sel=[...statResSel].filter(id=>RMAP[id]);
+  if(!sel.length){msg(t("Keine Ressourcen ausgewählt"));return;}
+  if(samples.length<2){msg(t("Sammle Daten …"));return;}
+  const field=statMetric==="rate"?"net":"stock", isRate=statMetric==="rate";
+  let lo=0,hi=0.0001;for(const s of samples)for(const id of sel){const v=(s[field]||{})[id]||0;if(v<lo)lo=v;if(v>hi)hi=v;}
+  if(!isRate)lo=0; const span=Math.max(1e-6,hi-lo), bot=isRate?lo-span*0.1:0, top=isRate?hi+span*0.1:hi*1.1;
+  const ylab=isRate?(v=>fmtRate(v)):(v=>fmtN(Math.round(v)));
+  const X=tt=>padL+W*(tt-t0)/(statRange*1000), Y=v=>padT+H-H*(v-bot)/(top-bot);
+  x.strokeStyle="rgba(255,255,255,0.20)";x.lineWidth=1;x.beginPath();x.moveTo(padL,padT);x.lineTo(padL,padT+H);x.lineTo(padL+W,padT+H);x.stroke();
+  x.font="10px ui-monospace,monospace";x.textBaseline="middle";x.textAlign="right";
+  for(let i=0;i<=4;i++){const v=bot+(top-bot)*i/4, yy=Y(v);
+    x.strokeStyle=(isRate&&Math.abs(v)<(top-bot)*0.01)?"rgba(255,255,255,0.22)":"rgba(255,255,255,0.07)";
+    x.beginPath();x.moveTo(padL,yy);x.lineTo(padL+W,yy);x.stroke();
+    x.fillStyle="#8a93a3";x.fillText(ylab(v),padL-5,yy);}
+  x.textAlign="center";x.textBaseline="alphabetic";
+  for(let i=0;i<=3;i++){const tt=t0+(statRange*1000)*i/3, xx=X(tt), ago=(now-tt)/1000;
+    x.fillStyle="#8a93a3";x.fillText(i===3?t("jetzt"):("-"+(ago>=60?fmtDE(ago/60,ago>=600?0:1)+"m":Math.round(ago)+"s")),xx,padT+H+15);}
+  for(const id of sel){x.strokeStyle=(RMAP[id]||{}).col||"#888";x.lineWidth=1.8;x.beginPath();let st=false;
+    for(const s of samples){const xx=X(s.t),yy=Y((s[field]||{})[id]||0);st?x.lineTo(xx,yy):(x.moveTo(xx,yy),st=true);}x.stroke();}
+  statChartGeo={padL,W,t0,range:statRange,samples,sel,field,isRate};
+  if(statHoverT!=null){let near=samples[0],bd=1e18;for(const s of samples){const d=Math.abs(s.t-statHoverT);if(d<bd){bd=d;near=s;}}
+    const hx=X(near.t);
+    x.strokeStyle="rgba(255,255,255,0.32)";x.setLineDash([3,3]);x.beginPath();x.moveTo(hx,padT);x.lineTo(hx,padT+H);x.stroke();x.setLineDash([]);
+    for(const id of sel){x.fillStyle=(RMAP[id]||{}).col||"#888";x.beginPath();x.arc(hx,Y((near[field]||{})[id]||0),3.2,0,7);x.fill();}}
+}
+function statChartMove(e){
+  const cv=$("#statchart"),g=statChartGeo;if(!cv||!g){return;}
+  const rect=cv.getBoundingClientRect(), cssX=e.clientX-rect.left;
+  if(cssX<g.padL||cssX>g.padL+g.W){statHoverT=null;hideProdTip();drawStatHistChart();return;}
+  statHoverT=g.t0+(cssX-g.padL)/g.W*g.range*1000;
+  let near=g.samples[0],bd=1e18;for(const s of g.samples){const d=Math.abs(s.t-statHoverT);if(d<bd){bd=d;near=s;}}
+  const ago=(performance.now()-near.t)/1000, fmt=g.isRate?(v=>(v>=0?"+":"−")+fmtRate(Math.abs(v))+"/s"):(v=>fmtN(v));
+  const rows=g.sel.map(id=>({id,v:(near[g.field]||{})[id]||0})).sort((a,b)=>b.v-a.v);
+  const tip=$("#prodtip");
+  if(tip){tip.innerHTML='<div class="pt-s" style="margin-bottom:4px">'+(ago<STAT_SAMPLE?t("jetzt"):"−"+(ago>=60?fmtDE(ago/60,1)+" min":Math.round(ago)+" s"))+'</div>'+
+    rows.map(r=>'<div class="pt-r" style="color:'+((RMAP[r.id]||{}).col||"#9aa7b5")+'">'+resIcon(r.id,13)+' '+t((RMAP[r.id]||{}).n||r.id)+': '+fmt(r.v)+'</div>').join('');
+    tip.classList.add("on");posProdTip(e);}
+  drawStatHistChart();
+}
+function statChartLeave(){statHoverT=null;hideProdTip();drawStatHistChart();}
 
 function renderStatsTabs(){
   const el=$("#stbaltabs");if(!el)return;
@@ -4464,42 +4946,50 @@ function renderStatsTabs(){
 
 function renderStatsData(){
   const win=$("#statswin");if(!win||!win.classList.contains("on"))return;
-  prodDirty();const P=computeProduction();
+  renderStatsSysSel();
+  const oi=(STATSYS==="all")?null:STATSYS;
+  prodDirty();const P=computeProduction(oi);
+  const fpc=(STATSYS==="all"||STATSYS===SOL)?researchConsumption():{}; // FP-Umwandlung nur in Sol
+  let totFpc=0;for(const k in fpc)totFpc+=fpc[k];
   let tp=0,tc=0;for(const k in P.prod)tp+=P.prod[k];for(const k in P.cons)tc+=P.cons[k];
   $("#stsum").innerHTML=
     '<span class="chip">'+t('Produktion')+' <b style="color:#5fd38a">'+fmtRate(tp)+' /s</b></span>'+
-    '<span class="chip">'+t('Verbrauch')+' <b style="color:#f0b75c">'+fmtRate(tc)+' /s</b></span>'+
+    '<span class="chip">'+t('Verbrauch')+' <b style="color:#f0b75c">'+fmtRate(tc+totFpc)+' /s</b></span>'+
+    (totFpc>0?'<span class="chip">'+t('davon FP-Umwandlung')+' <b style="color:#7fc8e0">'+fmtRate(totFpc)+' /s</b></span>':'')+
     '<span class="chip">'+t('Aktive F\u00f6rderer')+' <b>'+P.activeFoe+'</b></span>'+
     '<span class="chip">'+t('Gesamt gef\u00f6rdert')+' <b>'+fmtN(G().minedTotal||0)+'</b></span>';
-  let list=DRES.filter(r=>(STATCLASS==="all"||resClass(r)===STATCLASS)&&(G().disc[r.id]||(P.prod[r.id]||0)>0||(P.cons[r.id]||0)>0));
-  let maxR=0.0001;list.forEach(r=>{maxR=Math.max(maxR,P.prod[r.id]||0,P.cons[r.id]||0)});
-  list.sort((a,b)=>((P.prod[a.id]||0)-(P.cons[a.id]||0))-((P.prod[b.id]||0)-(P.cons[b.id]||0)));
-  $("#stbal").innerHTML=list.length?list.map(r=>{const pr=P.prod[r.id]||0,co=P.cons[r.id]||0,net=pr-co;
-    return '<div class="balrow" title="'+t(r.n)+' \u00b7 '+t('Produktion')+' '+fmtRate(pr)+'/s \u00b7 '+t('Verbrauch')+' '+fmtRate(co)+'/s \u00b7 '+t('Netto')+' '+(net>=0?'+':'\u2212')+fmtRate(Math.abs(net))+'/s">'+
+  const totCons=r=>(P.cons[r.id]||0)+(fpc[r.id]||0);
+  let list=DRES.filter(r=>(STATCLASS==="all"||resClass(r)===STATCLASS)&&(G().disc[r.id]||(P.prod[r.id]||0)>0||totCons(r)>0));
+  let maxR=0.0001;list.forEach(r=>{maxR=Math.max(maxR,P.prod[r.id]||0,totCons(r))});
+  list.sort((a,b)=>((P.prod[a.id]||0)-totCons(a))-((P.prod[b.id]||0)-totCons(b)));
+  drawStatHistChart();
+  $("#stbal").innerHTML=list.length?list.map(r=>{const pr=P.prod[r.id]||0,co=P.cons[r.id]||0,fc=fpc[r.id]||0,net=pr-co-fc;
+    return '<div class="balrow" data-res="'+r.id+'">'+
       '<span class="ic">'+resIcon(r.id,16)+'</span><span class="baln">'+t(r.n)+'</span>'+
-      '<span class="balbar"><i class="bp" style="width:'+(pr/maxR*100).toFixed(1)+'%"></i><i class="bc" style="width:'+(co/maxR*100).toFixed(1)+'%"></i></span>'+
+      '<span class="balbar"><i class="bp" style="width:'+(pr/maxR*100).toFixed(1)+'%"></i><i class="bc" style="width:'+(co/maxR*100).toFixed(1)+'%"></i>'+
+        (fc>0?'<i class="bf" style="left:'+(co/maxR*100).toFixed(1)+'%;width:'+(fc/maxR*100).toFixed(1)+'%"></i>':'')+'</span>'+
       '<span class="balnet '+(net>0.0001?'pos':net<-0.0001?'neg':'')+'">'+(net>=0?'+':'\u2212')+fmtRate(Math.abs(net))+'</span>'+
       '<span class="ballag mono">'+fmtN(totalRes(r.id))+'</span></div>';}).join('')
     :'<div class="empty">'+t('Keine Ressourcen in dieser Klasse.')+'</div>';
+  $("#stbal").querySelectorAll('.balrow[data-res]').forEach(row=>{const id=row.dataset.res;
+    row.addEventListener('mouseenter',e=>showProdTip(e,id,STATSYS));
+    row.addEventListener('mousemove',posProdTip);
+    row.addEventListener('mouseleave',hideProdTip);});
+  const showSys=(STATSYS==="all");   // Per-System-Tabelle nur in der galaxieweiten Ansicht sinnvoll
+  {const sec=$("#stsysSec"),body=$("#stsys");if(sec)sec.style.display=showSys?"":"none";if(body)body.style.display=showSys?"":"none";}
   const sk=Object.keys(P.perSys).sort((a,b)=>P.perSys[b].rate-P.perSys[a].rate);
   $("#stsys").innerHTML=sk.length?'<table class="sttable"><thead><tr><th>'+t('System')+'</th>'+
     '<th style="text-align:right">'+t('F\u00f6rderer')+'</th><th style="text-align:right">/s</th></tr></thead><tbody>'+
     sk.map(k=>{const s=P.perSys[k];return '<tr><td>'+s.name+'</td><td class="num">'+s.foe+'</td><td class="num">'+fmtRate(s.rate)+'</td></tr>'}).join('')+'</tbody></table>'
     :'<div class="empty">'+t('Noch keine F\u00f6rderer im Einsatz \u2013 baue welche an Himmelsk\u00f6rpern.')+'</div>';
-
-  const sm=$("#stmega");if(sm){
-    if(!megaUnlocked())sm.innerHTML='<div class="empty">'+t("Megastrukturen werden ab der ersten Werft verf\u00fcgbar.")+'</div>';
-    else sm.innerHTML=MEGAORDER.map(key=>{const def=MEGADEF[key];
-      const built=[],building=[];for(const s in (G().mega||{})){const m=G().mega[s][key];if(!m)continue;(m.phase>=def.phases.length?built:building).push(+s);}
-      let status;
-      if(key==="nexus")status=built.length?'\u2713 '+t('gebaut')+' \u00b7 '+STARS[built[0]].name:(building.length?t('im Bau')+' \u00b7 '+STARS[building[0]].name:t('baubar \u2013 nur bei Sagittarius A*'));
-      else status=(built.length?'\u2713 '+built.length+'\u00d7 '+t('gebaut'):t('baubar (pro System)'))+(building.length?' \u00b7 '+building.length+' '+t('im Bau'):'');
-      return '<div class="balrow"><span class="ic">\u25c8</span><span class="baln" style="color:'+def.col+'">'+t(def.n)+'</span>'+
-        '<span class="meta" style="flex:1">'+t(def.bonus)+'</span>'+
-        '<span class="ballag" style="width:auto;color:var(--txt)">'+status+'</span></div>';}).join('');
-  }
 }
-function openStats(){const win=$("#statswin");if(!win)return;win.classList.add("on");statT=performance.now();renderStatsTabs();renderStatsData();}
+function openStats(){const win=$("#statswin");if(!win)return;
+  STATSYS=(MODE==="system"&&SYSIDX>=0)?SYSIDX:"all"; statSysSig="";   // Standard: aktuelles System; auf der Galaxiekarte galaxieweit
+  win.classList.add("on");statT=performance.now();
+  const ss=$("#statSysSel");if(ss)ss.onchange=()=>{STATSYS=ss.value==="all"?"all":+ss.value;statSysSig="";renderStatResDrop();renderStatsData();};
+  const rb=$("#statResBtn");if(rb)rb.onclick=()=>{const p=$("#statResPanel");if(p)p.classList.toggle("on");};
+  const cv=$("#statchart");if(cv){cv.onmousemove=statChartMove;cv.onmouseleave=statChartLeave;}
+  renderStatsTabs();renderStatMetricBtns();renderStatRangeBtns();renderStatResDrop();renderStatsData();}
 
 function updateStatsLive(){
   const win=$("#statswin");if(!win||!win.classList.contains("on"))return;
@@ -4705,6 +5195,162 @@ function showStationPanel(){
   panel.querySelectorAll('[data-shipok]').forEach(b=>b.addEventListener('click',()=>commitShip(+b.dataset.shipok)));
 }
 
+function resBarHTML(frac,id){return '<div style="height:7px;border-radius:4px;background:rgba(127,200,224,0.14);overflow:hidden;margin:4px 0">'+
+  '<div'+(id?' id="'+id+'"':'')+' style="height:100%;width:'+Math.min(100,Math.max(0,frac*100)).toFixed(1)+'%;background:#7fc8e0"></div></div>';}
+function showResearchPanel(){
+  if(!SYS)return;
+  const r=RG(), built=hasResearch();
+  let h='<div class="ptitle"><h2>'+t("Forschungszentrum")+'</h2><span class="tag" style="color:#7fc8e0">'+SYS.star.name+'</span></div>';
+  if(!built){
+    h+='<div class="psub">'+t("Nicht gebaut · nur in Sol, im Orbit der Erde")+'</div>';
+    h+='<p class="desc">'+t("Das Forschungszentrum wandelt eingespeiste Werkstoffe, Komponenten und Module (P1–P3) in Forschungspunkte um und schaltet einen Upgrade-Baum frei. Es speist ausschließlich aus dem Sol-Lager – liefere Produkte per Route nach Sol.")+'</p>';
+    h+='<div class="foebuy"><div class="costs">'+costHTML(RESEARCH_BUILD,SOL)+'</div><button id="btnResBuild"'+(canAfford(RESEARCH_BUILD,SOL)?'':' disabled')+costAttr(RESEARCH_BUILD,SOL)+'>'+t("Forschungszentrum errichten")+'</button></div>';
+    pbody.innerHTML=h;panel.classList.add("on");
+    const b=$("#btnResBuild");if(b)b.addEventListener("click",()=>{buildResearch();if(sel==="research")showResearchPanel()});
+    return;
+  }
+  h+='<div class="psub">'+t("Stufe")+' '+r.lvl+'/'+RES_MAXLVL+' · '+activeConvCount()+' '+t("Umwandlungen aktiv")+'</div>';
+  h+='<div class="grid">'+
+    '<div class="cell"><div class="k">FP1</div><div class="v" style="color:#9fb2c4">'+fmtN(fp(1))+'</div></div>'+
+    '<div class="cell"><div class="k">FP2</div><div class="v" style="color:#7fd8b0">'+fmtN(fp(2))+'</div></div>'+
+    '<div class="cell"><div class="k">FP3</div><div class="v" style="color:#e07ad0">'+fmtN(fp(3))+'</div></div>'+
+    '</div>';
+  if(r.queue){const nd=rNode(r.queue.node),left=Math.max(0,r.queue.dur-(r.queue.acc||0));
+    h+='<div class="psub" style="margin-top:8px">'+t("Forschung läuft")+' · '+t(nd?nd.n:"")+'</div>';
+    h+=resBarHTML((r.queue.acc||0)/r.queue.dur,"resqfill");
+    h+='<div class="meta">'+t("Noch ")+fmtDur(left)+'</div>';
+  }
+  h+='<button id="btnResOpen" style="margin-top:10px">'+t("Forschungszentrum öffnen")+'</button>';
+  if(r.lvl<RES_MAXLVL){const uc=RESEARCH_UPG[r.lvl];
+    h+='<div class="meta" style="margin-top:8px">'+t("Höhere Stufen schalten tiefere Forschung frei.")+'</div>';
+    h+='<div class="foebuy" style="margin-top:4px"><div class="costs">'+costHTML(uc,SOL)+'</div><button id="btnResUpg"'+(canAfford(uc,SOL)?'':' disabled')+costAttr(uc,SOL)+'>'+t("Ausbauen → Stufe ")+(r.lvl+1)+'</button></div>';
+  } else h+='<div class="meta" style="margin-top:8px">'+t("Maximalstufe erreicht.")+'</div>';
+  pbody.innerHTML=h;panel.classList.add("on");
+  const bo=$("#btnResOpen");if(bo)bo.addEventListener("click",()=>{if(typeof openResearch==="function")openResearch()});
+  const bu=$("#btnResUpg");if(bu)bu.addEventListener("click",()=>{upgradeResearch();if(sel==="research")showResearchPanel()});
+}
+
+/* ---- Forschungszentrum-Fenster (Umwandlung + Forschungsbaum) ---- */
+let RESTAB="conv";
+const FPCOL={1:"#9fb2c4",2:"#7fd8b0",3:"#e07ad0"};
+const BRCOL={oeko:"#5fd38a",foer:"#f0b75c",log:"#f0a060",sens:"#7fc8e0",ver:"#e07ad0",mega:"#ffd070"};
+function researchWinOpen(){const w=$("#reswin");return !!(w&&w.classList.contains("on"));}
+function openResearch(){const w=$("#reswin");if(!w)return;
+  if(!hasResearch()){toast("Forschungszentrum noch nicht errichtet – baue es in Sol im Orbit der Erde");return}
+  w.classList.add("on");renderResearchWin();}
+function closeResearch(){const w=$("#reswin");if(w)w.classList.remove("on");}
+function fpChip(tier){return '<span class="fpchip" style="border-color:'+FPCOL[tier]+'55;color:'+FPCOL[tier]+'">FP'+tier+' <b data-fpv="'+tier+'">'+fmtN(fp(tier))+'</b></span>';}
+function convTabHTML(){
+  const P=computeProduction(),r=RG(),st=storeOf(SOL);
+  let h='<p class="desc">'+t("Das Forschungszentrum wandelt Produkte aus dem Sol-Lager fortlaufend in Forschungspunkte um: P1 → FP1, P2 → FP2, P3 → FP3 (je 1 Einheit = 1 Punkt). Lege pro Produkt fest, wie viele Einheiten pro Sekunde umgewandelt werden, und eine Reserve, unter der die Umwandlung pausiert – so verarbeitest du nur den Überschuss.")+'</p>';
+  for(const g of [[1,"P1 · Werkstoffe"],[2,"P2 · Komponenten"],[3,"P3 · Module"]]){
+    h+='<div class="psub" style="margin:12px 0 2px">'+t(g[1])+' → FP'+g[0]+'</div>';
+    h+=WERK.filter(p=>p.ps===g[0]).map(it=>{const cfg=r.conv[it.id]||{},rate=cfg.rate||0,reserve=cfg.reserve||0;
+      return '<div class="convrow'+(rate>0?' on':'')+'">'+
+        '<span class="ic">'+resIcon(it.id,16)+'</span><span class="cn">'+t(it.n)+'</span>'+
+        '<span class="cs" title="'+t("Im Sol-Lager")+'" data-cstk="'+it.id+'">'+fmtN(st[it.id]||0)+'</span>'+
+        '<span class="cp" title="'+t("Produktion/s (galaxieweit)")+'" data-cprod="'+it.id+'">+'+fmtRate(P.prod[it.id]||0)+'/s</span>'+
+        '<label class="convlbl">'+t("Rate")+' <input type="number" class="cginp" data-crate="'+it.id+'" min="0" value="'+rate+'"><span class="cgstep"><button data-crup="'+it.id+'">▲</button><button data-crdn="'+it.id+'">▼</button></span></label>'+
+        '<label class="convlbl">'+t("Reserve")+' <input type="number" class="cginp" data-cres="'+it.id+'" min="0" value="'+reserve+'"></label>'+
+        '</div>';}).join('');
+  }
+  return h;
+}
+function upgradeTabHTML(){
+  let h='<p class="desc">'+t("Werte niedrigere Forschungspunkte in höhere auf – im Verhältnis 3:1. Trage ein, wie viele Punkte du einsetzen willst; das Ergebnis siehst du sofort und bestätigst es per Knopf. Herabstufen ist nicht möglich.")+'</p>';
+  for(const p of [[1,2],[2,3]]){const from=p[0],to=p[1];
+    h+='<div class="rupblock"><div class="psub" style="margin-bottom:6px">FP'+from+' → FP'+to+' <span class="meta" style="text-transform:none;letter-spacing:0">· 3 FP'+from+' = 1 FP'+to+'</span></div>'+
+      '<div class="ruprow"><label class="convlbl">'+t("FP")+from+' '+t("einsetzen")+' <input type="number" class="cginp" data-upfrom="'+from+'" min="0" value="0"></label>'+
+      '<span class="rupres" data-upres="'+from+'" style="color:'+FPCOL[to]+'">→ 0 FP'+to+'</span>'+
+      '<button class="rstartbtn" style="width:auto" data-upconf="'+from+'">'+t("Aufwerten")+'</button></div>'+
+      '<div class="meta">'+t("Verfügbar: ")+'<b data-fpv="'+from+'">'+fmtN(fp(from))+'</b> FP'+from+'</div></div>';
+  }
+  return h;
+}
+function reqText(nd){const r=RG();const miss=[];
+  if(r.lvl<reqCenterLvl(nd))miss.push(t("Zentrum Stufe ")+reqCenterLvl(nd));
+  (nd.req||[]).filter(q=>!r.nodes[q]).forEach(q=>miss.push(t(rNode(q).n)));
+  if(nd.reqTier3&&tier3Count()<1)miss.push("1 "+t("Stufe-III-Knoten"));
+  if(nd.reqTier3n&&tier3Count()<nd.reqTier3n)miss.push(nd.reqTier3n+" "+t("Stufe-III-Knoten"));
+  return miss.length?t("benötigt: ")+miss.join(", "):t("gesperrt");}
+function rConn(on,col){return '<div class="rconn" style="background:'+(on?(col||"#5fd38a"):"var(--line2)")+'"></div>';}
+function rNodeCard(nd){
+  const r=RG(),done=!!r.nodes[nd.id],avail=nodeAvail(nd.id),queued=r.queue&&r.queue.node===nd.id;
+  const canStart=avail&&!r.queue&&fp(nd.tier)>=nd.cost, col=BRCOL[nd.br]||FPCOL[nd.tier];
+  let status;
+  if(done)status='<span class="rn2done">✓ '+t("erforscht")+'</span>';
+  else if(queued)status='<span style="color:#7fc8e0">⟳ '+t("läuft …")+'</span>';
+  else if(!avail)status='<span class="rn2lk">🔒 '+reqText(nd)+'</span>';
+  else status='<button class="rstartbtn" data-rstart="'+nd.id+'"'+(canStart?'':' disabled')+'>'+t("Erforschen")+'</button>'+(fp(nd.tier)<nd.cost?'<div class="meta" style="margin-top:3px">'+t("zu wenig FP")+nd.tier+'</div>':'');
+  return '<div class="rn2'+(done?' done':queued?' run':avail?' av':' lk')+'">'+
+    '<div class="rn2h">'+t(nd.n)+'</div>'+
+    '<div class="rn2c"><span style="color:'+FPCOL[nd.tier]+'">'+fmtN(nd.cost)+' FP'+nd.tier+'</span> · '+fmtDur(nd.time)+'</div>'+
+    '<div class="rn2d">'+t(nd.d)+'</div>'+
+    '<div class="rn2s">'+status+'</div></div>';
+}
+function treeTabHTML(){
+  const r=RG();let h='';
+  if(r.queue){const nd=rNode(r.queue.node),left=Math.max(0,r.queue.dur-(r.queue.acc||0));
+    h+='<div class="rqbox"><div class="psub">'+t("Forschung läuft")+' · '+t(nd.n)+'</div>'+
+       resBarHTML((r.queue.acc||0)/r.queue.dur,"rqfill")+
+       '<div class="meta">'+t("Noch ")+'<span id="rqtime">'+fmtDur(left)+'</span> · <button class="recbtn" id="rqCancel">'+t("Abbrechen (FP zurück)")+'</button></div></div>';}
+  // 5 Effekt-Aeste als Spalten mit I→II→III-Kette
+  h+='<div class="rtree">';
+  for(const b of RBRANCH){if(b[0]==="mega")continue;
+    const nodes=RNODES.filter(n=>n.br===b[0]), col=BRCOL[b[0]];
+    h+='<div class="rbr"><div class="rbrh" style="color:'+col+';border-color:'+col+'66;background:'+col+'14">'+t(b[1])+'</div>';
+    nodes.forEach((nd,i)=>{h+=rConn(i===0?true:!!r.nodes[nodes[i-1].id],col)+rNodeCard(nd);});
+    h+='</div>';
+  }
+  h+='</div>';
+  // Mega-Zweig als verzweigter Teilbaum (Dyson → Temporal/Nexus → Archiv)
+  const col=BRCOL.mega, by=id=>RNMAP[id];
+  h+='<div class="rmega"><div class="rbrh" style="display:inline-block;color:'+col+';border-color:'+col+'66;background:'+col+'14">'+t("Megakonstruktionen")+'</div>';
+  h+='<div class="rmcol">'+rNodeCard(by("mega_dyson"))+
+     rConn(!!r.nodes.mega_dyson,col)+
+     '<div class="rmrow">'+rNodeCard(by("mega_temporal"))+rNodeCard(by("mega_nexus"))+'</div>'+
+     rConn(!!r.nodes.mega_temporal&&!!r.nodes.mega_nexus,col)+
+     rNodeCard(by("mega_archive"))+'</div></div>';
+  return h;
+}
+const RTABS=[["conv","Umwandlung"],["upgrade","Aufwertung"],["tree","Forschung"]];
+function renderResearchWin(){
+  const w=$("#reswin");if(!w||!w.classList.contains("on"))return;
+  const r=RG(),body=$("#rsbody");if(!body)return;prodDirty();
+  let h='<div class="rstabs">'+RTABS.map(tb=>'<button class="rstab'+(RESTAB===tb[0]?' on':'')+'" data-rtab="'+tb[0]+'">'+t(tb[1])+'</button>').join('')+'</div>';
+  h+='<div class="fpbig">'+fpChip(1)+fpChip(2)+fpChip(3)+'</div>';
+  h+=(RESTAB==="conv")?convTabHTML():(RESTAB==="upgrade")?upgradeTabHTML():treeTabHTML();
+  body.innerHTML=h;
+  body.querySelectorAll('[data-rtab]').forEach(b=>b.addEventListener('click',()=>{RESTAB=b.dataset.rtab;renderResearchWin();}));
+  const cfgOf=id=>{const g=RG();return g.conv[id]||(g.conv[id]={rate:0,reserve:0,acc:0});};
+  const setRate=(id,v)=>{cfgOf(id).rate=Math.max(0,Math.floor(v||0));persist();renderResearchWin();};
+  body.querySelectorAll('.cginp[data-crate]').forEach(inp=>inp.addEventListener('change',()=>setRate(inp.dataset.crate,+inp.value)));
+  body.querySelectorAll('[data-crup]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.crup,c=RG().conv[id];setRate(id,(c&&c.rate||0)+1);}));
+  body.querySelectorAll('[data-crdn]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.crdn,c=RG().conv[id];setRate(id,(c&&c.rate||0)-1);}));
+  body.querySelectorAll('.cginp[data-cres]').forEach(inp=>inp.addEventListener('change',()=>{cfgOf(inp.dataset.cres).reserve=Math.max(0,Math.floor(+inp.value||0));persist();}));
+  // Aufwertungs-Tab
+  const upPreview=from=>{const inp=body.querySelector('.cginp[data-upfrom="'+from+'"]'),out=body.querySelector('[data-upres="'+from+'"]');
+    if(!inp||!out)return;const v=Math.max(0,Math.floor(+inp.value||0)),got=Math.floor(Math.min(v,fp(from))/FP_UPSTEP);
+    out.textContent='→ '+fmtN(got)+' FP'+(from+1);};
+  body.querySelectorAll('.cginp[data-upfrom]').forEach(inp=>inp.addEventListener('input',()=>upPreview(+inp.dataset.upfrom)));
+  body.querySelectorAll('[data-upconf]').forEach(b=>b.addEventListener('click',()=>{const from=+b.dataset.upconf,inp=body.querySelector('.cginp[data-upfrom="'+from+'"]');
+    const v=inp?Math.max(0,Math.floor(+inp.value||0)):0, times=Math.floor(Math.min(v,fp(from))/FP_UPSTEP);
+    if(times<=0){toast(t("Zu wenig Punkte zum Aufwerten"));return;}upstepFP(from,times);renderResearchWin();}));
+  body.querySelectorAll('[data-rstart]').forEach(b=>b.addEventListener('click',()=>{startResearch(b.dataset.rstart);renderResearchWin();}));
+  const rc=$("#rqCancel");if(rc)rc.addEventListener('click',()=>{cancelResearch(true);renderResearchWin();});
+}
+/* Live-Aktualisierung ohne Neuaufbau (verhindert Flackern + Klickverlust der Reiter). */
+function updateResearchLive(){
+  if(!researchWinOpen())return;const r=RG();
+  document.querySelectorAll('#rsbody [data-fpv]').forEach(el=>{el.textContent=fmtN(fp(+el.dataset.fpv));});
+  if(RESTAB==="conv"){const P=computeProduction(),st=storeOf(SOL);
+    document.querySelectorAll('#rsbody [data-cstk]').forEach(el=>{el.textContent=fmtN(st[el.dataset.cstk]||0);});
+    document.querySelectorAll('#rsbody [data-cprod]').forEach(el=>{el.textContent='+'+fmtRate(P.prod[el.dataset.cprod]||0)+'/s';});}
+  const f=$("#rqfill"),tm=$("#rqtime");
+  if(r.queue){if(f)f.style.width=Math.min(100,(r.queue.acc||0)/r.queue.dur*100).toFixed(1)+"%";
+    if(tm)tm.textContent=fmtDur(Math.max(0,r.queue.dur-(r.queue.acc||0)));}
+}
+
 function showRefineryPanel(){
   if(!SYS)return;
   const idx=SYSIDX;
@@ -4837,10 +5483,10 @@ function showPlanetPanel(p){
     h+=empty?'<button disabled>'+t("Ressourcenvorkommen ersch\u00f6pft")+'</button>'
       :'<button id="btnMine" class="loadbtn"><span>'+t("Abbauen")+'</span><i class="lfill"></i></button> <span class="mhint mono">+ '+miningPower()+' '+t("Einheiten / Klick")+'</span>';
 
-    const fl=G().foe[p.id]||0, atMax=fl>=FOE_MAX, fcost=foeCost(p,fl), faff=canAfford(fcost);
+    const fl=G().foe[p.id]||0, atMax=fl>=foeMax(), fcost=foeCost(p,fl), faff=canAfford(fcost);
     h+='<div class="foe">';
     h+='<div class="foehd"><span class="fnm">'+t("Automatischer F\u00f6rderer")+'</span>'+
-      (fl>0?'<span class="flv mono">'+t("Stufe")+' '+fl+' / '+FOE_MAX+'</span>':'<span class="flv mono off">'+t("nicht gebaut")+'</span>')+'</div>';
+      (fl>0?'<span class="flv mono">'+t("Stufe")+' '+fl+' / '+foeMax()+'</span>':'<span class="flv mono off">'+t("nicht gebaut")+'</span>')+'</div>';
     if(fl>0){
       const y=foeYield(p,fl);
       const ytxt=p.comp.filter(c=>(y[c[0]]||0)>0).map(c=>y[c[0]]+' '+t(RMAP[c[0]].n)).join(' \u00b7 ');
@@ -4877,28 +5523,6 @@ function showPlanetPanel(p){
   });
 }
 
-/* ============ Offline-Fortschritt ============ */
-
-const OFFLINE_FRAC=0.10, OFFLINE_BASE=3600;
-function offlineCapSec(){return OFFLINE_BASE*(1+(G().up.offline||0));}
-function snapStores(){const o={},st=G().store;for(const s in st)for(const k in st[s])o[s+"|"+k]=st[s][k];return o;}
-
-function primeFoeSystems(){const seen={};for(const id in (G().foe||{})){if((G().foe[id]||0)<=0)continue;
-  const m=/^s(\d+)/.exec(id);if(m){const i=+m[1];if(!seen[i]){seen[i]=1;getSystem(i);}}}}
-function applyOffline(){
-  const last=+SAVE.ts||0; if(!last)return;
-  const elapsed=(Date.now()-last)/1000; if(elapsed<60)return;
-  const capped=Math.min(elapsed,offlineCapSec()), eff=capped*OFFLINE_FRAC; if(eff<1)return;
-  primeFoeSystems();
-  const before=snapStores();
-  const cyc=Math.min(2000,Math.floor(eff/FOE_INTERVAL)); for(let i=0;i<cyc;i++)foeTick();
-  refineryTick(eff); plantTick(eff);
-  const g={},st=G().store; for(const s in st)for(const k in st[s]){const d=(st[s][k]||0)-(before[s+"|"+k]||0);if(d>0)g[k]=(g[k]||0)+d;}
-  const keys=Object.keys(g), tot=keys.reduce((a,k)=>a+g[k],0);
-  persist();
-  if(tot>0){const top=keys.sort((a,b)=>g[b]-g[a]).slice(0,5).map(k=>resIcon(k,13)+' '+fmtN(g[k])).join(' · ');
-    note("Während deiner Abwesenheit ("+fmtDur(capped)+" · 10 %): +"+fmtN(tot)+" Einheiten · "+top,true);}
-}
 /* ============ Globales Sicherheitsnetz ============ */
 
 let globalErrShown=false;
@@ -4920,7 +5544,6 @@ try{
 
   if(!G().probe[SOL]){G().probe[SOL]=1;persist()}
   migrateFleet();
-  applyOffline();
 
   if(!G().galaxyOpen&&((G().fleet||[]).length>=1||nOf(SAVE.vis)>1)){G().galaxyOpen=1;persist()}
   updCounters();updHUD();applyLang();
