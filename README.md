@@ -24,9 +24,6 @@ CHANGELOG.md    Versioned change history (SemVer)
 README.md       This file
 ```
 
-Internal design documents and test tooling are kept out of the public repository
-(see `.gitignore`).
-
 ## License
 
 Proprietary — **all rights reserved**. See [LICENSE](LICENSE). Playing through the
